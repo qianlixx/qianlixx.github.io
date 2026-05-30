@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf .claude _vercel_comments compress.py jpeg.zip hero_preview.png itunes_test.json meme_api_result.json \"pic/模板\")",
+      "Bash(rm -rf \"pic/_超大原图备份\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Fix mobile photo display - case sensitive filenames\")",
+      "Bash(git remote *)",
+      "Bash(git push *)"
+    ]
+  }
+}
