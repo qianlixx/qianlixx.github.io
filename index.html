@@ -80,7 +80,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0a;overflow:hidden;co
 .section{min-height:100vh;scroll-snap-align:start;position:relative;display:flex;align-items:center;justify-content:center}
 /* Desktop: add overflow hidden for clean scroll-snap */
 @media(min-width:769px){
-  #about,#photos,#movies,#comments{overflow:hidden}
+  #about,#photos,#movies{overflow:hidden}
 }
 
 /* ===== NAVIGATION DOTS ===== */
@@ -265,11 +265,11 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .photo-nav{width:32px;height:32px;font-size:14px}
   .photo-nav-prev{left:6px}
   .photo-nav-next{right:6px}
-  .photo-info-wrap{position:relative;right:auto;top:auto;transform:none;width:100%;flex:0 0 auto;min-height:auto;border-radius:0;border:none;background:transparent;padding:16px 0 0}
-  .photo-info-inner{padding:0 clamp(20px,4vw,32px);min-height:auto}
-  .photo-info-item{position:relative;inset:auto;opacity:1!important;transform:none!important;padding:0;text-align:center}
-  .photo-info-item.show{opacity:1;transform:none}
-  .photo-info-item .badge{font-size:10px;padding:4px 12px;margin-bottom:8px;margin:0 auto 8px}
+  .photo-info-wrap{position:relative;right:auto;top:auto;transform:none;width:100%;flex:0 0 auto;min-height:140px;border-radius:0;border:none;background:transparent;padding:16px 0 0}
+  .photo-info-inner{position:relative;padding:0 clamp(20px,4vw,32px);min-height:140px}
+  .photo-info-item{position:absolute;inset:0 clamp(20px,4vw,32px);display:flex;flex-direction:column;justify-content:center;text-align:center;opacity:0;transform:translateY(10px);transition:all 0.5s ease}
+  .photo-info-item.show{opacity:1;transform:translateY(0)}
+  .photo-info-item .badge{font-size:10px;padding:4px 12px;border-radius:100px;margin:0 auto 8px;width:fit-content}
   .photo-info-item h2{font-size:clamp(24px,6vw,32px);margin-bottom:4px}
   .photo-info-item p{font-size:clamp(13px,3.2vw,16px);line-height:1.6;color:rgba(255,255,255,0.5)}
   .photo-dots{position:relative;right:auto;top:auto;transform:none;flex-direction:row;justify-content:center;gap:8px;padding:12px 0 0;margin-top:auto}
@@ -307,9 +307,9 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
 
   .photo-scroll-wrap{flex:0 0 40vh;height:40vh;background:#0a0a0a}
   .photo-scroll{height:40vh}
-  .photo-info-wrap{min-height:auto;padding:12px 0 0}
-  .photo-info-inner{padding:0 clamp(16px,3vw,24px)}
-  .photo-info-item{padding:0}
+  .photo-info-wrap{min-height:120px;padding:12px 0 0}
+  .photo-info-inner{min-height:120px;padding:0 clamp(16px,3vw,24px)}
+  .photo-info-item{inset:0 clamp(16px,3vw,24px)}
   .photo-info-item h2{font-size:clamp(20px,5vw,26px)}
   .photo-info-item p{font-size:clamp(12px,3vw,14px)}
   .photo-dots{padding:8px 0 0;gap:6px}
@@ -370,40 +370,6 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
 .meme-row-inner.r3{animation:memeScroll 75s linear infinite;animation-delay:-40s}
 .meme-row-inner.paused{animation-play-state:paused!important}
 @keyframes memeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ===== COMMENTS SECTION ===== */
-#comments{background:linear-gradient(160deg,#0a0604 0%,#1a0e08 30%,#0d0806 60%,#0a0604 100%);flex-direction:column;padding:clamp(40px,6vh,80px) clamp(20px,4vw,60px)}
-#comments::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,140,0,0.05),transparent 70%);pointer-events:none}
-#comments .section-content{text-align:center;position:relative;z-index:2;width:100%;max-width:800px}
-#comments .section-title{font-family:'Noto Serif SC',serif;font-size:clamp(28px,5vw,60px);font-weight:900;margin-bottom:6px;opacity:0;transform:translateY(30px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
-#comments .section-title.visible{opacity:1;transform:translateY(0)}
-#comments .section-subtitle{font-size:clamp(13px,1.2vw,17px);color:rgba(255,180,100,0.3);margin-bottom:clamp(20px,3vh,40px);font-weight:300;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.05s}
-#comments .section-subtitle.visible{opacity:1;transform:translateY(0)}
-
-.comments-box{width:100%;max-width:700px;margin:0 auto;padding:clamp(20px,3vh,36px);border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,140,0,0.1);backdrop-filter:blur(8px);position:relative;z-index:2;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.15s}
-.comments-box.visible{opacity:1;transform:translateY(0)}
-#twikoo .tk-content{color:rgba(255,255,255,0.7)!important}
-#twikoo .tk-submit{background:transparent!important}
-#twikoo .tk-input-el{background:rgba(255,255,255,0.04)!important;border:1px solid rgba(255,140,0,0.1)!important;color:#fff!important;border-radius:8px!important}
-#twikoo .tk-input-el:focus{border-color:rgba(255,140,0,0.3)!important}
-#twikoo .tk-btn{padding:8px 24px!important;border-radius:100px!important;border:none!important;background:linear-gradient(135deg,#FF8C00,#E06000)!important;color:#fff!important;font-size:14px!important;cursor:pointer!important;transition:all 0.3s ease!important}
-#twikoo .tk-btn:hover{box-shadow:0 8px 25px rgba(255,120,0,0.3)!important}
-#twikoo .tk-comments-count{color:rgba(255,180,100,0.4)!important}
-#twikoo .tk-nick{color:rgba(255,180,100,0.7)!important}
-#twikoo .tk-time{color:rgba(255,255,255,0.2)!important}
-#twikoo .tk-tag{background:rgba(255,140,0,0.1)!important;color:rgba(255,180,100,0.5)!important;border-radius:4px!important}
-#twikoo .tk-avatar{width:32px!important;height:32px!important;border-radius:50%!important}
-/* Hide email and website fields - only nickname needed */
-#twikoo .tk-row-email-website,#twikoo .tk-col-mail,#twikoo .tk-col-url,
-#twikoo .tk-email,#twikoo .tk-url,#twikoo [class*="email"],#twikoo [class*="url"],
-#twikoo [class*="mail"],#twikoo input[type="email"]{display:none!important}
-
-/* ===== VISITOR COUNTER ===== */
-.footer-bar{position:relative;z-index:2;width:100%;text-align:center;padding:16px 0 0;opacity:0;transition:all 0.8s ease 0.3s}
-.footer-bar.visible{opacity:1}
-.footer-bar span{font-size:clamp(11px,0.8vw,13px);color:rgba(255,180,100,0.2);letter-spacing:1px;font-weight:300}
-.footer-bar .counter-num{color:rgba(255,140,0,0.4);font-weight:400}
-.footer-bar .sep{margin:0 8px;color:rgba(255,180,100,0.1)}
 </style>
 </head>
 <body>
@@ -429,7 +395,6 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
     <a href="#about" data-index="0" class="active">关于我</a>
     <a href="#photos" data-index="1">摄影</a>
     <a href="#movies" data-index="2">电影</a>
-    <a href="#comments" data-index="3">留言</a>
   </div>
 </nav>
 
@@ -438,7 +403,6 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   <a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a>
   <a class="nav-dot" href="#photos" data-index="1"><span class="dot-label">摄影</span></a>
   <a class="nav-dot" href="#movies" data-index="2"><span class="dot-label">电影</span></a>
-  <a class="nav-dot" href="#comments" data-index="3"><span class="dot-label">留言</span></a>
 </nav>
 
 
@@ -546,22 +510,6 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
     </div>
   </section>
 
-  <!-- ============ COMMENTS ============ -->
-  <section id="comments" class="section">
-    <div class="section-content">
-      <h2 class="section-title">留下足迹</h2>
-      <p class="section-subtitle">既然来了，说点什么吧</p>
-      <div class="comments-box">
-        <div id="twikoo"></div>
-      </div>
-      <div class="footer-bar">
-        <span>已接待 <span class="counter-num" id="busuanzi_value_site_pv">--</span> 位访客</span>
-        <span class="sep">·</span>
-        <span>第 <span class="counter-num" id="busuanzi_value_site_uv">--</span> 次相遇</span>
-      </div>
-    </div>
-  </section>
-
 </div>
 
 <script>
@@ -626,8 +574,7 @@ const fadeOverlay = document.getElementById('sectionFade');
 const bgColors = {
   about: '#0a0604',
   photos: '#0a0e2a',
-  movies: '#0d0000',
-  comments: '#0a0604'
+  movies: '#0d0000'
 };
 
 let lastSection = 'about';
@@ -685,12 +632,6 @@ function updateSectionProgress() {
     if (sec.id === 'about') {
       sec.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach(el => {
         if (visibleRatio > 0.15) el.classList.add('visible');
-      });
-    }
-    // Handle comments section
-    if (sec.id === 'comments') {
-      sec.querySelectorAll('.comments-box, .footer-bar').forEach(el => {
-        if (visibleRatio > 0.2) el.classList.add('visible');
       });
     }
     if (visibleRatio > maxV) {
@@ -1045,20 +986,6 @@ document.addEventListener('mouseleave', () => { cursor.style.display = 'none'; c
 document.addEventListener('mouseenter', () => { cursor.style.display = ''; cursorDot.style.display = ''; });
 
 </script>
-
-<!-- ===== TWIKOO COMMENTS ===== -->
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js"></script>
-<script>
-twikoo.init({
-  envId: 'https://vercelcomments-nj5ljkcf2-qianlixxs-projects.vercel.app',
-  el: '#twikoo',
-  lang: 'zh-CN',
-  requiredFields: ['nick'],
-});
-</script>
-
-<!-- 不蒜子访客统计 -->
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 </body>
 </html>
