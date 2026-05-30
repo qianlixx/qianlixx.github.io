@@ -11,7 +11,8 @@
       "Bash(curl -s \"https://api.github.com/repos/qianlixx/qianlixx.github.io/branches\")",
       "Bash(curl -sL \"https://qianlixx.github.io\")",
       "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Fix mobile photo layout and require only nickname for comments\")",
-      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Fix movie text visibility on mobile\")"
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Fix movie text visibility on mobile\")",
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Fix 480px movie text\")"
     ]
   }
 }
