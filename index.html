@@ -255,15 +255,15 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
 
   /* Photo section */
   #photos{flex-direction:column;justify-content:flex-start;min-height:100vh}
-  .photo-scroll-wrap{position:relative;inset:auto;padding:0;display:flex;flex:1 1 55%;width:100%;min-height:0}
-  .photo-scroll{width:100%;height:100%;border-radius:0;box-shadow:none;flex:1}
-  .photo-track{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .photo-scroll-wrap{position:relative;inset:auto;padding:0;display:block;flex:0 0 50vh;width:100%;min-height:0}
+  .photo-scroll{width:100%;height:50vh;border-radius:0;box-shadow:none}
+  .photo-track{position:relative;width:100%;height:100%}
   .photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:0;transition:opacity 0.5s ease}
   .photo-img.active{opacity:1}
   .photo-nav{width:32px;height:32px;font-size:14px}
   .photo-nav-prev{left:6px}
   .photo-nav-next{right:6px}
-  .photo-info-wrap{position:relative;right:auto;top:auto;transform:none;width:100%;flex:0 0 auto;min-height:220px;border-radius:0;border-top:1px solid rgba(255,140,0,0.08);background:rgba(10,6,4,0.95)}
+  .photo-info-wrap{position:relative;right:auto;top:auto;transform:none;width:100%;flex:0 0 auto;min-height:auto;border-radius:0;border-top:1px solid rgba(255,140,0,0.08);background:rgba(10,6,4,0.95)}
   .photo-info-inner{padding:clamp(20px,3vh,32px) clamp(16px,4vw,24px);min-height:auto}
   .photo-info-item{inset:clamp(20px,3vh,32px) clamp(16px,4vw,24px)}
   .photo-info-item h2{font-size:clamp(20px,5vw,28px);margin-bottom:4px}
@@ -273,15 +273,16 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .photo-dots span.active{width:6px;height:14px}
 
   /* Movie section */
-  .movie-carousel-wrap{align-items:flex-start;padding-top:2vh}
-  .movie-track{height:auto;min-height:50vh;padding-top:30px;padding-bottom:120px}
+  .movie-carousel-wrap{align-items:flex-start;padding-top:2vh;overflow:visible!important}
+  .movie-track{height:auto;min-height:50vh;padding-top:30px;padding-bottom:140px}
   .movie-card{width:110px;height:165px}
-  .movie-card.focus{width:190px;height:285px;margin-bottom:10px}
-  .movie-item.focus .movie-info{opacity:1;color:rgba(255,255,255,0.6)!important}
+  .movie-card.focus{width:190px;height:285px;margin-bottom:0}
+  .movie-card.focus .poster-overlay{opacity:0.5}
+  .movie-item.focus .movie-info{opacity:1}
   .movie-item.focus .movie-info h3{color:#E85050!important;font-size:clamp(14px,3.5vw,18px)!important}
-  .movie-info{min-height:80px;padding:6px 2px 0}
-  .movie-info h3{font-size:clamp(12px,3vw,15px)}
-  .movie-info .meta,.movie-info .actors,.movie-info .rating,.movie-info .desc{font-size:clamp(10px,2.2vw,12px);display:block!important;color:rgba(255,255,255,0.3)!important}
+  .movie-info{padding:8px 2px 0}
+  .movie-info h3{font-size:clamp(12px,3vw,15px);color:rgba(255,255,255,0.5)!important}
+  .movie-info .meta,.movie-info .actors,.movie-info .rating,.movie-info .desc{font-size:clamp(10px,2.2vw,12px)!important;display:block!important;color:rgba(255,255,255,0.3)!important}
   .movie-item.focus .movie-info .meta{color:rgba(255,255,255,0.5)!important}
   .movie-item.focus .movie-info .actors{color:rgba(255,255,255,0.4)!important}
   .movie-item.focus .movie-info .rating{color:#FFD700!important}
@@ -297,7 +298,8 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .about-hero-left .hero-bio{font-size:clamp(11px,3vw,13px);margin-bottom:16px}
   .about-hero-left .hero-tagline{font-size:clamp(11px,2.8vw,14px);margin-bottom:8px}
 
-  .photo-scroll-wrap{flex:1 1 50%}
+  .photo-scroll-wrap{flex:0 0 40vh;height:40vh}
+  .photo-scroll{height:40vh}
   .photo-info-wrap{min-height:180px}
   .photo-info-inner{padding:clamp(14px,2vh,20px) clamp(12px,3vw,18px)}
   .photo-info-item{inset:clamp(14px,2vh,20px) clamp(12px,3vw,18px)}
@@ -308,9 +310,9 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .photo-dots span{width:4px;height:4px}
   .photo-dots span.active{width:5px;height:10px}
 
-  .movie-track{height:auto;min-height:45vh;padding-bottom:100px}
+  .movie-track{height:auto;min-height:45vh;padding-bottom:120px}
   .movie-card{width:90px;height:135px}
-  .movie-card.focus{width:160px;height:240px;margin-bottom:10px}
+  .movie-card.focus{width:160px;height:240px;margin-bottom:0}
   .movie-info h3{font-size:clamp(11px,3.5vw,13px)}
   .movie-info .meta,.movie-info .actors,.movie-info .rating,.movie-info .desc{font-size:clamp(9px,2.5vw,11px)!important}
 }
@@ -377,6 +379,9 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
 #twikoo .tk-time{color:rgba(255,255,255,0.2)!important}
 #twikoo .tk-tag{background:rgba(255,140,0,0.1)!important;color:rgba(255,180,100,0.5)!important;border-radius:4px!important}
 #twikoo .tk-avatar{width:32px!important;height:32px!important;border-radius:50%!important}
+/* Hide email and website fields - only nickname needed */
+#twikoo .tk-row-email-website{display:none!important}
+#twikoo .tk-row .tk-col:first-child{width:100%!important}
 
 /* ===== VISITOR COUNTER ===== */
 .footer-bar{position:relative;z-index:2;width:100%;text-align:center;padding:16px 0 0;opacity:0;transition:all 0.8s ease 0.3s}
