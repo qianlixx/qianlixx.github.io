@@ -77,10 +77,11 @@ body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0a;overflow:hidden;co
 .glass-nav a.active{color:#fff}
 
 /* ===== SECTION BASE ===== */
-.section{min-height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-/* Override for specific sections that need overflow visible */
-#movies{overflow:hidden}
-#photos{overflow:hidden}
+.section{min-height:100vh;scroll-snap-align:start;position:relative;display:flex;align-items:center;justify-content:center}
+/* Desktop: add overflow hidden for clean scroll-snap */
+@media(min-width:769px){
+  #about,#photos,#movies,#comments{overflow:hidden}
+}
 
 /* ===== NAVIGATION DOTS ===== */
 .nav-dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:16px}
