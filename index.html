@@ -307,7 +307,7 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .about-hero-left .hero-bio{font-size:clamp(11px,3vw,13px);margin-bottom:16px}
   .about-hero-left .hero-tagline{font-size:clamp(11px,2.8vw,14px);margin-bottom:8px}
 
-  .photo-scroll-wrap{flex:0 0 40vh;height:40vh}
+  .photo-scroll-wrap{flex:0 0 40vh;height:40vh;background:#0a0a0a}
   .photo-scroll{height:40vh}
   .photo-info-wrap{min-height:180px}
   .photo-info-inner{padding:clamp(14px,2vh,20px) clamp(12px,3vw,18px)}
@@ -322,8 +322,10 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   .movie-track{height:auto;min-height:45vh;padding-bottom:120px}
   .movie-card{width:90px;height:135px}
   .movie-card.focus{width:160px;height:240px;margin-bottom:0}
-  .movie-info h3{font-size:clamp(11px,3.5vw,13px)}
-  .movie-info .meta,.movie-info .actors,.movie-info .rating,.movie-info .desc{font-size:clamp(9px,2.5vw,11px)!important}
+  .movie-item .movie-info h3{font-size:clamp(11px,3.5vw,13px)!important;color:rgba(255,255,255,0.5)!important}
+  .movie-item .movie-info .meta,.movie-item .movie-info .actors,.movie-item .movie-info .rating,.movie-item .movie-info .desc{font-size:clamp(9px,2.5vw,11px)!important;display:block!important;color:rgba(255,255,255,0.3)!important}
+  .movie-item.focus .movie-info h3{color:#E85050!important}
+  .movie-item.focus .movie-info .rating{color:#FFD700!important}
 }
 
 @media(hover:none) and (pointer:coarse){
