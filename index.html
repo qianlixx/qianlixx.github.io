@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JONY · 个人空间</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Noto+Serif+SC:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0a;overflow:hidden;color:#fff;cursor:none}
+/* ===== CUSTOM CURSOR ===== */
+#cursor{position:fixed;width:20px;height:20px;border:2px solid rgba(255,140,0,0.35);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width 0.25s ease,height 0.25s ease,border-color 0.25s ease,background 0.25s ease;mix-blend-mode:difference}
+#cursor.hover{border-color:rgba(255,200,100,0.6);width:44px;height:44px;background:rgba(255,140,0,0.05)}
+#cursor.click{transform:translate(-50%,-50%) scale(0.7);border-color:rgba(255,200,100,0.8)}
+#cursor-dot{position:fixed;width:4px;height:4px;border-radius:50%;background:rgba(255,180,100,0.4);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width 0.15s,height 0.15s,background 0.15s;mix-blend-mode:difference}
+#cursor-dot.hover{width:8px;height:8px;background:rgba(255,200,100,0.7)}
+
+/* ===== TEXT HOVER RESPONSE ===== */
+.hover-text{transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1),color 0.2s ease}
+.hover-text:hover{transform:translateY(-3px) scale(1.03);color:#fff !important;text-shadow:0 4px 30px rgba(255,140,0,0.15)}
+.movie-info h3.hover-text:hover{color:#FF6B35 !important;transform:translateY(-2px) scale(1.04)}
+.movie-info .meta.hover-text:hover,.movie-info .actors.hover-text:hover{color:rgba(255,255,255,0.6) !important;transform:translateY(-2px)}
+.hero-bio.hover-text:hover{color:rgba(255,200,150,0.7) !important}
+.hero-tagline.hover-text:hover{letter-spacing:5px;color:rgba(255,200,150,0.7) !important}
+.hero-title.hover-text:hover{text-shadow:0 0 60px rgba(255,140,0,0.4),0 0 120px rgba(255,140,0,0.2);transform:scale(1.02);letter-spacing:-0.01em}
+.greeting.hover-text:hover{transform:translateX(3px);color:rgba(255,160,60,0.7) !important;font-style:normal}
+.badge.hover-text:hover{transform:scale(1.05);border-color:currentColor !important}
+.site-link.hover-text:hover{transform:translateY(-2px);border-color:rgba(255,140,0,0.4) !important;background:rgba(255,140,0,0.1) !important}
+.movie-card .movie-info .desc.hover-text:hover{color:rgba(255,255,255,0.7) !important}
+
+/* Photo text hover — :hover works because .show enables pointer-events */
+.photo-info-item.show .badge:hover{transform:scale(1.05);border-color:currentColor !important}
+.pi-0.show h2:hover,.pi-6.show h2:hover{color:#FF6B6B !important;transform:scale(1.06);text-shadow:0 0 50px rgba(255,107,107,0.4)}
+.pi-0.show p:hover,.pi-6.show p:hover{color:rgba(255,107,107,0.8) !important;transform:translateY(-2px)}
+.pi-1.show h2:hover,.pi-7.show h2:hover{color:#4ECDC4 !important;transform:translateX(4px);text-shadow:0 0 40px rgba(78,205,196,0.3)}
+.pi-1.show p:hover,.pi-7.show p:hover{color:rgba(78,205,196,0.8) !important}
+.pi-2.show h2:hover,.pi-8.show h2:hover{color:#FFE66D !important;transform:scale(1.07) rotate(-1deg);text-shadow:0 0 60px rgba(255,230,109,0.35)}
+.pi-2.show p:hover,.pi-8.show p:hover{color:rgba(255,230,109,0.8) !important;letter-spacing:1px}
+.pi-3.show h2:hover,.pi-9.show h2:hover{color:#C084FC !important;transform:translateY(-4px);text-shadow:0 8px 40px rgba(192,132,252,0.35)}
+.pi-3.show p:hover,.pi-9.show p:hover{color:rgba(192,132,252,0.8) !important}
+.pi-4.show h2:hover,.pi-10.show h2:hover{color:#FF8B94 !important;transform:scale(1.05);text-shadow:0 0 50px rgba(255,139,148,0.3)}
+.pi-4.show p:hover,.pi-10.show p:hover{color:rgba(255,139,148,0.8) !important;transform:translateX(2px)}
+.pi-5.show h2:hover,.pi-11.show h2:hover{color:#00DBDE !important;transform:translateX(-3px) scale(1.03);text-shadow:0 0 50px rgba(0,219,222,0.35)}
+.pi-5.show p:hover,.pi-11.show p:hover{color:rgba(0,219,222,0.8) !important;transform:translateY(-1px)}
+/* ===== SPLASH ENTRANCE ===== */
+#splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),visibility 0.8s cubic-bezier(0.22,1,0.36,1)}
+#splash::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,107,107,0.5) 0%,rgba(196,74,255,0.35) 35%,rgba(0,219,222,0.2) 60%,transparent 80%);opacity:0;transition:opacity 0.7s ease;pointer-events:none}
+#splash.dismissing::before{opacity:1}
+#splash.dismissing{background:radial-gradient(ellipse at 50% 50%,rgba(40,20,80,1) 0%,rgba(15,12,41,1) 60%,#000 100%)}
+#splash.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.splash-title{position:relative;display:flex;align-items:center;justify-content:center;transition:transform 0.8s cubic-bezier(0.34,1.56,0.64,1),opacity 0.6s ease}
+#splash.dismissing .splash-title{transform:scale(1.15);opacity:0.7}
+.title-base{font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:8px;color:rgba(255,255,255,0.04);margin:0;white-space:nowrap;transform:scaleY(1.18)}
+.title-sweep{position:absolute;font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:8px;color:#fff;margin:0;white-space:nowrap;clip-path:inset(0 99% 0 0);animation:beamSweep 3.5s ease 0.5s 1 forwards;will-change:clip-path;transform:scaleY(1.18)}
+@keyframes beamSweep{
+0%{clip-path:inset(0 99% 0 0)}
+25%{clip-path:inset(0 40% 0 0%)}
+40%{clip-path:inset(0 15% 0 42%)}
+50%{clip-path:inset(0 0% 0 72%)}
+55%{clip-path:inset(0 0% 0 99%)}
+100%{clip-path:inset(0 0% 0 99%)}
+}
+
+.main{height:100vh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.main::-webkit-scrollbar{display:none}
+
+/* ===== SECTION BACKGROUND CROSSFADE ===== */
+#sectionFade{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity 0.6s ease;will-change:opacity}
+
+/* ===== GLASS NAV ===== */
+.glass-nav{position:fixed;top:clamp(16px,3vh,32px);left:50%;transform:translateX(-50%);z-index:200;display:flex;gap:0;padding:6px;border-radius:16px;background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08)}
+.glass-nav-inner{position:relative;display:flex;gap:0}
+.glass-nav-indicator{position:absolute;top:0;left:0;height:100%;border-radius:10px;background:rgba(255,255,255,0.13);transition:left 0.45s cubic-bezier(0.22,1,0.36,1),width 0.45s cubic-bezier(0.22,1,0.36,1);pointer-events:none;z-index:0}
+.glass-nav a{text-decoration:none;padding:8px 22px;border-radius:10px;font-size:clamp(13px,0.9vw,15px);color:rgba(255,255,255,0.45);font-weight:500;transition:color 0.3s ease;cursor:pointer;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px;position:relative;z-index:1}
+.glass-nav a:hover{color:rgba(255,255,255,0.85)}
+.glass-nav a.active{color:#fff}
+
+/* ===== SECTION BASE ===== */
+.section{min-height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+/* ===== NAVIGATION DOTS ===== */
+.nav-dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:16px}
+.nav-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;transition:all 0.4s cubic-bezier(0.22,1,0.36,1);position:relative}
+.nav-dot:hover,.nav-dot.active{background:#fff;border-color:#fff;transform:scale(1.3)}
+.nav-dot .dot-label{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:13px;color:#fff;font-weight:400;white-space:nowrap;opacity:0;transition:opacity 0.3s;pointer-events:none;font-family:'Noto Sans SC',sans-serif}
+.nav-dot:hover .dot-label{opacity:0.8}
+
+/* ===== ABOUT SECTION ===== */
+#about{background:#0a0604;flex-direction:column;padding:0;justify-content:flex-start;position:relative;overflow:hidden}
+/* Dramatic single-source light ray from top-left */
+#about::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 30%,rgba(255,140,0,0.35) 0%,rgba(200,80,0,0.12) 35%,transparent 65%),radial-gradient(ellipse at 80% 60%,rgba(180,60,0,0.08) 0%,transparent 50%);pointer-events:none;z-index:1}
+/* Hard light ray beam */
+#about::after{content:'';position:absolute;top:-20%;left:-10%;width:60%;height:140%;background:linear-gradient(110deg,rgba(255,160,50,0.08) 0%,rgba(255,100,0,0.04) 25%,transparent 50%);transform:rotate(-15deg);pointer-events:none;z-index:1}
+.about-hero{flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;padding:0;position:relative;z-index:2;gap:clamp(30px,4vw,70px)}
+.about-hero-left{flex:0 1 auto;max-width:clamp(350px,50vw,650px);position:relative;z-index:3;padding-top:0}
+.about-hero-right{flex:0 0 clamp(240px,26vw,380px);position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+
+/* Portrait with dramatic amber lighting */
+.about-hero-right .name-img{width:100%;height:auto;max-height:80vh;object-fit:contain;border-radius:16px;cursor:pointer;
+box-shadow:0 0 100px rgba(255,120,0,0.15),0 0 200px rgba(255,80,0,0.08);
+transition:all 0.5s cubic-bezier(0.22,1,0.36,1)}
+.about-hero-right .name-img:hover{
+box-shadow:0 0 120px rgba(255,120,0,0.25),0 0 240px rgba(255,80,0,0.12);
+animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
+@keyframes imgBounce{0%{transform:translateY(0)}40%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+
+/* Left-aligned typography block - editorial style */
+.about-hero-left .greeting{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);color:rgba(255,140,0,0.4);font-style:italic;margin-bottom:6px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.1s}
+.about-hero-left .greeting.visible{opacity:1;transform:translateY(0)}
+.about-hero-left .hero-title{font-size:clamp(56px,9vw,120px);font-weight:900;line-height:0.92;letter-spacing:-0.03em;margin-bottom:12px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.15s;color:#FF8C00;text-shadow:0 2px 40px rgba(255,140,0,0.2)}
+.about-hero-left .hero-title.visible{opacity:1;transform:translateY(0)}
+.about-hero-left .hero-tagline{font-size:clamp(16px,1.4vw,24px);color:rgba(255,160,60,0.5);margin-bottom:12px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.2s;letter-spacing:4px;font-weight:300;text-transform:uppercase}
+.about-hero-left .hero-tagline.visible{opacity:1;transform:translateY(0)}
+.about-hero-left .hero-bio{font-size:clamp(15px,1.2vw,20px);line-height:1.9;color:rgba(255,180,100,0.35);font-weight:300;margin-bottom:28px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.25s}
+.about-hero-left .hero-bio.visible{opacity:1;transform:translateY(0)}
+.about-hero-left .hero-bio strong{color:rgba(255,180,100,0.7)}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;border-radius:100px;border:none;background:linear-gradient(135deg,#FF8C00,#E06000);color:#fff;font-size:clamp(14px,1vw,17px);font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(15px);letter-spacing:1.5px;font-family:'Noto Sans SC',sans-serif;text-decoration:none;text-transform:uppercase}
+.hero-btn.visible{opacity:1;transform:translateY(0);transition-delay:0.3s}
+.hero-btn:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(255,120,0,0.35),0 0 80px rgba(255,80,0,0.15)}
+.hero-btn span{font-size:16px;line-height:1;transition:transform 0.3s ease}
+.hero-btn:hover span{transform:translateX(4px)}
+
+/* Ghosted cross deco */
+.about-hero-right .deco-cross{position:absolute;right:-15%;top:50%;transform:translateY(-50%);font-size:clamp(200px,30vw,500px);color:rgba(255,140,0,0.04);font-weight:900;pointer-events:none;z-index:0;font-family:'Arial',sans-serif;user-select:none}
+.about-hero-right .deco-light{position:absolute;width:clamp(100px,12vw,200px);height:clamp(100px,12vw,200px);border-radius:50%;background:radial-gradient(circle,rgba(255,140,0,0.08),transparent 70%);pointer-events:none;z-index:1}
+
+/* Site links below portrait */
+.site-links{width:100%;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;opacity:0;transform:translateY(15px);transition:all 0.8s cubic-bezier(0.15,0.85,0.35,1) 0.4s}
+.site-links.visible{opacity:1;transform:translateY(0)}
+.site-link{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;border:1px solid rgba(255,140,0,0.12);background:rgba(255,140,0,0.04);color:rgba(255,180,100,0.5);font-size:clamp(11px,0.7vw,13px);text-decoration:none;transition:all 0.3s ease;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.5px}
+.site-links.visible{opacity:1;transform:translateY(0)}
+.site-link{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,140,0,0.12);background:rgba(255,140,0,0.04);color:rgba(255,180,100,0.5);font-size:clamp(10px,0.7vw,12px);text-decoration:none;transition:all 0.3s ease;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.5px}
+.site-link:hover{border-color:rgba(255,140,0,0.3);background:rgba(255,140,0,0.08);color:rgba(255,180,100,0.8)}
+.site-link .link-icon{font-size:14px;line-height:1}
+
+/* ===== PHOTO SECTION (single page) ===== */
+#photos{background:linear-gradient(150deg,#0a0e2a 0%,#121840 40%,#1a1040 70%,#0f0c29 100%);padding:0;display:flex;align-items:center;overflow:hidden}
+#photos::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(78,205,196,0.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(192,132,252,0.08) 0%,transparent 60%);pointer-events:none}
+.photo-scroll-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding:6% 0 6% 5%}
+.photo-scroll{width:52%;height:75vh;overflow:hidden;position:relative;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.5);flex-shrink:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center}
+.photo-track{position:relative;width:100%;height:100%}
+.photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:0;transition:opacity 0.5s ease}
+.photo-img.active{opacity:1}
+.photo-nav{position:absolute;z-index:10;top:50%;transform:translateY(-50%);width:40px;height:40px;border:none;border-radius:50%;background:rgba(0,0,0,0.5);color:rgba(255,255,255,0.7);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;backdrop-filter:blur(4px)}
+.photo-nav:hover{background:rgba(0,0,0,0.8);color:#fff;transform:translateY(-50%) scale(1.1)}
+.photo-nav-prev{left:12px}
+.photo-nav-next{right:12px}
+
+.photo-info-wrap{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:36%;display:flex;flex-direction:column;background:rgba(15,12,41,0.85);border-radius:16px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);z-index:2}
+.photo-info-inner{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vh,48px) clamp(24px,3vw,44px);position:relative;min-height:300px}
+.photo-info-item{position:absolute;inset:clamp(28px,4vh,48px) clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(20px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1);pointer-events:none}
+.photo-info-item.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.photo-info-item .badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;border:1px solid;padding:4px 12px;border-radius:100px;margin-bottom:12px;width:fit-content;font-weight:400}
+.photo-info-item h2{font-size:clamp(26px,3.5vw,48px);font-weight:900;line-height:1.15;margin-bottom:10px}
+.photo-info-item p{font-size:clamp(15px,1.3vw,20px);color:rgba(255,255,255,0.5);line-height:1.8;font-weight:300}
+
+/* Photo accent colors cycling through 12 */
+.pi-0 .badge,.pi-6 .badge{border-color:#FF6B6B;color:#FF6B6B}
+.pi-0 h2,.pi-6 h2{color:#FF6B6B}
+.pi-1 .badge,.pi-7 .badge{border-color:#4ECDC4;color:#4ECDC4}
+.pi-1 h2,.pi-7 h2{color:#4ECDC4}
+.pi-2 .badge,.pi-8 .badge{border-color:#FFE66D;color:#FFE66D}
+.pi-2 h2,.pi-8 h2{color:#FFE66D}
+.pi-3 .badge,.pi-9 .badge{border-color:#C084FC;color:#C084FC}
+.pi-3 h2,.pi-9 h2{color:#C084FC}
+.pi-4 .badge,.pi-10 .badge{border-color:#FF8B94;color:#FF8B94}
+.pi-4 h2,.pi-10 h2{color:#FF8B94}
+.pi-5 .badge,.pi-11 .badge{border-color:#00DBDE;color:#00DBDE}
+.pi-5 h2,.pi-11 h2{color:#00DBDE}
+
+.photo-dots{position:absolute;right:clamp(-20px,-2vw,-12px);top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:8px}
+.photo-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.5s ease;cursor:pointer}
+.photo-dots span.active{width:8px;height:20px;border-radius:4px;background:#fff}
+
+/* ===== MOVIES SECTION ===== */
+#movies{background:linear-gradient(160deg,#0d0000 0%,#2a0000 30%,#1a0000 60%,#0d0000 100%);flex-direction:column;padding:0;overflow:hidden}
+#movies::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,0,0,0.3),transparent 70%);pointer-events:none}
+#movies .section-content{text-align:center;position:relative;z-index:2;width:100%;padding:clamp(40px,6vh,60px) 0 0;flex:0 0 auto}
+#movies .section-title{font-family:'Noto Serif SC',serif;font-size:clamp(36px,6vw,72px);font-weight:900;margin-bottom:4px;opacity:0;transform:translateY(30px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
+#movies .section-title.visible{opacity:1;transform:translateY(0)}
+#movies .section-subtitle{font-size:clamp(14px,1.5vw,20px);color:rgba(255,255,255,0.4);margin-bottom:clamp(16px,2vh,32px);font-weight:300;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.05s}
+#movies .section-subtitle.visible{opacity:1;transform:translateY(0)}
+
+/* Movie carousel */
+.movie-carousel-wrap{position:relative;flex:1;width:100%;overflow:hidden;display:flex;align-items:center}
+.movie-track{display:flex;align-items:center;gap:50px;will-change:transform;padding:0;height:75vh}
+.movie-item{flex-shrink:0;width:160px;display:flex;flex-direction:column;align-items:center}
+.movie-card{width:160px;height:240px;border-radius:12px;position:relative;cursor:pointer;border:2px solid transparent;flex-shrink:0;opacity:0.35;filter:brightness(0.35);margin-bottom:0;transition:margin-bottom 0.5s,transform 0.5s,opacity 0.5s,filter 0.5s}
+.movie-card .poster{position:absolute;inset:0;overflow:hidden;border-radius:10px}
+.movie-card .poster div{width:100%;height:100%;background-size:cover;background-position:center}
+.movie-card .poster-overlay{position:absolute;inset:0;border-radius:10px;background:linear-gradient(to top,rgba(0,0,0,0.2),transparent 40%);pointer-events:none;transition:opacity 0.4s ease}
+
+/* Focus: scale up AND push text down with margin-bottom */
+.movie-card.focus{transform:scale(1.875);transform-origin:center top;opacity:1;filter:brightness(1);border-color:rgba(232,80,80,0.6);z-index:10;margin-bottom:220px}
+.movie-card.focus .poster-overlay{opacity:0.5}
+.movie-card.side{opacity:0.7;filter:brightness(0.55)}
+
+/* Movie info below poster */
+.movie-info{width:100%;padding:12px 4px 0;text-align:center;transition:color 0.4s ease}
+.movie-info h3{font-size:clamp(18px,1.4vw,24px);font-weight:700;font-family:'Noto Serif SC',serif;color:rgba(255,255,255,0.3);margin-bottom:3px;transition:color 0.4s ease}
+.movie-info .meta{font-size:clamp(13px,1vw,17px);color:rgba(255,255,255,0.15);margin-bottom:3px;transition:color 0.4s ease}
+.movie-info .actors{font-size:clamp(12px,0.85vw,15px);color:rgba(255,255,255,0.12);margin-bottom:3px;transition:color 0.4s ease}
+.movie-info .rating{font-size:clamp(12px,0.85vw,15px);color:rgba(255,255,255,0.12);margin-bottom:4px;transition:color 0.4s ease}
+.movie-info .desc{font-size:clamp(13px,1vw,17px);color:rgba(255,255,255,0.1);line-height:1.4;font-weight:300;transition:color 0.4s ease}
+
+.movie-item.focus .movie-info h3{color:#E85050}
+.movie-item.focus .movie-info .meta{color:rgba(255,255,255,0.5)}
+.movie-item.focus .movie-info .actors{color:rgba(255,255,255,0.4)}
+.movie-item.focus .movie-info .rating{color:#FFD700}
+.movie-item.focus .movie-info .desc{color:rgba(255,255,255,0.55)}
+
+/* ===== ENTRANCE ===== */
+.section .animate{opacity:0;transform:translateY(40px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
+.section .animate.visible{opacity:1;transform:translateY(0)}
+.section .animate-d1{transition-delay:0.05s}
+.section .animate-d2{transition-delay:0.10s}
+.section .animate-d3{transition-delay:0.15s}
+.section .animate-d4{transition-delay:0.20s}
+.section .animate-d5{transition-delay:0.25s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-dots{right:14px;gap:12px}
+  .nav-dot{width:8px;height:8px}
+  .nav-dot .dot-label{display:none}
+}
+@media(max-width:480px){
+}
+
+/* ===== WATERFALL FLOW EFFECT ===== */
+.waterfall-indicator{position:absolute;right:clamp(30px,6vw,100px);bottom:clamp(40px,8vh,100px);z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.3}
+.waterfall-indicator .wf-line{width:1px;height:40px;background:linear-gradient(to bottom,#fff,transparent)}
+.waterfall-indicator .wf-text{font-size:10px;letter-spacing:2px;writing-mode:vertical-rl}
+
+/* ===== ZOOM OVERLAY ===== */
+#zoomLightbox{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.4s ease;cursor:zoom-out}
+#zoomLightbox.open{background:rgba(0,0,0,0.7);pointer-events:all}
+#zoomLightbox img{max-height:0;max-width:0;border-radius:12px;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);opacity:0}
+#zoomLightbox.open img{max-height:80vh;max-width:80vw;opacity:1}
+
+/* ===== MEME CAROUSEL ===== */
+.about-lower{width:100%;overflow:hidden;position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;padding:6px 0 30px;margin-top:auto}
+.meme-header{display:flex;align-items:center;justify-content:flex-start;padding:0 clamp(24px,4vw,50px)}
+.meme-refresh-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,140,0,0.15);background:rgba(255,140,0,0.05);color:rgba(255,180,100,0.4);cursor:pointer;transition:all 0.3s ease;padding:0;flex-shrink:0}
+.meme-refresh-btn:hover{border-color:rgba(255,140,0,0.35);background:rgba(255,140,0,0.1);color:rgba(255,180,100,0.7)}
+.meme-refresh-btn svg{width:14px;height:14px;display:block}
+.meme-refresh-btn.spinning svg{animation:spin 0.6s linear infinite}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.meme-border{margin:0 clamp(20px,3vw,50px);border:1.5px solid rgba(255,140,0,0.2);border-radius:12px;overflow:hidden;padding:8px 0;background:rgba(255,140,0,0.02)}
+.meme-row{overflow:hidden;position:relative;display:flex;align-items:center;height:clamp(65px,11vh,120px)}
+.meme-row-inner{display:flex;gap:10px;white-space:nowrap;padding:0}
+.meme-row-inner img{height:clamp(55px,9vh,100px);width:auto;border-radius:6px;cursor:pointer;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s ease;flex-shrink:0}
+.meme-row-inner img:hover{transform:scale(1.05) !important;box-shadow:0 6px 20px rgba(255,140,0,0.25)}
+.meme-row-inner.r1{animation:memeScroll 45s linear infinite}
+.meme-row-inner.r2{animation:memeScroll 60s linear infinite;animation-delay:-20s}
+.meme-row-inner.r3{animation:memeScroll 75s linear infinite;animation-delay:-40s}
+.meme-row-inner.paused{animation-play-state:paused!important}
+@keyframes memeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<!-- ===== SPLASH / ENTRANCE ===== -->
+<div id="splash">
+  <h1 class="splash-title"><span class="title-base">你好，我是彭艺柯</span><span class="title-sweep">你好，我是彭艺柯</span></h1>
+</div>
+
+<!-- ===== ZOOM LIGHTBOX ===== -->
+<div id="zoomLightbox"><img alt=""></div>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div id="cursor-dot"></div>
+<div id="cursor"></div>
+
+<!-- ===== SECTION BACKGROUND CROSSFADE ===== -->
+<div id="sectionFade"></div>
+
+<!-- ===== GLASS NAV ===== -->
+<nav class="glass-nav" id="glassNav">
+  <div class="glass-nav-inner">
+    <div class="glass-nav-indicator" id="navIndicator"></div>
+    <a href="#about" data-index="0" class="active">关于我</a>
+    <a href="#photos" data-index="1">摄影</a>
+    <a href="#movies" data-index="2">电影</a>
+  </div>
+</nav>
+
+<!-- ===== NAV DOTS ===== -->
+<nav class="nav-dots" id="navDots">
+  <a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a>
+  <a class="nav-dot" href="#photos" data-index="1"><span class="dot-label">摄影</span></a>
+  <a class="nav-dot" href="#movies" data-index="2"><span class="dot-label">电影</span></a>
+</nav>
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main" id="main">
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="section">
+    <div class="about-hero">
+      <div class="about-hero-left">
+        <p class="greeting hover-text">Hi, I'm</p>
+        <h1 class="hero-title hover-text">彭艺柯</h1>
+        <p class="hero-tagline hover-text">高司令指定扮演者</p>
+        <p class="hero-bio hover-text">一个热爱生活、沉迷创意的人。<br>用 <strong>镜头</strong> 记录世界，用 <strong>代码</strong> 构建想象，用 <strong>故事</strong> 连接你我。</p>
+        <a class="hero-btn" href="#photos">探索作品 <span>→</span></a>
+      </div>
+      <div class="about-hero-right">
+        <span class="deco-cross">+</span>
+        <span class="deco-light" style="top:5%;left:-15%"></span>
+        <span class="deco-light" style="bottom:10%;right:-10%"></span>
+        <img class="name-img" src="pic/头像.jpg" alt="彭艺柯">
+        <div class="site-links">
+          <a class="site-link hover-text" href="https://www.bilibili.com" target="_blank"><span class="link-icon">▸</span>B站</a>
+          <a class="site-link hover-text" href="https://www.zhihu.com" target="_blank"><span class="link-icon">▸</span>知乎</a>
+          <a class="site-link hover-text" href="https://www.youtube.com" target="_blank"><span class="link-icon">▸</span>YouTube</a>
+          <a class="site-link hover-text" href="https://t.me" target="_blank"><span class="link-icon">▸</span>Telegram</a>
+          <a class="site-link hover-text" href="https://x.com" target="_blank"><span class="link-icon">▸</span>X</a>
+          <a class="site-link hover-text" href="https://rousi.pro/" target="_blank"><span class="link-icon">▸</span>rousi.pro</a>
+          <a class="site-link hover-text" href="https://carpt.net/index.php" target="_blank"><span class="link-icon">▸</span>carpt.net</a>
+        </div>
+      </div>
+    </div>
+    <div class="about-lower">
+      <div class="meme-header">
+        <button class="meme-refresh-btn" id="memeRefreshBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+      </div>
+      <div class="meme-border" id="memeBorder">
+      <div class="meme-row"><div class="meme-row-inner r1" id="memeRow1"></div></div>
+      <div class="meme-row"><div class="meme-row-inner r2" id="memeRow2"></div></div>
+      <div class="meme-row"><div class="meme-row-inner r3" id="memeRow3"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHOTOS ============ -->
+  <section id="photos" class="section">
+    <div class="photo-scroll-wrap">
+      <div class="photo-scroll">
+        <div class="photo-track" id="photoTrack">
+          <img src="pic/照片展示/DSC01708-1.JPG" alt="桥" class="photo-img">
+          <img src="pic/照片展示/DSC09198-1.JPG" alt="山间晨雾" class="photo-img active">
+          <img src="pic/照片展示/1780071501759.jpg" alt="窗" class="photo-img">
+          <img src="pic/照片展示/mmexport1768918568845.jpg" alt="秋" class="photo-img">
+          <img src="pic/照片展示/流星1.jpg" alt="流星" class="photo-img">
+          <img src="pic/照片展示/流星2.jpg" alt="星河" class="photo-img">
+        </div>
+        <button class="photo-nav photo-nav-prev" id="photoPrev">‹</button>
+        <button class="photo-nav photo-nav-next" id="photoNext">›</button>
+      </div>
+    </div>
+    <div class="photo-info-wrap">
+      <div class="photo-info-inner" id="photoInfoInner">
+        <div class="photo-info-item pi-0 show"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">山间晨雾</h2><p class="hover-text">云雾缠绕着山脊，光从缝隙中漏下来。</p></div>
+        <div class="photo-info-item pi-1"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">桥</h2><p class="hover-text">钢筋与水面之间，藏着城市的另一面。</p></div>
+        <div class="photo-info-item pi-2"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">窗</h2><p class="hover-text">窗里窗外，是不同的时间流速。</p></div>
+        <div class="photo-info-item pi-3"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">秋</h2><p class="hover-text">落叶铺满来时的路。</p></div>
+        <div class="photo-info-item pi-4"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">流星</h2><p class="hover-text">一瞬的光，也值得被记住。</p></div>
+        <div class="photo-info-item pi-5"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">星河</h2><p class="hover-text">抬头看的时候，宇宙也在看你。</p></div>
+      </div>
+      <div class="photo-dots" id="photoDots">
+        <span class="active" data-i="0"></span><span data-i="1"></span><span data-i="2"></span>
+        <span data-i="3"></span><span data-i="4"></span><span data-i="5"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOVIES ============ -->
+  <section id="movies" class="section">
+    <div class="section-content">
+      <h2 class="section-title animate hover-text">光影 · 电影</h2>
+      <p class="section-subtitle animate hover-text">那些在银幕上闪烁的，是另一个世界的梦</p>
+    </div>
+    <div class="movie-carousel-wrap">
+      <div class="movie-track" id="movieTrack">
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BODYwNDYxNDk1Nl5BMl5BanBnXkFtZTgwOTAwMTk2MDE@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">白日梦想家</h3><div class="meta hover-text">🎬 本·斯蒂勒 · 2013</div><div class="actors hover-text">⭐ 本·斯蒂勒 / 克里斯汀·韦格</div><div class="rating hover-text">🏆 IMDb 7.3</div><div class="desc hover-text">开拓视野，冲破艰险。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">楚门的世界</h3><div class="meta hover-text">🎬 彼得·威尔 · 1998</div><div class="actors hover-text">⭐ 金·凯瑞 / 劳拉·琳尼</div><div class="rating hover-text">🏆 IMDb 8.2</div><div class="desc hover-text">如果不能再见，祝你早安午安晚安。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">爱乐之城</h3><div class="meta hover-text">🎬 达米恩·查泽雷 · 2016</div><div class="actors hover-text">⭐ 瑞恩·高斯林 / 艾玛·斯通</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">敬那些做梦的人。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzVkMTgzODQtMWIwZC00NzE4LTgzZjYtMzAwM2I5OGZhNjE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">头号玩家</h3><div class="meta hover-text">🎬 史蒂文·斯皮尔伯格 · 2018</div><div class="actors hover-text">⭐ 泰伊·谢里丹 / 奥利维亚·库克</div><div class="rating hover-text">🏆 IMDb 7.4</div><div class="desc hover-text">谢谢你玩我的游戏。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">波西米亚狂想曲</h3><div class="meta hover-text">🎬 布莱恩·辛格 · 2018</div><div class="actors hover-text">⭐ 拉米·马雷克 / 露西·宝通</div><div class="rating hover-text">🏆 IMDb 7.9</div><div class="desc hover-text">我们注定与众不同。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">搏击俱乐部</h3><div class="meta hover-text">🎬 大卫·芬奇 · 1999</div><div class="actors hover-text">⭐ 布拉德·皮特 / 爱德华·诺顿</div><div class="rating hover-text">🏆 IMDb 8.8</div><div class="desc hover-text">丢掉一切，才能自由。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">星际穿越</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2014</div><div class="actors hover-text">⭐ 马修·麦康纳 / 安妮·海瑟薇</div><div class="rating hover-text">🏆 IMDb 8.7</div><div class="desc hover-text">爱是我们能穿越时空的唯一力量。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">银翼杀手</h3><div class="meta hover-text">🎬 雷德利·斯科特 · 1982</div><div class="actors hover-text">⭐ 哈里森·福特 / 肖恩·杨</div><div class="rating hover-text">🏆 IMDb 8.1</div><div class="desc hover-text">我见过你们无法想象的美。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDU5YTNmMmItN2QxNy00OGQ0LTg5MTctNzFmYjEzZjcwN2UwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">绿皮书</h3><div class="meta hover-text">🎬 彼得·法雷利 · 2018</div><div class="actors hover-text">⭐ 维果·莫滕森 / 马赫沙拉·阿里</div><div class="rating hover-text">🏆 IMDb 8.2</div><div class="desc hover-text">勇气改变人心。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">信条</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2020</div><div class="actors hover-text">⭐ 约翰·大卫·华盛顿 / 罗伯特·帕丁森</div><div class="rating hover-text">🏆 IMDb 7.3</div><div class="desc hover-text">不要试图理解它，去感受它。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">当幸福来敲门</h3><div class="meta hover-text">🎬 加布里尔·穆奇诺 · 2006</div><div class="actors hover-text">⭐ 威尔·史密斯 / 贾登·史密斯</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">如果你有梦想，就要守护它。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">盗梦空间</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2010</div><div class="actors hover-text">⭐ 莱昂纳多·迪卡普里奥 / 约瑟夫·高登-莱维特</div><div class="rating hover-text">🏆 IMDb 8.8</div><div class="desc hover-text">一个念头就能改变一切。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">黑客帝国</h3><div class="meta hover-text">🎬 沃卓斯基姐妹 · 1999</div><div class="actors hover-text">⭐ 基努·里维斯 / 劳伦斯·菲什伯恩</div><div class="rating hover-text">🏆 IMDb 8.7</div><div class="desc hover-text">欢迎来到现实荒漠。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGRkYTNhOWQtYmI0Ni00MjZhLWJmMzAtMTA2Mjg4NGNiNDU0XkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">这个杀手不太冷</h3><div class="meta hover-text">🎬 吕克·贝松 · 1994</div><div class="actors hover-text">⭐ 让·雷诺 / 娜塔莉·波特曼</div><div class="rating hover-text">🏆 IMDb 8.5</div><div class="desc hover-text">人生总是如此痛苦吗？</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDg0ZTU4YTItZTI3My00ODNjLTllMTYtMzI3ZWNjYjU1NGM1XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">海上钢琴师</h3><div class="meta hover-text">🎬 朱塞佩·托纳多雷 · 1998</div><div class="actors hover-text">⭐ 蒂姆·罗斯 / 普路特·泰勒·文斯</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">琴键有限，音乐无限。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDdjZGQ5YzEtNTc2My00Mjc0LWFlMTctYzkwMzZlNzdiZWYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,9,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">心灵捕手</h3><div class="meta hover-text">🎬 格斯·范·桑特 · 1997</div><div class="actors hover-text">⭐ 罗宾·威廉姆斯 / 马特·达蒙</div><div class="rating hover-text">🏆 IMDb 8.4</div><div class="desc hover-text">不是你的错。</div></div></div>
+        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">教父</h3><div class="meta hover-text">🎬 弗朗西斯·科波拉 · 1972</div><div class="actors hover-text">⭐ 马龙·白兰度 / 阿尔·帕西诺</div><div class="rating hover-text">🏆 IMDb 9.2</div><div class="desc hover-text">我会给他一个无法拒绝的提议。</div></div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ===== SPLASH ENTRANCE =====
+const splash = document.getElementById('splash');
+
+function dismissSplash() {
+  if (splash.classList.contains('dismissing')) return;
+  splash.classList.add('dismissing');
+  setTimeout(() => {
+    splash.classList.add('hidden');
+    document.body.style.overflow = '';
+    document.getElementById('main').style.overflowY = 'scroll';
+    // Trigger about section entrance
+    const about = document.getElementById('about');
+    about.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 120);
+    });
+    // Init nav indicator
+    updateUI('about');
+  }, 800);
+}
+
+// Click anywhere to dismiss
+splash.addEventListener('click', dismissSplash);
+
+// Auto-dismiss after sweep completes: 0.5s delay + 3.5s sweep + buffer
+setTimeout(() => {
+  if (!splash.classList.contains('hidden')) dismissSplash();
+}, 5000);
+
+// Prevent body scroll while splash is active
+document.body.style.overflow = 'hidden';
+document.getElementById('main').style.overflowY = 'hidden';
+
+// ===== AVATAR ZOOM =====
+const avatar = document.querySelector('.name-img');
+const zoomLightbox = document.getElementById('zoomLightbox');
+const zoomImg = zoomLightbox.querySelector('img');
+
+avatar.addEventListener('click', () => {
+  zoomImg.src = avatar.src;
+  zoomLightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('main').style.overflowY = 'hidden';
+});
+
+zoomLightbox.addEventListener('click', () => {
+  zoomLightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('main').style.overflowY = 'scroll';
+});
+
+// ===== SMOOTH SECTION ENTRANCE =====
+const sections = document.querySelectorAll('.section');
+const navDots = document.querySelectorAll('.nav-dot');
+const main = document.getElementById('main');
+const glassLinks = document.querySelectorAll('#glassNav a');
+const indicator = document.getElementById('navIndicator');
+const fadeOverlay = document.getElementById('sectionFade');
+
+const bgColors = {
+  about: '#0a0604',
+  photos: '#0a0e2a',
+  movies: '#0d0000'
+};
+
+let lastSection = 'about';
+let navLock = 0;
+
+function slideIndicator(id) {
+  const link = document.querySelector(`#glassNav a[href="#${id}"]`);
+  if (!link) return;
+  const navInner = link.closest('.glass-nav-inner');
+  if (!navInner) return;
+  // Calculate offset within the inner wrapper
+  let left = 0;
+  let found = false;
+  navInner.querySelectorAll('a').forEach(a => {
+    if (a === link) found = true;
+    if (!found) left += a.offsetWidth;
+  });
+  indicator.style.left = left + 'px';
+  indicator.style.width = link.offsetWidth + 'px';
+}
+
+function updateUI(id) {
+  lastSection = id;
+  slideIndicator(id);
+  glassLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+  navDots.forEach(d => d.classList.toggle('active', d.getAttribute('href') === '#' + id));
+}
+
+function doFade(id) {
+  if (id === lastSection) return;
+  fadeOverlay.style.background = bgColors[lastSection] || '#000';
+  fadeOverlay.style.opacity = '1';
+  requestAnimationFrame(() => {
+    fadeOverlay.style.opacity = '0';
+    updateUI(id);
+  });
+}
+
+function updateSectionProgress() {
+  if (Date.now() < navLock) return;
+  const viewH = main.clientHeight;
+  let best = null;
+  let maxV = 0;
+  sections.forEach(sec => {
+    const r = sec.getBoundingClientRect();
+    // Only consider sections with visible area on screen
+    if (r.bottom <= 0 || r.top >= viewH) return;
+    // How much of this section is visible (0-1)
+    const visibleArea = Math.min(r.bottom, viewH) - Math.max(r.top, 0);
+    const visibleRatio = visibleArea / r.height;
+    sec.querySelectorAll('.animate').forEach(el => {
+      if (visibleRatio > 0.1) el.classList.add('visible');
+    });
+    // Also handle about hero section elements
+    if (sec.id === 'about') {
+      sec.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach(el => {
+        if (visibleRatio > 0.15) el.classList.add('visible');
+      });
+    }
+    if (visibleRatio > maxV) {
+      maxV = visibleRatio;
+      best = sec.id;
+    }
+  });
+  if (best && best !== lastSection && bgColors[best]) {
+    doFade(best);
+  }
+}
+main.addEventListener('scroll', updateSectionProgress, { passive: true });
+
+function initSectionUI() {
+  if (!document.getElementById('glassNav').offsetWidth) { setTimeout(initSectionUI, 50); return; }
+  updateUI('about');
+}
+setTimeout(initSectionUI, 150);
+
+// ===== PHOTO CAROUSEL =====
+const photoImgs = document.querySelectorAll('.photo-img');
+const photoItems = document.querySelectorAll('.photo-info-item');
+const photoDots = document.querySelectorAll('#photoDots span');
+const photoPrev = document.getElementById('photoPrev');
+const photoNext = document.getElementById('photoNext');
+const PHOTO_COUNT = 6;
+let photoIdx = 0;
+let photoTimer = null;
+const PHOTO_INTERVAL = 5000;
+
+function showPhoto(index) {
+  photoImgs.forEach((img, i) => img.classList.toggle('active', i === index));
+  photoItems.forEach((item, i) => item.classList.toggle('show', i === index));
+  photoDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  photoIdx = index;
+}
+
+function nextPhoto() {
+  showPhoto((photoIdx + 1) % PHOTO_COUNT);
+}
+
+function prevPhoto() {
+  showPhoto((photoIdx - 1 + PHOTO_COUNT) % PHOTO_COUNT);
+}
+
+function startCarousel() {
+  stopCarousel();
+  (function tick() {
+    photoTimer = setTimeout(() => { nextPhoto(); tick(); }, PHOTO_INTERVAL);
+  })();
+}
+
+function stopCarousel() {
+  if (photoTimer) { clearTimeout(photoTimer); photoTimer = null; }
+}
+
+// Buttons
+photoPrev.addEventListener('click', () => { stopCarousel(); prevPhoto(); startCarousel(); });
+photoNext.addEventListener('click', () => { stopCarousel(); nextPhoto(); startCarousel(); });
+
+// Dots
+photoDots.forEach((dot, i) => {
+  dot.addEventListener('click', () => { stopCarousel(); showPhoto(i); startCarousel(); });
+});
+
+// Hover pause
+document.querySelector('.photo-scroll').addEventListener('mouseenter', stopCarousel);
+document.querySelector('.photo-scroll').addEventListener('mouseleave', startCarousel);
+
+// Start on intersection
+const photoObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) startCarousel();
+    else stopCarousel();
+  });
+}, { threshold: 0.3 });
+photoObs.observe(document.getElementById('photos'));
+showPhoto(0);
+
+// ===== MOVIE CAROUSEL =====
+const movieTrack = document.getElementById('movieTrack');
+const movieItems = Array.from(movieTrack.querySelectorAll('.movie-item'));
+const MC = movieItems.length;
+let movieTimer = null;
+let movieIdx = 0;
+const NORMAL_INTERVAL = 3500;
+
+// Clone: prepend last 3 and append first 3 for seamless wrap
+movieItems.slice(-3).forEach(item => movieTrack.insertBefore(item.cloneNode(true), movieTrack.firstChild));
+movieItems.slice(0, 3).forEach(item => movieTrack.appendChild(item.cloneNode(true)));
+
+const allItems = movieTrack.querySelectorAll('.movie-item');
+const CS = 3;
+
+function centerMovie(anim) {
+  const vw = movieTrack.parentElement?.offsetWidth || window.innerWidth;
+  movieTrack.style.transition = anim ? 'transform 0.5s cubic-bezier(0.22,1,0.36,1)' : 'none';
+  movieTrack.style.transform = `translateX(${vw / 2 - movieIdx * 210 - 80}px)`;
+  allItems.forEach((item, i) => {
+    const f = i === movieIdx;
+    item.classList.toggle('focus', f);
+    item.querySelector('.movie-card').classList.toggle('focus', f);
+    item.querySelector('.movie-card').classList.toggle('side', Math.abs(i - movieIdx) === 1);
+  });
+}
+
+function advanceMovie() {
+  movieIdx++;
+  if (movieIdx >= MC + CS) {
+    movieTrack.style.transition = 'none';
+    movieIdx = CS;
+    centerMovie(false);
+  } else {
+    centerMovie(true);
+  }
+}
+
+function goToMovie(i) { movieStop(); movieIdx = i; centerMovie(true); movieStart(NORMAL_INTERVAL); }
+
+function movieStart(interval) {
+  movieStop();
+  movieTimer = setInterval(advanceMovie, interval || NORMAL_INTERVAL);
+}
+
+function movieStop() { if (movieTimer) { clearInterval(movieTimer); movieTimer = null; } }
+
+// Rapid intro: burst once, then steady
+function initMovies() {
+  if (!movieTrack.parentElement?.offsetWidth) { setTimeout(initMovies, 50); return; }
+  movieIdx = CS;
+  centerMovie(false);
+  // Rapid burst: advance 3 times at 120ms each
+  movieStart(120);
+  let burst = 0;
+  const stopBurst = setInterval(() => {
+    burst++;
+    advanceMovie();
+    if (burst >= 3) {
+      clearInterval(stopBurst);
+      movieStart(NORMAL_INTERVAL);
+    }
+  }, 120);
+}
+
+allItems.forEach((item, i) => item.addEventListener('click', () => goToMovie(i)));
+movieTrack.addEventListener('mouseenter', movieStop);
+movieTrack.addEventListener('mouseleave', () => movieStart(NORMAL_INTERVAL));
+
+// Observer pauses/resumes on scroll
+const movieObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      // Only do rapid intro if section was fully out of view
+      initMovies();
+    } else movieStop();
+  });
+}, { threshold: 0.1 });
+movieObs.observe(document.getElementById('movies'));
+window.addEventListener('resize', () => centerMovie(false));
+
+// ===== SMOOTH NAV DOT CLICK =====
+navDots.forEach(dot => {
+  dot.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = dot.getAttribute('href').replace('#', '');
+    const target = document.querySelector(dot.getAttribute('href'));
+    if (target) {
+      navLock = Date.now() + 900;
+      updateUI(id);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ===== GLASS NAV CLICK =====
+glassLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = link.getAttribute('href').replace('#', '');
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      navLock = Date.now() + 900;
+      updateUI(id);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+
+// ===== MEME CAROUSEL =====
+const memeFiles = [
+  '1748875607313.jpg','1753255081215.jpeg','1755950079507.jpeg',
+  '1756979894541.jpg','1765352075279.jpeg','1765516039129.jpg','1765516075962.jpg',
+  '1766136398997.jpg','1768381934831.jpeg','1768548968592.jpg','1772099114064.jpeg',
+  '1774340520343.jpg','1778050893069.jpeg','1778600941841.jpeg','1778642810048.jpeg',
+  '1778665138007_1778680998335edit.jpg','1778769760184.jpeg','1778769787367.png',
+  '1778822189658.png','1779031627897.png','1779188037489.jpeg','1779724549938.jpeg',
+  '236128203.jpg','236171301.jpg',
+  '2eb3235e04c82e6ac6cc740be082b5d70506df0ae55c3f064.gif',
+  '39cac4552ea880acc7261cb9821e0b90fb90476a668ffe40.webp',
+  '59d37f2678babdf79be36d55dae0fafa1a53e978c0f6b1419.jpg',
+  '5EBF802803BAD18C0889130D5291572F_1778804798843.we.jpg',
+  '5e9b39c13b5fb72fb4a46ba1db688b4f02edb844b26e8509.webp',
+  '5ec107a52ece173cb37078af9ed70f0def5ef9958121b6808.gif',
+  '6fc2ea4d479036b8059838559c7389e0127e65e8e3f26c17f.jpg',
+  '7172bd4d951583eb1942c05e36aece857d3cb725818c88a4.webp',
+  '849f768aea68a874b3c5bad7f187e0048c6c31ba784a5a01.webp',
+  '8a0d86446e9105734b6037cd72cdd7ab692d2ec6fe903d8f7.jpg',
+  '9b4ba25600163f857fb3257a141c10f07737c9557bb5f562.webp',
+  '9d6274c444b4d96f916b2c5a0dfa6a78f43b1c82fe856b0c.webp',
+  'Camera_1040g3k031v3p7td2ia0049aeppoiei1rui3t1o0.jpg',
+  'Camera_1040g3k03206156vv2q305p1fptd525depgrgts8.jpg',
+  'Camera_1040g3k03206156vv2q6g5p1fptd525desv7s0e8.jpg',
+  'Camera_1040g3k0320j9oriqls005pamsj0203gbafmnoro.jpg',
+  'Camera_1040g3k831qqs1tn87o6g5noqk5f093odabe4rb8.jpg',
+  'Camera_1040g3k831v2oot98ii005pq4m5endoe2pkbicmo.jpg',
+  'Camera_1040g3k831ve5atbq3q105n2sgp04m90oevn951g.jpg',
+  'Camera_1040g3k831vvqdo4aiscg5q8js1jdoh834g4o3e8.jpg',
+  'Camera_1040g3k83207als2i5i705phs6s7houm3l9drtuo.jpg',
+  'Camera_1040g3k83207als2i5i7g5phs6s7houm3toau0do.jpg',
+  'Camera_1040g3k83207als2i5i805phs6s7houm3d2f6dio.jpg',
+  'Camera_1040g3k83207als2i5iag5phs6s7houm3ociq0og.jpg',
+  'Camera_1040g3k8320aid0qd6ed05p67gkd3ksa87j5n5p0.jpg',
+  'Camera_XHS_17677996805181000g0081hlad34oai0605of3.jpg',
+  'Camera_XHS_17783367797351040g2sg31q0vb09fn0705ol2.jpg',
+  'Camera_XHS_17789825715421040g2sg3208057tnlseg5nrp.jpg',
+  'Camera_XHS_17789825802751040g2sg3208057tnlsf05nrp.jpg',
+  'Camera_XHS_17789825930881040g2sg3208057tnlsgg5nrp.jpg',
+  'Camera_XHS_17801314925611040g2sg320op76bume505oun.jpg',
+  'Camera_XHS_17801314955941040g008320j9qlealsdg5oun.jpg',
+  'Camera_XHS_17801314975121040g008320j9qlav686g5oun.jpg',
+  'Camera_XHS_17801314992911040g008320j9qdri6e505oun.jpg',
+  'Camera_XHS_17801315009161040g008320j9qdri6e005oun.jpg',
+  'Camera_XHS_17801315029631040g008320j9qdri6e0g5oun.jpg',
+  'Camera_XHS_17801315051771040g008320j9qdri6e105oun.jpg',
+  'Camera_XHS_17801315082471040g008320j9qdri6e1g5oun.jpg',
+  'IMG_20260509_195811.jpg','Image_1778490311410_343.jpg',
+  'Image_1778718448291_698.jpg',
+  'Screenshot_2026-05-11-16-07-07-723_com.larus.nova.jpg',
+  'Screenshot_2026-05-14-12-33-56-984_tv.danmaku.bil.jpg',
+  'a1e5f50cf8b755c2471b3304f81eef7e3fec9d5f0991b9d0.webp',
+  'b7b6fe12dcfc20c20df66011857172354ce77ebc76c28719e.png',
+  'bfd74294d879b1420b8da697e28f9c35ed23bfbb6a208775a.jpg',
+  'c145576176ca0e0d77695d2cc4edc2365e898f1db8e6f4b53.jpg',
+  'cf946d05ef292b72c92bcb2da9030429421b2f73af5a3487.webp',
+  'd0152c34c68f99098f086080cc87957cda9e938b4506158b.webp',
+  'd1f358be8e1453e330759e7a0c524a6c90337c2b2721a0cde.gif',
+  'e130861a8b33a0e20ee8b8cf65343c9ee28d30a2dcd2a341.webp',
+  'e388b2bbd0f35d6c1d976758356d328976fda5cd2118f326.webp',
+  'eab2e700363a85fb43e2ed09d8d532321d1122aedbb27efe2.gif',
+  'f7764a140775959b1df5b9b95d6aba65fabf8f3a7ed42b27.webp',
+  'f78735356b6f788139b2aced67f3bd47bb702e16db49bba85.gif',
+  'heybox_1771519093983_-1020902177.png','heybox_1771576577812_150815951.png',
+  'heybox_1771577049714_-57043090.png','heybox_1771916238305_1263922669.png',
+  'heybox_1772671088676_20537663.png','heybox_1772671097984_1232992783.png',
+  'heybox_1773578879907_-1894240409.png','heybox_1774838658958_234639381.png',
+  'heybox_1775359157559_-527053061.png','heybox_1775359173305_796181055.png',
+  'heybox_1775489953666_-895193356.png','heybox_1776250399828_-1958278530.png',
+  'heybox_1776250453509_1324844214.png','heybox_1778568890730_-836616743.png',
+  'meme_0.jpg','meme_1.jpg','meme_10.jpg','meme_11.png','meme_12.jpg','meme_13.jpg',
+  'meme_14.jpg','meme_15.jpg','meme_16.jpg','meme_17.jpg','meme_18.png','meme_19.jpg',
+  'meme_2.jpg','meme_20.jpg','meme_21.jpg','meme_22.jpg','meme_23.jpg','meme_24.png',
+  'meme_25.jpg','meme_26.jpg','meme_27.jpg','meme_28.png','meme_29.jpg','meme_3.jpg',
+  'meme_30.jpg','meme_31.png','meme_32.jpg','meme_33.jpg','meme_34.png','meme_35.jpg',
+  'meme_36.png','meme_37.jpg','meme_38.jpg','meme_39.jpg','meme_4.jpg','meme_5.jpg',
+  'meme_6.jpg','meme_7.png','meme_8.jpg','meme_9.jpg',
+  'mmexport1779282871533.jpg','mmexport1779371520178.jpg'
+];
+const memeRows = [
+  document.getElementById('memeRow1'),
+  document.getElementById('memeRow2'),
+  document.getElementById('memeRow3')
+];
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderMemes(fileNames) {
+  const srcs = fileNames.map(f => 'pic/梗图/' + f);
+  const groups = [[], [], []];
+  srcs.forEach((s, i) => groups[i % 3].push(s));
+  memeRows.forEach((row, ri) => {
+    row.innerHTML = '';
+    groups[ri].forEach(src => {
+      const img = document.createElement('img');
+      img.src = src; img.alt = 'meme';
+      row.appendChild(img);
+    });
+    groups[ri].forEach(src => {
+      const img = document.createElement('img');
+      img.src = src; img.alt = 'meme';
+      row.appendChild(img);
+    });
+  });
+  memeRows.forEach(row => {
+    row._pause = () => row.classList.add('paused');
+    row._resume = () => row.classList.remove('paused');
+    row.addEventListener('mouseenter', row._pause);
+    row.addEventListener('mouseleave', row._resume);
+  });
+  document.querySelectorAll('.meme-row-inner img').forEach(img => {
+    img.addEventListener('click', () => {
+      zoomImg.src = img.src;
+      zoomLightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('main').style.overflowY = 'hidden';
+    });
+  });
+}
+
+renderMemes(memeFiles);
+
+// Refresh - shuffle local memes only
+const refreshBtn = document.getElementById('memeRefreshBtn');
+refreshBtn.addEventListener('click', () => {
+  refreshBtn.classList.add('spinning');
+  // Reduce to 45 images per load for file:// reliability
+  const shuffled = shuffleArray([...memeFiles]).slice(0, 45);
+  renderMemes(shuffled);
+  setTimeout(() => refreshBtn.classList.remove('spinning'), 400);
+});
+
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursor-dot');
+let curX = 0, curY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  curX = e.clientX;
+  curY = e.clientY;
+  cursorDot.style.left = curX + 'px';
+  cursorDot.style.top = curY + 'px';
+  setTimeout(() => {
+    cursor.style.left = curX + 'px';
+    cursor.style.top = curY + 'px';
+  }, 40);
+});
+
+document.querySelectorAll('a, button, input, img, .card, .movie-card, .site-link, .photo-nav, .meme-row-inner img, .name-img, .hero-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorDot.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorDot.classList.remove('hover'); });
+});
+
+document.addEventListener('mousedown', () => cursor.classList.add('click'));
+document.addEventListener('mouseup', () => cursor.classList.remove('click'));
+document.addEventListener('mouseleave', () => { cursor.style.display = 'none'; cursorDot.style.display = 'none'; });
+document.addEventListener('mouseenter', () => { cursor.style.display = ''; cursorDot.style.display = ''; });
+
+</script>
+</body>
+</html>
