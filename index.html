@@ -338,6 +338,26 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
 .meme-row-inner.r3{animation:memeScroll 75s linear infinite;animation-delay:-40s}
 .meme-row-inner.paused{animation-play-state:paused!important}
 @keyframes memeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== COMMENTS SECTION ===== */
+#comments{background:linear-gradient(160deg,#0a0604 0%,#1a0e08 30%,#0d0806 60%,#0a0604 100%);flex-direction:column;padding:clamp(40px,6vh,80px) clamp(20px,4vw,60px)}
+#comments::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,140,0,0.05),transparent 70%);pointer-events:none}
+#comments .section-content{text-align:center;position:relative;z-index:2;width:100%;max-width:800px}
+#comments .section-title{font-family:'Noto Serif SC',serif;font-size:clamp(28px,5vw,60px);font-weight:900;margin-bottom:6px;opacity:0;transform:translateY(30px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
+#comments .section-title.visible{opacity:1;transform:translateY(0)}
+#comments .section-subtitle{font-size:clamp(13px,1.2vw,17px);color:rgba(255,180,100,0.3);margin-bottom:clamp(20px,3vh,40px);font-weight:300;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.05s}
+#comments .section-subtitle.visible{opacity:1;transform:translateY(0)}
+
+.comments-box{width:100%;max-width:700px;margin:0 auto;padding:clamp(20px,3vh,36px);border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,140,0,0.1);backdrop-filter:blur(8px);position:relative;z-index:2;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.15s}
+.comments-box.visible{opacity:1;transform:translateY(0)}
+.comments-box .giscus-frame{width:100%;border:none}
+
+/* ===== VISITOR COUNTER ===== */
+.footer-bar{position:relative;z-index:2;width:100%;text-align:center;padding:16px 0 0;opacity:0;transition:all 0.8s ease 0.3s}
+.footer-bar.visible{opacity:1}
+.footer-bar span{font-size:clamp(11px,0.8vw,13px);color:rgba(255,180,100,0.2);letter-spacing:1px;font-weight:300}
+.footer-bar .counter-num{color:rgba(255,140,0,0.4);font-weight:400}
+.footer-bar .sep{margin:0 8px;color:rgba(255,180,100,0.1)}
 </style>
 </head>
 <body>
@@ -363,6 +383,7 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
     <a href="#about" data-index="0" class="active">关于我</a>
     <a href="#photos" data-index="1">摄影</a>
     <a href="#movies" data-index="2">电影</a>
+    <a href="#comments" data-index="3">留言</a>
   </div>
 </nav>
 
@@ -371,6 +392,7 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
   <a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a>
   <a class="nav-dot" href="#photos" data-index="1"><span class="dot-label">摄影</span></a>
   <a class="nav-dot" href="#movies" data-index="2"><span class="dot-label">电影</span></a>
+  <a class="nav-dot" href="#comments" data-index="3"><span class="dot-label">留言</span></a>
 </nav>
 
 
@@ -478,6 +500,22 @@ animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
     </div>
   </section>
 
+  <!-- ============ COMMENTS ============ -->
+  <section id="comments" class="section">
+    <div class="section-content">
+      <h2 class="section-title">留下足迹</h2>
+      <p class="section-subtitle">既然来了，说点什么吧</p>
+      <div class="comments-box">
+        <div class="giscus" id="giscusComments"></div>
+      </div>
+      <div class="footer-bar">
+        <span>已接待 <span class="counter-num" id="busuanzi_value_site_pv">--</span> 位访客</span>
+        <span class="sep">·</span>
+        <span>第 <span class="counter-num" id="busuanzi_value_site_uv">--</span> 次相遇</span>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <script>
@@ -542,7 +580,8 @@ const fadeOverlay = document.getElementById('sectionFade');
 const bgColors = {
   about: '#0a0604',
   photos: '#0a0e2a',
-  movies: '#0d0000'
+  movies: '#0d0000',
+  comments: '#0a0604'
 };
 
 let lastSection = 'about';
@@ -596,10 +635,16 @@ function updateSectionProgress() {
     sec.querySelectorAll('.animate').forEach(el => {
       if (visibleRatio > 0.1) el.classList.add('visible');
     });
-    // Also handle about hero section elements
+    // Handle about hero section
     if (sec.id === 'about') {
       sec.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach(el => {
         if (visibleRatio > 0.15) el.classList.add('visible');
+      });
+    }
+    // Handle comments section
+    if (sec.id === 'comments') {
+      sec.querySelectorAll('.comments-box, .footer-bar').forEach(el => {
+        if (visibleRatio > 0.2) el.classList.add('visible');
       });
     }
     if (visibleRatio > maxV) {
@@ -954,5 +999,12 @@ document.addEventListener('mouseleave', () => { cursor.style.display = 'none'; c
 document.addEventListener('mouseenter', () => { cursor.style.display = ''; cursorDot.style.display = ''; });
 
 </script>
+
+<!-- GISCUS -->
+<script src="https://giscus.app/client.js" data-repo="qianlixx/qianlixx.github.io" data-repo-id="" data-category="Announcements" data-category-id="" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="dark" data-lang="zh-CN" crossorigin="anonymous" async></script>
+
+<!-- 不蒜子访客统计 -->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 </body>
 </html>
