@@ -6,7 +6,13 @@
       "Bash(ping -n 1 -w 1000 github.com)",
       "Bash(GIT_HTTP_LOW_SPEED_TIME=99999 GIT_HTTP_LOW_SPEED=1 git push -u origin main -f)",
       "Bash(git add *)",
-      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Add comments section and visitor counter\")"
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Add comments section and visitor counter\")",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Add comments and visitor counter\")",
+      "Bash(curl -sL \"https://api.github.com/repos/qianlixx/qianlixx.github.io\")",
+      "Bash(curl -sL \"https://api.github.com/graphql\" -H \"Authorization: bearer \" -H \"Content-Type: application/json\" -d '{\"query\":\"query{repository\\(owner:\\\\\"qianlixx\\\\\",name:\\\\\"qianlixx.github.io\\\\\"\\){discussionCategories\\(first:10\\){nodes{id name}}}}\"}')",
+      "Bash(git -c user.name=qianlixx -c user.email=qianlixx@users.noreply.github.com commit -m \"Update Giscus config with repo ID and category\")"
     ]
   }
 }
