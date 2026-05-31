@@ -42,18 +42,41 @@ The site is pure static HTML — no build step, no package.json, no framework.
 
 ## Project Structure
 
-- `index.html` — Entire website (~1200 lines): inline HTML, CSS (in `<style>`), and JS (in `<script>`). Single-page portfolio with 4 sections: about, photos, movies, music.
-- `music_data.js` — 731-track playlist from NetEase Cloud Music, exported as global `MUSIC_DATA`.
+- `index.html` — Entire website (~52KB, ~1050 lines): inline HTML, CSS (in `<style>`), and JS (in `<script>`). Single-page portfolio with 5 sections: about, games, photos, movies, music.
+- `music_data.js` — 731-track playlist from NetEase Cloud Music, exported as global `MUSIC_DATA`. Each track: `{id, name, artists[], album, albumPic, dt}`.
+
+## Music Section Current State
+
+**3 artists displayed as side-by-side panels in `#music`:**
+- 马思唯 (马思唯) — panels/musicAlbumsMs
+- 陶喆 (David Tao) — panels/musicAlbumsDt  
+- 五月天 (Mayday) — panels/musicAlbumsWyt
+
+**How it works:** JS function `RA(name, containerId)` filters `MUSIC_DATA.tracks` by artist name, deduplicates by album name, and renders album cover + name in a CSS grid. Artist avatars fall back to `AI` object URLs when no album pic exists.
+
+**Artist avatar URLs:**
+- 马思唯: `https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg`
+- 陶喆: `https://p2.music.126.net/7FWLQ9Vm_po0VS7ptLTFiQ==/109951170606711717.jpg`
+- 五月天: `https://p2.music.126.net/5Bu3XLAvh-M9Iwkh0wlOYg==/109951168162347102.jpg`
+
+**Task: Build individual artist pages**
+Goal: Create separate dedicated pages (or sub-sections) for each of the 3 artists, showing:
+- Full discography with all albums
+- Track listings per album
+- Better visual presentation than the current compact grid panel
+- Navigation back to main music section
+- Keep consistent with existing dark theme + dopamine color scheme (accent: #F97316, music accent: #0EA5E9 blue)
 - `pic/照片展示/` — 6 photography portfolio images.
 - `pic/梗图/` — ~135 meme/reaction images referenced by filename array in index.html.
 
 ## Architecture
 
 **Sections** (full-viewport scroll-snap):
-- `#about` — Bio, social links (Bilibili/Zhihu/YouTube/Telegram/X/rousip/carpt), meme carousel
-- `#photos` — Photo carousel with prev/next, dot indicators, auto-advance 5s, themed accent colors
-- `#movies` — 17-movie horizontal carousel with 3D focus effect, auto-advance 3.5s, posters from Amazon IMDB, shows title/director/year/actors/rating/quote
-- `#music` — NetEase Cloud Music player grouped by artist (马思唯, 陶喆), 30s audio previews from `music.163.com`
+- `#about` — Bio, social links (Bilibili/Zhihu/YouTube/Telegram/X/rousip/carpt), meme carousel, avatar with bounce effect
+- `#games` — 30-game grid with Steam CDN posters, paginated 10/page, habit description text, glow bar hover effect
+- `#photos` — 3-card horizontal stack with focus/side/far depth effect, conic-gradient frame, 20 photos, auto-advance 5s, 3D parallax tilt on hover, film-edge label
+- `#movies` — 17-movie horizontal carousel with 3D focus effect, auto-advance 3.5s, posters from Amazon IMDB, shows title/director/year/actors/rating/quote, SVG film grain overlay on focus
+- `#music` — NetEase Cloud Music album grid grouped by 3 artists (马思唯, 陶喆, 五月天), album art from `music.163.com`, vinyl spin animation on hover
 
 **Navigation**: Glassmorphism top nav with sliding indicator, right-side nav dots (hidden on mobile).
 
@@ -69,11 +92,40 @@ The site is pure static HTML — no build step, no package.json, no framework.
 
 | Resource | Purpose |
 |---|---|
-| `music.163.com` | 30s audio previews (`/song/media/outer/url`) |
-| `m.media-amazon.com` | Movie poster images |
-| Google Fonts | Noto Sans SC, Noto Serif SC, Playfair Display |
+| `music.163.com` | Album artwork and artist images via CDN (`p1.music.126.net`, `p2.music.126.net`) |
+| `shared.akamai.steamstatic.com` | Steam game poster images (`library_600x900_2x.jpg`) |
+| `m.media-amazon.com` | Movie poster images (Amazon IMDB CDN) |
+| Google Fonts | Instrument Serif, Outfit, DM Sans, Noto Sans SC, Noto Serif SC, Playfair Display
 
 ## Git Notes
 
 - Remote: `qianlixx.github.io` (GitHub Pages)
 - Commits use `qianlixx` / `qianlixx@users.noreply.github.com`
+
+## Design System
+
+**Dopamine color scheme** — each section has its own accent:
+- 关于我: #F97316 (orange) — warm amber glow
+- 游戏: #6366F1 (indigo) — game accent
+- 摄影: #14B8A6 (teal) — photo stage
+- 电影: #EC4899 (pink) — movie focus border
+- 音乐: #0EA5E9 (blue) — music panel
+
+**CSS Variables** in `:root`:
+```css
+--font-display:'Instrument Serif','Noto Serif SC',serif;
+--font-body:'Outfit','DM Sans','Noto Sans SC',sans-serif;
+--radius-sm:8px; --radius-md:16px; --radius-lg:24px;
+--ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+--ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+```
+
+## Key Skills Available
+
+Skills installed in `C:\Users\Jony\.claude\skills\` that are relevant to this project:
+- `ui-ux-pro-max` — design system generation, style/color/typography recommendations
+- `frontend-design` — production-grade frontend implementation
+- `brainstorming` — design exploration before coding
+- `writing-plans` — implementation planning
+- `using-superpowers` — methodology for structured development
+- `baoyu-compress-image` — image compression (WebP/PNG)
