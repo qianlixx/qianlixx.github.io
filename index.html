@@ -9,20 +9,33 @@
 :root{--bg-deep:#0a0806;--bg-surface:#14100c;--text-primary:#ece4dc;--text-secondary:#a09088;--text-muted:#6a5c54;--accent:#F97316;--accent-light:#FDA75C;--accent-glow:rgba(249,115,22,0.2);--border-subtle:rgba(236,228,220,0.06);--font-display:'Instrument Serif','Noto Serif SC',serif;--font-body:'Outfit','DM Sans','Noto Sans SC',sans-serif;--font-greeting:'Playfair Display',serif;--radius-sm:8px;--radius-md:16px;--radius-lg:24px;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;color:var(--text-primary);cursor:none;font-weight:300;font-size:16px;line-height:1.6}
-/* cursor - neon cyber */
-#cursor-ring{position:fixed;width:22px;height:22px;border:1.5px solid rgba(20,184,166,0.4);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s ease,height .3s ease,border-color .3s ease,border-width .3s ease;mix-blend-mode:difference;box-shadow:0 0 6px rgba(20,184,166,0.06),inset 0 0 6px rgba(20,184,166,0.03)}
-#cursor-ring::before{content:'';position:absolute;top:50%;left:50%;width:10px;height:1px;background:rgba(20,184,166,0.5);transform:translate(-50%,-50%);pointer-events:none}
-#cursor-ring::after{content:'';position:absolute;top:50%;left:50%;height:10px;width:1px;background:rgba(20,184,166,0.5);transform:translate(-50%,-50%);pointer-events:none}
-#cursor-ring .ring-scan{position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(20,184,166,0.1);animation:scanSpin 2.5s linear infinite;pointer-events:none}
-#cursor-ring .ring-scan2{position:absolute;inset:-7px;border-radius:50%;border:1px dashed rgba(20,184,166,0.06);animation:scanSpin 4s linear infinite reverse;pointer-events:none}
+/* cursor - holographic scan */
+#cursor-ring{position:fixed;width:20px;height:20px;border:1.5px solid rgba(20,184,166,0.35);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .35s var(--ease-out-expo),height .35s var(--ease-out-expo),border-color .35s ease,border-width .35s ease;mix-blend-mode:difference;box-shadow:0 0 10px rgba(20,184,166,0.06),inset 0 0 10px rgba(20,184,166,0.03)}
+#cursor-ring .cr-glow{position:absolute;inset:-2px;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(20,184,166,0.06),transparent 70%);animation:crPulse 2s ease-in-out infinite alternate;pointer-events:none}
+@keyframes crPulse{0%{opacity:0.3;transform:scale(1)}100%{opacity:1;transform:scale(1.2)}}
+#cursor-ring .cr-cross-h{position:absolute;top:50%;left:50%;width:12px;height:1px;background:rgba(20,184,166,0.45);transform:translate(-50%,-50%);pointer-events:none;border-radius:1px}
+#cursor-ring .cr-cross-v{position:absolute;top:50%;left:50%;height:12px;width:1px;background:rgba(20,184,166,0.45);transform:translate(-50%,-50%);pointer-events:none;border-radius:1px}
+#cursor-ring .cr-ring1{position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(20,184,166,0.08);animation:scanSpin 3s linear infinite;pointer-events:none}
+#cursor-ring .cr-ring2{position:absolute;inset:-9px;border-radius:50%;border:1px dashed rgba(20,184,166,0.04);animation:scanSpin 5s linear infinite reverse;pointer-events:none}
+#cursor-ring .cr-corner{position:absolute;width:4px;height:4px;border-color:rgba(20,184,166,0.2);border-style:solid;pointer-events:none}
+#cursor-ring .cr-corner.tl{top:-1px;left:-1px;border-width:1px 0 0 1px}
+#cursor-ring .cr-corner.tr{top:-1px;right:-1px;border-width:1px 1px 0 0}
+#cursor-ring .cr-corner.bl{bottom:-1px;left:-1px;border-width:0 0 1px 1px}
+#cursor-ring .cr-corner.br{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
 @keyframes scanSpin{100%{transform:rotate(360deg)}}
-#cursor-ring.hover{width:42px;height:42px;border-color:rgba(20,184,166,0.6);border-width:2px;box-shadow:0 0 14px rgba(20,184,166,0.12),inset 0 0 14px rgba(20,184,166,0.06)}
-#cursor-ring.hover::before{width:16px;background:rgba(20,184,166,0.7)}
-#cursor-ring.hover::after{height:16px;background:rgba(20,184,166,0.7)}
-#cursor-ring.click{transform:translate(-50%,-50%) scale(.7);border-color:rgba(14,165,233,0.6);box-shadow:0 0 16px rgba(14,165,233,0.15)}
-#cursor-dot{position:fixed;width:3px;height:3px;border-radius:50%;background:rgba(20,184,166,0.9);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width .1s,height .1s,background .1s;mix-blend-mode:difference;box-shadow:0 0 6px rgba(20,184,166,0.4)}
-#cursor-dot.hover{width:6px;height:6px;background:rgba(20,184,166,1);box-shadow:0 0 12px rgba(20,184,166,0.5)}
-.cursor-particle{position:fixed;border-radius:50%;pointer-events:none;z-index:99998;mix-blend-mode:difference}
+#cursor-ring.hover{width:44px;height:44px;border-color:rgba(20,184,166,0.5);border-width:2px;box-shadow:0 0 20px rgba(20,184,166,0.12),inset 0 0 20px rgba(20,184,166,0.06)}
+#cursor-ring.hover .cr-cross-h{width:18px;background:rgba(20,184,166,0.65)}
+#cursor-ring.hover .cr-cross-v{height:18px;background:rgba(20,184,166,0.65)}
+#cursor-ring.hover .cr-corner{border-color:rgba(20,184,166,0.35)}
+#cursor-ring.click{transform:translate(-50%,-50%) scale(.7);border-color:rgba(14,165,233,0.5);box-shadow:0 0 24px rgba(14,165,233,0.15)}
+#cursor-dot{position:fixed;width:3px;height:3px;border-radius:50%;background:rgba(20,184,166,0.85);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width .12s,height .12s,background .12s,box-shadow .12s;mix-blend-mode:difference;box-shadow:0 0 8px rgba(20,184,166,0.3)}
+#cursor-dot.hover{width:7px;height:7px;background:rgba(20,184,166,1);box-shadow:0 0 16px rgba(20,184,166,0.45)}
+.cr-particle{position:fixed;border-radius:50%;pointer-events:none;z-index:99998;mix-blend-mode:difference}
+/* egg - confetti */
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(100px) rotate(720deg)}}
+.egg-toast{z-index:99997;pointer-events:none;position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) scale(0.85);opacity:0;transition:all .5s cubic-bezier(0.34,1.56,0.64,1);background:rgba(20,16,12,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(100,130,255,0.25);border-radius:16px;padding:20px 32px;text-align:center;font-size:clamp(15px,1.8vw,22px);color:#fff;font-family:var(--font-body);box-shadow:0 0 60px rgba(100,130,255,0.08)}
+.egg-toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.egg-toast .egg-icon{display:block;font-size:clamp(28px,3.5vw,44px);margin-bottom:8px}
 .hover-text{transition:all .35s var(--ease-spring),color .2s ease}
 .hover-text:hover{transform:translateY(-2px) scale(1.02);color:var(--text-primary)!important;text-shadow:0 4px 30px rgba(249,115,22,0.1)}
 #splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity .8s var(--ease-out-expo),visibility .8s var(--ease-out-expo)}
@@ -234,7 +247,7 @@ body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;colo
 </style></head><body>
 <div id="splash"><h1 class="splash-title"><span class="title-base">你好，我是彭艺柯</span><span class="title-sweep">你好，我是彭艺柯</span></h1></div>
 <div id="zoomLightbox"><img alt=""></div>
-<div id="cursor-dot"></div><div id="cursor-ring"><div class="ring-scan"></div><div class="ring-scan2"></div></div>
+<div id="cursor-dot"></div><div id="cursor-ring"><div class="cr-glow"></div><div class="cr-cross-h"></div><div class="cr-cross-v"></div><div class="cr-ring1"></div><div class="cr-ring2"></div><span class="cr-corner tl"></span><span class="cr-corner tr"></span><span class="cr-corner bl"></span><span class="cr-corner br"></span></div>
 <nav class="glass-nav" id="glassNav"><div class="glass-nav-inner"><div class="glass-nav-indicator" id="navIndicator"></div><a href="#about" data-index="0" class="active">关于我</a><a href="#games" data-index="1">游戏</a><a href="#photos" data-index="2">摄影</a><a href="#movies" data-index="3">电影</a><a href="#music" data-index="4">音乐</a></div></nav>
 <nav class="nav-dots" id="navDots"><a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a><a class="nav-dot" href="#games" data-index="1"><span class="dot-label">游戏</span></a><a class="nav-dot" href="#photos" data-index="2"><span class="dot-label">摄影</span></a><a class="nav-dot" href="#movies" data-index="3"><span class="dot-label">电影</span></a><a class="nav-dot" href="#music" data-index="4"><span class="dot-label">音乐</span></a></nav>
 <div class="main" id="main">
@@ -431,7 +444,7 @@ if(ppdots){ppdots.addEventListener('click',function(e){if(e.target.classList.con
 
 // 7. GAMES: double-click title = achievement toast
 var gst=document.querySelector('#games .section-title');
-if(gst){gst.addEventListener('dblclick',function(){var msgs=['🏆 成就「资深玩家」已解锁！','🎮 成就「游戏收藏家」已解锁！','💪 成就「时长 1000h+」已解锁！','🕹️ 成就「全平台制霸」已解锁！','⚡ 成就「电竞之心」已解锁！'];var msg=msgs[Math.floor(Math.random()*msgs.length)];var t=document.createElement('div');t.style.cssText='position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) scale(0.8);z-index:99997;pointer-events:none;background:rgba(20,16,12,0.92);backdrop-filter:blur(16px);border:1px solid rgba(100,130,255,0.3);border-radius:16px;padding:18px 28px;font-size:clamp(15px,1.8vw,22px);color:#fff;font-family:var(--font-body);text-align:center;opacity:0;transition:all .5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 0 50px rgba(100,130,255,0.1)';t.textContent=msg;document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity='1';t.style.transform='translate(-50%,-50%) scale(1)'});setTimeout(function(){t.style.opacity='0';t.style.transform='translate(-50%,-50%) scale(0.8) translateY(-20px)';setTimeout(function(){t.remove()},600)},2800)})}
+if(gst){gst.addEventListener('dblclick',function(){var msgs=[['🏆','成就「资深玩家」已解锁！'],['🎮','成就「游戏收藏家」已解锁！'],['💪','成就「时长 1000h+」已解锁！'],['🕹️','成就「全平台制霸」已解锁！'],['⚡','成就「电竞之心」已解锁！']];var m=msgs[Math.floor(Math.random()*msgs.length)];var t=document.createElement('div');t.className='egg-toast';t.innerHTML='<span class="egg-icon">'+m[0]+'</span>'+m[1];document.body.appendChild(t);requestAnimationFrame(function(){t.classList.add('show')});for(var i=0;i<16;i++){(function(){var cf=document.createElement('div');var s=Math.random()*6+4;var clrs=['#F97316','#14B8A6','#EC4899','#FBBF24','#0EA5E9'];cf.style.cssText='position:fixed;pointer-events:none;z-index:99996;width:'+s+'px;height:'+s+'px;background:'+clrs[Math.floor(Math.random()*clrs.length)]+';left:'+(window.innerWidth*0.5+(Math.random()-0.5)*200)+'px;top:'+(window.innerHeight*0.4-10)+'px;border-radius:2px;opacity:1;transition:all 1.2s cubic-bezier(0.22,1,0.36,1)';document.body.appendChild(cf);requestAnimationFrame(function(){cf.style.transform='translateY('+(Math.random()*120+40)+'px) rotate('+(Math.random()*360)+'deg)';cf.style.opacity='0'});setTimeout(function(){cf.remove()},1400)})()}setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove()},600)},2800)})}
 
 // 8. GAMES: subtitle hint
 var gss=document.querySelector('#games .section-subtitle');if(gss)gss.title='🎮 双击标题有惊喜';
@@ -442,7 +455,7 @@ if(mss){var mqs=['"电影是生活的渐近线" — 安德烈·巴赞','"我们�
 
 // cursor
 
-document.addEventListener('mousemove',function(e){CD.style.left=e.clientX+'px';CD.style.top=e.clientY+'px';setTimeout(function(){CU.style.left=e.clientX+'px';CU.style.top=e.clientY+'px'},30);var c=document.createElement('div');c.className='cursor-particle';var s=Math.random()*3+2;var clr=['rgba(20,184,166,0.5)','rgba(14,165,233,0.4)','rgba(236,72,153,0.3)'][Math.floor(Math.random()*3)];c.style.cssText='width:'+s+'px;height:'+s+'px;background:'+clr+';left:'+e.clientX+'px;top:'+e.clientY+'px;transform:translate(-50%,-50%);opacity:1;transition:all .5s ease';document.body.appendChild(c);requestAnimationFrame(function(){c.style.opacity='0';c.style.transform='translate(-50%,-50%) translate('+(Math.random()-0.5)*30+'px,'+(Math.random()-0.5)*30+'px) scale(0)';setTimeout(function(){c.remove()},600)})});
+var _ct=0;document.addEventListener('mousemove',function(e){CD.style.left=e.clientX+'px';CD.style.top=e.clientY+'px';requestAnimationFrame(function(){CU.style.left=e.clientX+'px';CU.style.top=e.clientY+'px'});var n=Date.now();if(n-_ct<40)return;_ct=n;for(var pi=0;pi<2;pi++){(function(){var c=document.createElement('div');c.className='cr-particle';var s=Math.random()*4+2;var clrs=['rgba(20,184,166,0.6)','rgba(14,165,233,0.45)','rgba(236,72,153,0.35)','rgba(251,191,36,0.3)'];c.style.cssText='position:fixed;border-radius:50%;pointer-events:none;z-index:99998;mix-blend-mode:difference;width:'+s+'px;height:'+s+'px;background:'+clrs[Math.floor(Math.random()*clrs.length)]+';left:'+(e.clientX+(Math.random()-0.5)*6)+'px;top:'+(e.clientY+(Math.random()-0.5)*6)+'px;transform:translate(-50%,-50%) scale(1);opacity:0.8';document.body.appendChild(c);requestAnimationFrame(function(){c.style.transition='all .6s cubic-bezier(0.22,1,0.36,1)';c.style.opacity='0';c.style.transform='translate(-50%,-50%) translate('+(Math.random()-0.5)*40+'px,'+(Math.random()-0.5)*40+'px) scale(0)';setTimeout(function(){if(c.parentNode)c.remove()},700)})})()}});
 document.querySelectorAll('a,button,input,img,.site-link,.meme-row-inner img,.name-img,.hero-btn,.photo-card,.game-grid-item,.movie-card').forEach(function(e){e.addEventListener('mouseenter',function(){CU.classList.add('hover');CD.classList.add('hover')});e.addEventListener('mouseleave',function(){CU.classList.remove('hover');CD.classList.remove('hover')})});
 document.addEventListener('mousedown',function(){CU.classList.add('click')});document.addEventListener('mouseup',function(){CU.classList.remove('click')});
 document.addEventListener('mouseleave',function(){CU.style.display='none';CD.style.display='none'});document.addEventListener('mouseenter',function(){CU.style.display='';CD.style.display=''});
