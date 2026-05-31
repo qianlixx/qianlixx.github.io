@@ -59,9 +59,18 @@ body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;colo
 .glass-nav a{text-decoration:none;padding:7px 22px;border-radius:100px;font-size:clamp(12px,0.85vw,14px);color:var(--text-muted);font-weight:400;transition:color .3s ease;cursor:pointer;font-family:var(--font-body);letter-spacing:2px;position:relative;z-index:1;text-transform:uppercase}
 .glass-nav a:hover{color:var(--text-secondary)}
 .glass-nav a.active{color:var(--accent-light);text-shadow:0 0 20px rgba(249,115,22,0.15)}
-.glass-nav .nv-deco{position:absolute;width:4px;height:4px;border-color:rgba(236,228,220,0.08);border-style:solid;pointer-events:none;z-index:0}
-.glass-nav .nv-deco.tl{top:3px;left:3px;border-width:1px 0 0 1px}
-.glass-nav .nv-deco.br{bottom:3px;right:3px;border-width:0 1px 1px 0}
+.glass-nav .nv-deco{position:absolute;width:clamp(10px,1.2vw,18px);height:clamp(10px,1.2vw,18px);border-color:rgba(249,115,22,0.2);border-style:solid;pointer-events:none;z-index:0;transition:border-color .4s ease}
+.glass-nav:hover .nv-deco{border-color:rgba(249,115,22,0.4)}
+.glass-nav .nv-deco.tl{top:-5px;left:-5px;border-width:1.5px 0 0 1.5px;border-image:linear-gradient(135deg,rgba(249,115,22,0.3),transparent) 1}
+.glass-nav .nv-deco.tr{top:-5px;right:-5px;border-width:1.5px 1.5px 0 0;border-image:linear-gradient(225deg,rgba(14,165,233,0.3),transparent) 1}
+.glass-nav .nv-deco.bl{bottom:-5px;left:-5px;border-width:0 0 1.5px 1.5px;border-image:linear-gradient(45deg,rgba(14,165,233,0.3),transparent) 1}
+.glass-nav .nv-deco.br{bottom:-5px;right:-5px;border-width:0 1.5px 1.5px 0;border-image:linear-gradient(315deg,rgba(249,115,22,0.3),transparent) 1}
+.glass-nav .nv-deco-dot{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(249,115,22,0.12);pointer-events:none;z-index:0;transition:all .4s ease}
+.glass-nav:hover .nv-deco-dot{background:rgba(249,115,22,0.3);box-shadow:0 0 6px rgba(249,115,22,0.1)}
+.glass-nav .nv-deco-dot.tld{top:-2px;left:-2px}
+.glass-nav .nv-deco-dot.trd{top:-2px;right:-2px}
+.glass-nav .nv-deco-dot.bld{bottom:-2px;left:-2px}
+.glass-nav .nv-deco-dot.brd{bottom:-2px;right:-2px}
 .section{min-height:100vh;scroll-snap-align:start;position:relative;display:flex;align-items:center;justify-content:center}
 @media(min-width:769px){#about,#games,#photos,#movies{overflow:hidden}}
 .nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:14px}
@@ -72,7 +81,7 @@ body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;colo
 
 /* ===== EASTER EGGS ===== */
 .hero-title{position:relative;cursor:pointer;display:inline-block}
-.hero-title .egg-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(6px);background:rgba(20,16,12,0.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(249,115,22,0.2);border-radius:100px;padding:6px 16px;font-size:clamp(12px,0.8vw,14px);color:rgba(253,167,92,0.9);font-family:var(--font-body);white-space:nowrap;pointer-events:none;opacity:0;transition:all .4s var(--ease-spring);font-weight:400;letter-spacing:0.5px}
+.hero-title .egg-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(6px);background:rgba(20,16,12,0.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(249,115,22,0.2);border-radius:100px;padding:6px 16px;font-size:clamp(12px,0.8vw,14px);color:rgba(253,167,92,0.9);font-family:var(--font-body);white-space:nowrap;pointer-events:none;opacity:0;transition:all .4s var(--ease-spring);font-weight:400;letter-spacing:0.5px;-webkit-text-fill-color:initial}
 .hero-title .egg-tip.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hero-title:hover .egg-tip.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hero-title .egg-tip .heart{display:inline-block;color:#FF6B8A;animation:heartPulse .8s ease-in-out infinite alternate}
@@ -257,7 +266,7 @@ body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;colo
 <div id="splash"><h1 class="splash-title"><span class="title-base">你好，我是彭艺柯</span><span class="title-sweep">你好，我是彭艺柯</span></h1></div>
 <div id="zoomLightbox"><img alt=""></div>
 <div id="cursor-dot"></div><div id="cursor-ring"><div class="cr-glow"></div><div class="cr-cross-h"></div><div class="cr-cross-v"></div><div class="cr-ring1"></div><div class="cr-ring2"></div><span class="cr-corner tl"></span><span class="cr-corner tr"></span><span class="cr-corner bl"></span><span class="cr-corner br"></span></div>
-<nav class="glass-nav" id="glassNav"><span class="nv-deco tl"></span><div class="glass-nav-inner"><div class="glass-nav-indicator" id="navIndicator"></div><a href="#about" data-index="0" class="active">关于我</a><a href="#games" data-index="1">游戏</a><a href="#photos" data-index="2">摄影</a><a href="#movies" data-index="3">电影</a><a href="#music" data-index="4">音乐</a></div><span class="nv-deco br"></span></nav>
+<nav class="glass-nav" id="glassNav"><span class="nv-deco tl"></span><span class="nv-deco tr"></span><span class="nv-deco bl"></span><span class="nv-deco br"></span><span class="nv-deco-dot tld"></span><span class="nv-deco-dot trd"></span><span class="nv-deco-dot bld"></span><span class="nv-deco-dot brd"></span><div class="glass-nav-inner"><div class="glass-nav-indicator" id="navIndicator"></div><a href="#about" data-index="0" class="active">关于我</a><a href="#games" data-index="1">游戏</a><a href="#photos" data-index="2">摄影</a><a href="#movies" data-index="3">电影</a><a href="#music" data-index="4">音乐</a></div></nav>
 <nav class="nav-dots" id="navDots"><a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a><a class="nav-dot" href="#games" data-index="1"><span class="dot-label">游戏</span></a><a class="nav-dot" href="#photos" data-index="2"><span class="dot-label">摄影</span></a><a class="nav-dot" href="#movies" data-index="3"><span class="dot-label">电影</span></a><a class="nav-dot" href="#music" data-index="4"><span class="dot-label">音乐</span></a></nav>
 <div class="main" id="main">
 <section id="about" class="section">
@@ -293,7 +302,7 @@ body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;colo
   <div class="aurora-blob ab1"></div><div class="aurora-blob ab2"></div><div class="section-content"><h2 class="section-title animate hover-text">音乐 · 收藏</h2><div class="st-deco" style="background:#0EA5E9"></div><p class="section-subtitle animate hover-text">反复听过无数遍的专辑，都在这里了。</p></div>
 <div class="music-artists-wrap"><div class="music-artist-panel" data-artist="马思唯"><div class="music-artist-header"><img class="music-artist-img" src="https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg" alt="马思唯"><h3>马思唯</h3><div class="music-artist-count" data-count="马思唯"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsMs"></div></div></div>
 <div class="music-artist-panel" data-artist="陶喆"><div class="music-artist-header"><img class="music-artist-img" src="https://p2.music.126.net/7FWLQ9Vm_po0VS7ptLTFiQ==/109951170606711717.jpg" alt="陶喆"><h3>陶喆</h3><div class="music-artist-count" data-count="陶喆"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsDt"></div></div></div>
-<div class="music-artist-panel" data-artist="五月天"><div class="music-artist-header"><img class="music-artist-img" src="https://p2.music.126.net/ww3pHTuUWKjDy2fKpFkhnA==/109951166952576068.jpg" alt="五月天"><h3>五月天</h3><div class="music-artist-count" data-count="五月天"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsWyt"></div></div></div></div></section>
+<div class="music-artist-panel" data-artist="五月天"><div class="music-artist-header"><img class="music-artist-img" src="https://p2.music.126.net/5Bu3XLAvh-M9Iwkh0wlOYg==/109951168162347102.jpg" alt="五月天"><h3>五月天</h3><div class="music-artist-count" data-count="五月天"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsWyt"></div></div></div></div></section>
 </div>
 <script src="music_data.js"></script>
 <script>
