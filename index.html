@@ -4,824 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JONY · 个人空间</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Noto+Serif+SC:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0a;overflow:hidden;color:#fff;cursor:none}
-/* ===== CUSTOM CURSOR ===== */
-#cursor{position:fixed;width:20px;height:20px;border:2px solid rgba(255,140,0,0.35);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width 0.25s ease,height 0.25s ease,border-color 0.25s ease,background 0.25s ease;mix-blend-mode:difference}
-#cursor.hover{border-color:rgba(255,200,100,0.6);width:44px;height:44px;background:rgba(255,140,0,0.05)}
-#cursor.click{transform:translate(-50%,-50%) scale(0.7);border-color:rgba(255,200,100,0.8)}
-#cursor-dot{position:fixed;width:4px;height:4px;border-radius:50%;background:rgba(255,180,100,0.4);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width 0.15s,height 0.15s,background 0.15s;mix-blend-mode:difference}
-#cursor-dot.hover{width:8px;height:8px;background:rgba(255,200,100,0.7)}
-
-/* ===== TEXT HOVER RESPONSE ===== */
-.hover-text{transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1),color 0.2s ease}
-.hover-text:hover{transform:translateY(-3px) scale(1.03);color:#fff !important;text-shadow:0 4px 30px rgba(255,140,0,0.15)}
-.movie-info h3.hover-text:hover{color:#FF6B35 !important;transform:translateY(-2px) scale(1.04)}
-.movie-info .meta.hover-text:hover,.movie-info .actors.hover-text:hover{color:rgba(255,255,255,0.6) !important;transform:translateY(-2px)}
-.hero-bio.hover-text:hover{color:rgba(255,200,150,0.7) !important}
-.hero-tagline.hover-text:hover{letter-spacing:5px;color:rgba(255,200,150,0.7) !important}
-.hero-title.hover-text:hover{text-shadow:0 0 60px rgba(255,140,0,0.4),0 0 120px rgba(255,140,0,0.2);transform:scale(1.02);letter-spacing:-0.01em}
-.greeting.hover-text:hover{transform:translateX(3px);color:rgba(255,160,60,0.7) !important;font-style:normal}
-.badge.hover-text:hover{transform:scale(1.05);border-color:currentColor !important}
-.site-link.hover-text:hover{transform:translateY(-2px);border-color:rgba(255,140,0,0.4) !important;background:rgba(255,140,0,0.1) !important}
-.movie-card .movie-info .desc.hover-text:hover{color:rgba(255,255,255,0.7) !important}
-
-/* Photo text hover — :hover works because .show enables pointer-events */
-.photo-info-item.show .badge:hover{transform:scale(1.05);border-color:currentColor !important}
-.pi-0.show h2:hover,.pi-6.show h2:hover{color:#FF6B6B !important;transform:scale(1.06);text-shadow:0 0 50px rgba(255,107,107,0.4)}
-.pi-0.show p:hover,.pi-6.show p:hover{color:rgba(255,107,107,0.8) !important;transform:translateY(-2px)}
-.pi-1.show h2:hover,.pi-7.show h2:hover{color:#4ECDC4 !important;transform:translateX(4px);text-shadow:0 0 40px rgba(78,205,196,0.3)}
-.pi-1.show p:hover,.pi-7.show p:hover{color:rgba(78,205,196,0.8) !important}
-.pi-2.show h2:hover,.pi-8.show h2:hover{color:#FFE66D !important;transform:scale(1.07) rotate(-1deg);text-shadow:0 0 60px rgba(255,230,109,0.35)}
-.pi-2.show p:hover,.pi-8.show p:hover{color:rgba(255,230,109,0.8) !important;letter-spacing:1px}
-.pi-3.show h2:hover,.pi-9.show h2:hover{color:#C084FC !important;transform:translateY(-4px);text-shadow:0 8px 40px rgba(192,132,252,0.35)}
-.pi-3.show p:hover,.pi-9.show p:hover{color:rgba(192,132,252,0.8) !important}
-.pi-4.show h2:hover,.pi-10.show h2:hover{color:#FF8B94 !important;transform:scale(1.05);text-shadow:0 0 50px rgba(255,139,148,0.3)}
-.pi-4.show p:hover,.pi-10.show p:hover{color:rgba(255,139,148,0.8) !important;transform:translateX(2px)}
-.pi-5.show h2:hover,.pi-11.show h2:hover{color:#00DBDE !important;transform:translateX(-3px) scale(1.03);text-shadow:0 0 50px rgba(0,219,222,0.35)}
-.pi-5.show p:hover,.pi-11.show p:hover{color:rgba(0,219,222,0.8) !important;transform:translateY(-1px)}
-/* ===== SPLASH ENTRANCE ===== */
-#splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),visibility 0.8s cubic-bezier(0.22,1,0.36,1)}
-#splash::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,107,107,0.5) 0%,rgba(196,74,255,0.35) 35%,rgba(0,219,222,0.2) 60%,transparent 80%);opacity:0;transition:opacity 0.7s ease;pointer-events:none}
+:root{--bg-deep:#0a0806;--bg-surface:#14100c;--text-primary:#ece4dc;--text-secondary:#a09088;--text-muted:#6a5c54;--accent:#FF6B35;--accent-light:#FF8C5A;--accent-glow:rgba(255,107,53,0.2);--border-subtle:rgba(236,228,220,0.06);--font-display:'Instrument Serif','Noto Serif SC',serif;--font-body:'DM Sans','Noto Sans SC',sans-serif;--font-greeting:'Playfair Display',serif;--radius-sm:6px;--radius-md:12px;--radius-lg:16px;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);overflow:hidden;color:var(--text-primary);cursor:none;font-weight:300;font-size:16px;line-height:1.6}
+#cursor{position:fixed;width:20px;height:20px;border:1.5px solid rgba(255,107,53,0.3);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .35s ease,height .35s ease,border-color .35s ease,background .35s ease;mix-blend-mode:difference}
+#cursor.hover{border-color:rgba(255,140,90,0.5);width:44px;height:44px;background:rgba(255,107,53,0.04)}
+#cursor.click{transform:translate(-50%,-50%) scale(.65);border-color:rgba(255,140,90,0.7)}
+#cursor-dot{position:fixed;width:4px;height:4px;border-radius:50%;background:rgba(255,107,53,0.35);pointer-events:none;z-index:100000;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;mix-blend-mode:difference}
+#cursor-dot.hover{width:8px;height:8px;background:rgba(255,140,90,0.6)}
+.hover-text{transition:all .35s var(--ease-spring),color .2s ease}
+.hover-text:hover{transform:translateY(-2px) scale(1.02);color:var(--text-primary)!important;text-shadow:0 4px 30px rgba(255,107,53,0.1)}
+#splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity .8s var(--ease-out-expo),visibility .8s var(--ease-out-expo)}
+#splash::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,107,53,0.4) 0%,rgba(204,85,42,0.3) 30%,rgba(30,20,16,0.4) 60%,transparent 80%);opacity:0;transition:opacity .8s ease;pointer-events:none}
 #splash.dismissing::before{opacity:1}
-#splash.dismissing{background:radial-gradient(ellipse at 50% 50%,rgba(40,20,80,1) 0%,rgba(15,12,41,1) 60%,#000 100%)}
+#splash.dismissing{background:radial-gradient(ellipse at 50% 50%,rgba(40,10,5,1) 0%,rgba(10,8,6,1) 60%,#000 100%)}
 #splash.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.splash-title{position:relative;display:flex;align-items:center;justify-content:center;transition:transform 0.8s cubic-bezier(0.34,1.56,0.64,1),opacity 0.6s ease}
-#splash.dismissing .splash-title{transform:scale(1.15);opacity:0.7}
-.title-base{font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:8px;color:rgba(255,255,255,0.04);margin:0;white-space:nowrap;transform:scaleY(1.18)}
-.title-sweep{position:absolute;font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:8px;color:#fff;margin:0;white-space:nowrap;clip-path:inset(0 99% 0 0);animation:beamSweep 3.5s ease 0.5s 1 forwards;will-change:clip-path;transform:scaleY(1.18)}
-@keyframes beamSweep{
-0%{clip-path:inset(0 99% 0 0)}
-25%{clip-path:inset(0 40% 0 0%)}
-40%{clip-path:inset(0 15% 0 42%)}
-50%{clip-path:inset(0 0% 0 72%)}
-55%{clip-path:inset(0 0% 0 99%)}
-100%{clip-path:inset(0 0% 0 99%)}
-}
-
-.main{height:100vh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
-.main::-webkit-scrollbar{display:none}
-
-/* ===== SECTION BACKGROUND CROSSFADE ===== */
-#sectionFade{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity 0.6s ease;will-change:opacity}
-
-/* ===== GLASS NAV ===== */
-.glass-nav{position:fixed;top:clamp(16px,3vh,32px);left:50%;transform:translateX(-50%);z-index:200;display:flex;gap:0;padding:6px;border-radius:16px;background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08)}
-.glass-nav-inner{position:relative;display:flex;gap:0}
-.glass-nav-indicator{position:absolute;top:0;left:0;height:100%;border-radius:10px;background:rgba(255,255,255,0.13);transition:left 0.45s cubic-bezier(0.22,1,0.36,1),width 0.45s cubic-bezier(0.22,1,0.36,1);pointer-events:none;z-index:0}
-.glass-nav a{text-decoration:none;padding:8px 22px;border-radius:10px;font-size:clamp(13px,0.9vw,15px);color:rgba(255,255,255,0.45);font-weight:500;transition:color 0.3s ease;cursor:pointer;font-family:'Noto Sans SC',sans-serif;letter-spacing:1px;position:relative;z-index:1}
-.glass-nav a:hover{color:rgba(255,255,255,0.85)}
-.glass-nav a.active{color:#fff}
-
-/* ===== SECTION BASE ===== */
+.splash-title{font-family:var(--font-display);position:relative;display:flex;align-items:center;justify-content:center;transition:transform .8s var(--ease-spring),opacity .6s ease}
+#splash.dismissing .splash-title{transform:scale(1.12);opacity:0.6}
+.title-base{font-size:clamp(36px,6vw,80px);font-weight:400;letter-spacing:6px;color:rgba(236,228,220,0.03);margin:0;white-space:nowrap}
+.title-sweep{position:absolute;font-size:clamp(36px,6vw,80px);font-weight:400;letter-spacing:6px;color:var(--text-primary);margin:0;white-space:nowrap;clip-path:inset(0 99% 0 0);animation:beamSweep 3.5s ease .5s 1 forwards}
+@keyframes beamSweep{0%{clip-path:inset(0 99% 0 0)}25%{clip-path:inset(0 40% 0 0%)}40%{clip-path:inset(0 15% 0 42%)}50%{clip-path:inset(0 0% 0 72%)}55%{clip-path:inset(0 0% 0 99%)}100%{clip-path:inset(0 0% 0 99%)}}
+.main{height:100vh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:rgba(255,107,53,0.2) transparent}
+.main::-webkit-scrollbar{width:4px;background:transparent}
+.main::-webkit-scrollbar-thumb{background:rgba(255,107,53,0.15);border-radius:4px}
+.glass-nav{position:fixed;top:clamp(16px,3vh,28px);left:50%;transform:translateX(-50%);z-index:200;display:flex;padding:5px;border-radius:100px;background:rgba(20,16,12,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-subtle);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.glass-nav-inner{position:relative;display:flex;gap:2px}
+.glass-nav-indicator{position:absolute;top:0;left:0;height:100%;border-radius:100px;background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.2);transition:left .45s var(--ease-out-expo),width .45s var(--ease-out-expo);pointer-events:none;z-index:0}
+.glass-nav a{text-decoration:none;padding:7px 22px;border-radius:100px;font-size:clamp(12px,0.85vw,14px);color:var(--text-muted);font-weight:400;transition:color .3s ease;cursor:pointer;font-family:var(--font-body);letter-spacing:2px;position:relative;z-index:1;text-transform:uppercase}
+.glass-nav a:hover{color:var(--text-secondary)}
+.glass-nav a.active{color:var(--accent-light);text-shadow:0 0 20px rgba(255,107,53,0.15)}
 .section{min-height:100vh;scroll-snap-align:start;position:relative;display:flex;align-items:center;justify-content:center}
-/* Desktop: add overflow hidden for clean scroll-snap */
-@media(min-width:769px){
-  #about,#photos,#movies{overflow:hidden}
-}
-
-/* ===== NAVIGATION DOTS ===== */
-.nav-dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:16px}
-.nav-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;transition:all 0.4s cubic-bezier(0.22,1,0.36,1);position:relative}
-.nav-dot:hover,.nav-dot.active{background:#fff;border-color:#fff;transform:scale(1.3)}
-.nav-dot .dot-label{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:13px;color:#fff;font-weight:400;white-space:nowrap;opacity:0;transition:opacity 0.3s;pointer-events:none;font-family:'Noto Sans SC',sans-serif}
-.nav-dot:hover .dot-label{opacity:0.8}
-
-/* ===== ABOUT SECTION ===== */
-#about{background:#0a0604;flex-direction:column;padding:0;justify-content:flex-start;position:relative;overflow:hidden}
-/* Dramatic single-source light ray from top-left */
-#about::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 30%,rgba(255,140,0,0.35) 0%,rgba(200,80,0,0.12) 35%,transparent 65%),radial-gradient(ellipse at 80% 60%,rgba(180,60,0,0.08) 0%,transparent 50%);pointer-events:none;z-index:1}
-/* Hard light ray beam */
-#about::after{content:'';position:absolute;top:-20%;left:-10%;width:60%;height:140%;background:linear-gradient(110deg,rgba(255,160,50,0.08) 0%,rgba(255,100,0,0.04) 25%,transparent 50%);transform:rotate(-15deg);pointer-events:none;z-index:1}
-.about-hero{flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;padding:0;position:relative;z-index:2;gap:clamp(30px,4vw,70px)}
-.about-hero-left{flex:0 1 auto;max-width:clamp(350px,50vw,650px);position:relative;z-index:3;padding-top:0}
-.about-hero-right{flex:0 0 clamp(240px,26vw,380px);position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
-
-/* Portrait with dramatic amber lighting */
-.about-hero-right .name-img{width:100%;height:auto;max-height:80vh;object-fit:contain;border-radius:16px;cursor:pointer;
-box-shadow:0 0 100px rgba(255,120,0,0.15),0 0 200px rgba(255,80,0,0.08);
-transition:all 0.5s cubic-bezier(0.22,1,0.36,1)}
-.about-hero-right .name-img:hover{
-box-shadow:0 0 120px rgba(255,120,0,0.25),0 0 240px rgba(255,80,0,0.12);
-animation:imgBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
-@keyframes imgBounce{0%{transform:translateY(0)}40%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-
-/* Left-aligned typography block - editorial style */
-.about-hero-left .greeting{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);color:rgba(255,140,0,0.4);font-style:italic;margin-bottom:6px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.1s}
-.about-hero-left .greeting.visible{opacity:1;transform:translateY(0)}
-.about-hero-left .hero-title{font-size:clamp(56px,9vw,120px);font-weight:900;line-height:0.92;letter-spacing:-0.03em;margin-bottom:12px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.15s;color:#FF8C00;text-shadow:0 2px 40px rgba(255,140,0,0.2)}
-.about-hero-left .hero-title.visible{opacity:1;transform:translateY(0)}
-.about-hero-left .hero-tagline{font-size:clamp(16px,1.4vw,24px);color:rgba(255,160,60,0.5);margin-bottom:12px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.2s;letter-spacing:4px;font-weight:300;text-transform:uppercase}
-.about-hero-left .hero-tagline.visible{opacity:1;transform:translateY(0)}
-.about-hero-left .hero-bio{font-size:clamp(15px,1.2vw,20px);line-height:1.9;color:rgba(255,180,100,0.35);font-weight:300;margin-bottom:28px;opacity:0;transform:translateY(25px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.25s}
-.about-hero-left .hero-bio.visible{opacity:1;transform:translateY(0)}
-.about-hero-left .hero-bio strong{color:rgba(255,180,100,0.7)}
-.hero-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;border-radius:100px;border:none;background:linear-gradient(135deg,#FF8C00,#E06000);color:#fff;font-size:clamp(14px,1vw,17px);font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(15px);letter-spacing:1.5px;font-family:'Noto Sans SC',sans-serif;text-decoration:none;text-transform:uppercase}
-.hero-btn.visible{opacity:1;transform:translateY(0);transition-delay:0.3s}
-.hero-btn:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(255,120,0,0.35),0 0 80px rgba(255,80,0,0.15)}
-.hero-btn span{font-size:16px;line-height:1;transition:transform 0.3s ease}
-.hero-btn:hover span{transform:translateX(4px)}
-
-/* Ghosted cross deco */
-.about-hero-right .deco-cross{position:absolute;right:-15%;top:50%;transform:translateY(-50%);font-size:clamp(200px,30vw,500px);color:rgba(255,140,0,0.04);font-weight:900;pointer-events:none;z-index:0;font-family:'Arial',sans-serif;user-select:none}
-.about-hero-right .deco-light{position:absolute;width:clamp(100px,12vw,200px);height:clamp(100px,12vw,200px);border-radius:50%;background:radial-gradient(circle,rgba(255,140,0,0.08),transparent 70%);pointer-events:none;z-index:1}
-
-/* Site links below portrait */
-.site-links{width:100%;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;opacity:0;transform:translateY(15px);transition:all 0.8s cubic-bezier(0.15,0.85,0.35,1) 0.4s}
-.site-links.visible{opacity:1;transform:translateY(0)}
-.site-link{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;border:1px solid rgba(255,140,0,0.12);background:rgba(255,140,0,0.04);color:rgba(255,180,100,0.5);font-size:clamp(11px,0.7vw,13px);text-decoration:none;transition:all 0.3s ease;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.5px}
-.site-links.visible{opacity:1;transform:translateY(0)}
-.site-link{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,140,0,0.12);background:rgba(255,140,0,0.04);color:rgba(255,180,100,0.5);font-size:clamp(10px,0.7vw,12px);text-decoration:none;transition:all 0.3s ease;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.5px}
-.site-link:hover{border-color:rgba(255,140,0,0.3);background:rgba(255,140,0,0.08);color:rgba(255,180,100,0.8)}
-.site-link .link-icon{font-size:14px;line-height:1}
-
-/* ===== PHOTO SECTION (single page) ===== */
-#photos{background:linear-gradient(150deg,#0a0e2a 0%,#121840 40%,#1a1040 70%,#0f0c29 100%);padding:0;display:flex;align-items:center;overflow:hidden}
-#photos::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(78,205,196,0.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(192,132,252,0.08) 0%,transparent 60%);pointer-events:none}
-.photo-scroll-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding:6% 0 6% 5%}
-.photo-scroll{width:52%;height:75vh;overflow:hidden;position:relative;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.5);flex-shrink:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center}
-.photo-track{position:relative;width:100%;height:100%}
-.photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:0;transition:opacity 0.5s ease}
-.photo-img.active{opacity:1}
-.photo-nav{position:absolute;z-index:10;top:50%;transform:translateY(-50%);width:40px;height:40px;border:none;border-radius:50%;background:rgba(0,0,0,0.5);color:rgba(255,255,255,0.7);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;backdrop-filter:blur(4px)}
-.photo-nav:hover{background:rgba(0,0,0,0.8);color:#fff;transform:translateY(-50%) scale(1.1)}
-.photo-nav-prev{left:12px}
-.photo-nav-next{right:12px}
-
-.photo-info-wrap{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:36%;display:flex;flex-direction:column;background:rgba(15,12,41,0.85);border-radius:16px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);z-index:2}
-.photo-info-inner{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vh,48px) clamp(24px,3vw,44px);position:relative;min-height:300px}
-.photo-info-item{position:absolute;inset:clamp(28px,4vh,48px) clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(20px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1);pointer-events:none}
-.photo-info-item.show{opacity:1;transform:translateY(0);pointer-events:auto}
-.photo-info-item .badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;border:1px solid;padding:4px 12px;border-radius:100px;margin-bottom:12px;width:fit-content;font-weight:400}
-.photo-info-item h2{font-size:clamp(26px,3.5vw,48px);font-weight:900;line-height:1.15;margin-bottom:10px}
-.photo-info-item p{font-size:clamp(15px,1.3vw,20px);color:rgba(255,255,255,0.5);line-height:1.8;font-weight:300}
-
-/* Photo accent colors cycling through 12 */
-.pi-0 .badge,.pi-6 .badge{border-color:#FF6B6B;color:#FF6B6B}
-.pi-0 h2,.pi-6 h2{color:#FF6B6B}
-.pi-1 .badge,.pi-7 .badge{border-color:#4ECDC4;color:#4ECDC4}
-.pi-1 h2,.pi-7 h2{color:#4ECDC4}
-.pi-2 .badge,.pi-8 .badge{border-color:#FFE66D;color:#FFE66D}
-.pi-2 h2,.pi-8 h2{color:#FFE66D}
-.pi-3 .badge,.pi-9 .badge{border-color:#C084FC;color:#C084FC}
-.pi-3 h2,.pi-9 h2{color:#C084FC}
-.pi-4 .badge,.pi-10 .badge{border-color:#FF8B94;color:#FF8B94}
-.pi-4 h2,.pi-10 h2{color:#FF8B94}
-.pi-5 .badge,.pi-11 .badge{border-color:#00DBDE;color:#00DBDE}
-.pi-5 h2,.pi-11 h2{color:#00DBDE}
-
-.photo-dots{position:absolute;right:clamp(-20px,-2vw,-12px);top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:8px}
-.photo-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.5s ease;cursor:pointer}
-.photo-dots span.active{width:8px;height:20px;border-radius:4px;background:#fff}
-
-/* ===== MOVIES SECTION ===== */
-#movies{background:linear-gradient(160deg,#0d0000 0%,#2a0000 30%,#1a0000 60%,#0d0000 100%);flex-direction:column;padding:0;overflow:hidden}
-#movies::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,0,0,0.3),transparent 70%);pointer-events:none}
-#movies .section-content{text-align:center;position:relative;z-index:2;width:100%;padding:clamp(40px,6vh,60px) 0 0;flex:0 0 auto}
-#movies .section-title{font-family:'Noto Serif SC',serif;font-size:clamp(36px,6vw,72px);font-weight:900;margin-bottom:4px;opacity:0;transform:translateY(30px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
-#movies .section-title.visible{opacity:1;transform:translateY(0)}
-#movies .section-subtitle{font-size:clamp(14px,1.5vw,20px);color:rgba(255,255,255,0.4);margin-bottom:clamp(16px,2vh,32px);font-weight:300;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1) 0.05s}
-#movies .section-subtitle.visible{opacity:1;transform:translateY(0)}
-
-/* Movie carousel */
+@media(min-width:769px){#about,#games,#photos,#movies{overflow:hidden}}
+.nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:14px}
+.nav-dot{width:6px;height:6px;border-radius:50%;border:none;background:rgba(236,228,220,0.15);cursor:pointer;transition:all .4s var(--ease-out-expo);position:relative}
+.nav-dot:hover,.nav-dot.active{background:var(--accent);box-shadow:0 0 12px var(--accent-glow);transform:scale(1.4)}
+.nav-dot .dot-label{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-primary);font-weight:400;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none;font-family:var(--font-body);letter-spacing:1.5px;text-transform:uppercase}
+.nav-dot:hover .dot-label{opacity:0.6}
+/* about */
+#about{background:#1a0a04;flex-direction:column;padding:0;justify-content:flex-start;position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 25%,rgba(255,107,53,0.25) 0%,rgba(200,80,30,0.1) 30%,transparent 60%),radial-gradient(ellipse at 85% 70%,rgba(160,60,20,0.06) 0%,transparent 50%);pointer-events:none;z-index:1}
+#about::after{content:'';position:absolute;top:-25%;left:-15%;width:55%;height:150%;background:linear-gradient(110deg,rgba(255,140,90,0.06) 0%,rgba(255,80,40,0.03) 25%,transparent 50%);transform:rotate(-18deg);pointer-events:none;z-index:1}
+.about-hero{flex:1;width:100%;display:flex;align-items:center;justify-content:center;padding:0;position:relative;z-index:2;gap:clamp(30px,5vw,80px)}
+.about-hero-left{flex:0 1 auto;max-width:clamp(350px,48vw,600px);position:relative;z-index:3}
+.about-hero-right{flex:0 0 clamp(220px,24vw,340px);position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:14px}
+.about-hero-left::before{content:'\5F6D\827A\67EF';position:absolute;top:-15%;left:-10%;font-family:var(--font-display);font-size:clamp(140px,18vw,280px);font-weight:400;color:rgba(236,228,220,0.02);pointer-events:none;user-select:none;white-space:nowrap;line-height:1}
+.name-img{width:100%;height:auto;max-height:75vh;object-fit:contain;border-radius:var(--radius-md);box-shadow:0 0 80px rgba(255,107,53,0.1),0 0 160px rgba(255,107,53,0.04);transition:all .5s var(--ease-out-expo);cursor:pointer}
+.name-img:hover{box-shadow:0 0 100px rgba(255,107,53,0.18),0 0 200px rgba(255,107,53,0.08);animation:imgBounce .5s var(--ease-spring) forwards}
+@keyframes imgBounce{0%{transform:translateY(0)}40%{transform:translateY(-5px)}100%{transform:translateY(0)}}
+.greeting{font-family:var(--font-greeting);font-size:clamp(18px,2vw,32px);color:rgba(255,107,53,0.35);font-style:italic;margin-bottom:4px;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.greeting.visible{opacity:1;transform:translateY(0)}
+.hero-title{font-family:var(--font-display);font-size:clamp(52px,8vw,110px);font-weight:400;line-height:0.92;letter-spacing:-0.02em;margin-bottom:10px;color:var(--accent-light);text-shadow:0 2px 40px rgba(255,107,53,0.15);opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.hero-title.visible{opacity:1;transform:translateY(0)}
+.hero-tagline{font-size:clamp(14px,1.2vw,20px);color:var(--text-muted);margin-bottom:10px;letter-spacing:5px;font-weight:300;text-transform:uppercase;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.hero-tagline.visible{opacity:1;transform:translateY(0)}
+.hero-bio{font-size:clamp(14px,1vw,18px);line-height:2;color:var(--text-secondary);font-weight:300;margin-bottom:24px;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.hero-bio.visible{opacity:1;transform:translateY(0)}
+.hero-bio strong{color:var(--accent-light)}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 32px;border-radius:100px;border:1px solid rgba(255,107,53,0.3);background:rgba(255,107,53,0.08);color:var(--accent-light);font-size:clamp(13px,0.85vw,15px);font-weight:500;cursor:pointer;transition:all .4s var(--ease-out-expo);letter-spacing:2px;font-family:var(--font-body);text-decoration:none;text-transform:uppercase;opacity:0;transform:translateY(15px)}
+.hero-btn.visible{opacity:1;transform:translateY(0)}
+.hero-btn:hover{transform:translateY(-3px);border-color:rgba(255,107,53,0.5);box-shadow:0 12px 40px rgba(255,107,53,0.2)}
+.site-links{width:100%;display:flex;flex-wrap:wrap;gap:3px;justify-content:center}
+.site-link{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(20,16,12,0.5);color:var(--text-muted);font-size:clamp(10px,0.65vw,12px);text-decoration:none;transition:all .3s ease;font-weight:400;letter-spacing:0.8px}
+.site-link:hover{border-color:rgba(255,107,53,0.25);background:rgba(255,107,53,0.06);color:var(--accent-light)}
+/* photo */
+#photos{background:#041a14;flex-direction:column;padding:0;overflow:hidden}
+#photos::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(6,214,160,0.04) 0%,transparent 70%);pointer-events:none;z-index:0}
+#photos .section-content{position:absolute;top:clamp(20px,3vh,36px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;pointer-events:none}
+#photos .section-title{font-family:var(--font-display);font-size:clamp(24px,3vw,40px);font-weight:400;color:rgba(236,228,220,0.5)}
+#photos .section-subtitle{font-size:clamp(11px,0.85vw,13px);color:rgba(236,228,220,0.2)}
+.photo-view{position:relative;flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo-view::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,26,20,0.15) 0%,transparent 15%,transparent 85%,rgba(4,26,20,0.15) 100%),linear-gradient(0deg,rgba(4,26,20,0.2) 0%,transparent 30%,transparent 70%,rgba(4,26,20,0.05) 100%);pointer-events:none;z-index:2}
+.photo-track{display:flex;align-items:center;justify-content:center;width:100%;height:100vh;position:relative}
+.photo-car-item{position:absolute;inset:8%;border-radius:4px;overflow:hidden;cursor:pointer;background:#062e24;opacity:0;transition:opacity .6s ease,transform .6s ease;z-index:1}
+.photo-car-item img{width:100%;height:100%;object-fit:contain;display:block}
+.photo-car-item.active{opacity:1;z-index:3;transform:scale(1)}
+.photo-car-item.prev{opacity:0.6;z-index:2;transform:scale(0.92) translateX(-30px);filter:brightness(0.5)}
+.photo-car-item.next{opacity:0.3;z-index:1;transform:scale(0.92) translateX(30px);filter:brightness(0.5)}
+.photo-counter{position:absolute;bottom:clamp(24px,4vh,48px);right:clamp(24px,4vw,56px);z-index:10;font-family:var(--font-display);font-size:clamp(20px,2vw,32px);color:rgba(236,228,220,0.12);letter-spacing:2px;font-weight:400;user-select:none;font-style:italic}
+.photo-nav-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:clamp(32px,3vw,48px);height:clamp(32px,3vw,48px);border:none;background:transparent;color:rgba(236,228,220,0.15);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .4s var(--ease-out-expo);font-size:clamp(24px,2.5vw,40px);font-weight:100;font-family:var(--font-body);user-select:none;outline:none;padding:0}
+.photo-nav-btn:hover{color:rgba(236,228,220,0.5);transform:translateY(-50%) scale(1.15)}
+.photo-nav-btn.prev{left:clamp(8px,1.5vw,24px)}
+.photo-nav-btn.next{right:clamp(8px,1.5vw,24px)}
+.photo-pages{position:absolute;bottom:clamp(24px,4vh,48px);left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+.photo-page-dot{width:6px;height:6px;border-radius:50%;border:1px solid rgba(236,228,220,0.1);background:transparent;cursor:pointer;transition:all .6s ease;padding:0}
+.photo-page-dot.active{width:10px;height:10px;background:rgba(6,214,160,0.5);border-color:rgba(6,214,160,0.3);box-shadow:0 0 12px rgba(6,214,160,0.1)}
+/* games */
+#games{background:linear-gradient(145deg,#0a0a12 0%,#141428 30%,#0a0a12 100%);flex-direction:column;padding:0;overflow:hidden;min-height:100vh}
+#games::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(80,100,200,0.12),transparent 70%);pointer-events:none}
+#games .section-content{text-align:center;position:relative;z-index:2;width:100%;padding:clamp(36px,5vh,56px) 0 0;flex:0 0 auto}
+#games .section-title{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:400;color:var(--text-primary)}
+#games .section-subtitle{font-size:clamp(13px,1.2vw,17px);color:var(--text-muted);margin-bottom:4px}
+.game-desc{font-size:clamp(11px,0.85vw,14px);color:var(--text-muted);max-width:600px;margin:0 auto clamp(12px,1.5vh,22px);line-height:1.7;padding:0 16px;opacity:0.65}
+.game-grid-wrap{position:relative;flex:1;width:100%;display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:0 24px 16px}
+.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:860px;padding:4px}
+.game-grid-item{display:flex;gap:18px;align-items:center;border-radius:var(--radius-md);border:1px solid var(--border-subtle);background:rgba(20,16,30,0.4);padding:16px 18px;cursor:pointer;transition:all .35s var(--ease-out-expo);overflow:hidden}
+.game-grid-item:hover{transform:translateX(4px);border-color:rgba(100,130,255,0.25);background:rgba(40,35,70,0.35);box-shadow:0 4px 16px rgba(100,130,255,0.06)}
+.game-grid-poster{width:100px;height:150px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;background:#1a1a2e}
+.game-grid-poster div{width:100%;height:100%;background-size:cover;background-position:center}
+.game-grid-info{flex:1;min-width:0}
+.game-grid-info h3{font-size:clamp(15px,1.1vw,17px);font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;transition:color .3s}
+.game-grid-item:hover .game-grid-info h3{color:#7B9CFF}
+.game-grid-info .hours{font-size:clamp(13px,0.9vw,15px);color:var(--text-muted)}
+.game-grid-nav{display:flex;align-items:center;gap:16px;margin-top:6px}
+.game-nav-btn{width:28px;height:28px;border:none;background:transparent;color:rgba(236,228,220,0.15);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .35s ease;font-family:var(--font-body);user-select:none;line-height:1;padding:0;font-weight:100;outline:none}
+.game-nav-btn:hover{color:rgba(236,228,220,0.5);transform:scale(1.2)}
+.game-nav-btn:disabled{opacity:0.08;cursor:default;transform:none!important}
+.game-page-info{font-size:12px;color:var(--text-muted);font-weight:300;letter-spacing:2px;min-width:40px;text-align:center;font-family:var(--font-display);font-style:italic}
+/* movies */
+#movies{background:linear-gradient(160deg,#1a0408 0%,#2a0a12 30%,#1a0408 60%,#0d0204 100%);flex-direction:column;padding:0;overflow:hidden}
+#movies::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,71,111,0.15),transparent 70%);pointer-events:none}
+#movies .section-content{text-align:center;position:relative;z-index:2;width:100%;padding:clamp(36px,5vh,56px) 0 0;flex:0 0 auto}
+#movies .section-title{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:400;color:var(--text-primary)}
+#movies .section-subtitle{font-size:clamp(13px,1.2vw,17px);color:var(--text-muted);margin-bottom:clamp(12px,2vh,28px)}
 .movie-carousel-wrap{position:relative;flex:1;width:100%;overflow:hidden;display:flex;align-items:center}
 .movie-track{display:flex;align-items:center;gap:50px;will-change:transform;padding:0;height:75vh}
 .movie-item{flex-shrink:0;width:160px;display:flex;flex-direction:column;align-items:center}
-.movie-card{width:160px;height:240px;border-radius:12px;position:relative;cursor:pointer;border:2px solid transparent;flex-shrink:0;opacity:0.35;filter:brightness(0.35);margin-bottom:0;transition:margin-bottom 0.5s,transform 0.5s,opacity 0.5s,filter 0.5s}
+.movie-card{width:160px;height:240px;border-radius:var(--radius-sm);position:relative;cursor:pointer;border:1.5px solid transparent;flex-shrink:0;opacity:0.35;filter:brightness(0.35) saturate(0.5);margin-bottom:0;transition:all .5s;overflow:hidden}
 .movie-card .poster{position:absolute;inset:0;overflow:hidden;border-radius:10px}
 .movie-card .poster div{width:100%;height:100%;background-size:cover;background-position:center}
-.movie-card .poster-overlay{position:absolute;inset:0;border-radius:10px;background:linear-gradient(to top,rgba(0,0,0,0.2),transparent 40%);pointer-events:none;transition:opacity 0.4s ease}
-
-/* Focus: scale up AND push text down with margin-bottom */
-.movie-card.focus{transform:scale(1.875);transform-origin:center top;opacity:1;filter:brightness(1);border-color:rgba(232,80,80,0.6);z-index:10;margin-bottom:220px}
+.movie-card .poster-overlay{position:absolute;inset:0;border-radius:10px;background:linear-gradient(to top,rgba(0,0,0,0.2),transparent 40%);pointer-events:none}
+.movie-card.focus{transform:scale(1.875);transform-origin:center top;opacity:1;filter:brightness(1) saturate(1);border-color:rgba(239,71,111,0.5);z-index:10;margin-bottom:220px;box-shadow:0 0 40px rgba(239,71,111,0.15)}
 .movie-card.focus .poster-overlay{opacity:0.5}
 .movie-card.side{opacity:0.7;filter:brightness(0.55)}
-
-/* Movie info below poster */
-.movie-info{width:100%;padding:12px 4px 0;text-align:center;transition:color 0.4s ease}
-.movie-info h3{font-size:clamp(18px,1.4vw,24px);font-weight:700;font-family:'Noto Serif SC',serif;color:rgba(255,255,255,0.3);margin-bottom:3px;transition:color 0.4s ease}
-.movie-info .meta{font-size:clamp(13px,1vw,17px);color:rgba(255,255,255,0.15);margin-bottom:3px;transition:color 0.4s ease}
-.movie-info .actors{font-size:clamp(12px,0.85vw,15px);color:rgba(255,255,255,0.12);margin-bottom:3px;transition:color 0.4s ease}
-.movie-info .rating{font-size:clamp(12px,0.85vw,15px);color:rgba(255,255,255,0.12);margin-bottom:4px;transition:color 0.4s ease}
-.movie-info .desc{font-size:clamp(13px,1vw,17px);color:rgba(255,255,255,0.1);line-height:1.4;font-weight:300;transition:color 0.4s ease}
-
-.movie-item.focus .movie-info h3{color:#E85050}
-.movie-item.focus .movie-info .meta{color:rgba(255,255,255,0.5)}
-.movie-item.focus .movie-info .actors{color:rgba(255,255,255,0.4)}
-.movie-item.focus .movie-info .rating{color:#FFD700}
-.movie-item.focus .movie-info .desc{color:rgba(255,255,255,0.55)}
-
-/* ===== ENTRANCE ===== */
-.section .animate{opacity:0;transform:translateY(40px);transition:all 0.9s cubic-bezier(0.15,0.85,0.35,1)}
+.movie-info{width:100%;padding:12px 4px 0;text-align:center}
+.movie-info h3{font-size:clamp(18px,1.3vw,24px);font-weight:400;font-family:var(--font-display);color:rgba(255,255,255,0.3);margin-bottom:3px}
+.movie-info .meta{font-size:clamp(12px,0.9vw,15px);color:rgba(236,228,220,0.12);margin-bottom:2px}
+.movie-info .actors{font-size:clamp(11px,0.8vw,14px);color:rgba(236,228,220,0.1);margin-bottom:2px}
+.movie-info .rating{font-size:clamp(11px,0.8vw,14px);color:rgba(236,228,220,0.1);margin-bottom:3px}
+.movie-info .desc{font-size:clamp(12px,0.9vw,15px);color:rgba(236,228,220,0.08);font-weight:300;font-style:italic}
+.movie-item.focus .movie-info h3{color:#EF476F}
+.movie-item.focus .movie-info .meta{color:var(--text-secondary)}
+.movie-item.focus .movie-info .actors{color:rgba(236,228,220,0.4)}
+.movie-item.focus .movie-info .rating{color:#d4a547}
+.movie-item.focus .movie-info .desc{color:rgba(236,228,220,0.45)}
+/* music */
+#music{background:linear-gradient(145deg,#04101a 0%,#0a1e30 30%,#04101a 100%);padding:0;flex-direction:column;overflow:hidden;height:100vh}
+#music::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 15%,rgba(17,138,178,0.08) 0%,transparent 50%),radial-gradient(ellipse at 75% 85%,rgba(6,214,160,0.04) 0%,transparent 50%)}
+#music .section-content{text-align:center;position:relative;z-index:2;width:100%;padding:clamp(32px,4vh,48px) 0 clamp(6px,1vh,12px);flex:0 0 auto}
+#music .section-title{font-family:var(--font-display);font-size:clamp(32px,4.5vw,56px);font-weight:400;color:var(--text-primary)}
+#music .section-subtitle{font-size:clamp(12px,1.1vw,16px);color:var(--text-muted)}
+.music-artists-wrap{position:relative;flex:1;width:100%;display:flex;gap:clamp(16px,2vw,30px);padding:0 20px 24px;z-index:2;min-height:0}
+.music-artist-panel{flex:1;display:flex;flex-direction:column;min-width:0;background:rgba(10,6,20,0.5);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);backdrop-filter:blur(8px);overflow:hidden}
+.music-artist-header{padding:clamp(16px,2vh,24px);text-align:center;flex-shrink:0}
+.music-artist-img{width:clamp(70px,7vw,120px);height:clamp(70px,7vw,120px);border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;box-shadow:0 4px 20px rgba(17,138,178,0.15);border:2px solid rgba(236,228,220,0.06)}
+.music-artist-header h3{font-size:clamp(18px,1.6vw,24px);font-weight:500;color:var(--text-primary);font-family:var(--font-display)}
+.music-artist-count{font-size:clamp(11px,0.65vw,13px);color:rgba(17,138,178,0.35)}
+.music-album-scroll{flex:1;overflow-y:auto;padding:0 12px 12px;scrollbar-width:thin;scrollbar-color:rgba(17,138,178,0.15) transparent}
+.music-album-scroll::-webkit-scrollbar{width:3px}
+.music-album-scroll::-webkit-scrollbar-thumb{background:rgba(17,138,178,0.2);border-radius:4px}
+.music-album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px}
+.music-album-card{display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .35s var(--ease-out-expo)}
+.music-album-card:hover{transform:translateY(-4px)}
+.music-album-img{width:100%;aspect-ratio:1;border-radius:var(--radius-sm);object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,0.4);border:1px solid var(--border-subtle)}
+.music-album-card:hover .music-album-img{box-shadow:0 8px 28px rgba(17,138,178,0.2);transform:scale(1.03)}
+.music-album-name{font-size:11px;color:var(--text-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.section .animate{opacity:0;transform:translateY(40px);transition:all .9s cubic-bezier(0.15,0.85,0.35,1)}
 .section .animate.visible{opacity:1;transform:translateY(0)}
-.section .animate-d1{transition-delay:0.05s}
-.section .animate-d2{transition-delay:0.10s}
-.section .animate-d3{transition-delay:0.15s}
-.section .animate-d4{transition-delay:0.20s}
-.section .animate-d5{transition-delay:0.25s}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  .about-hero{flex-direction:column-reverse;gap:16px;padding:10vh 5vw 0}
-  .about-hero-left{max-width:100%;padding-top:0}
-  .about-hero-right{flex:0 0 auto;width:clamp(160px,40vw,240px)}
-  .about-hero-right .name-img{max-height:40vh}
-  .about-hero-left .hero-title{font-size:clamp(36px,10vw,56px);text-align:center}
-  .about-hero-left .greeting{font-size:clamp(16px,3vw,22px);text-align:center}
-  .about-hero-left .hero-tagline{font-size:clamp(12px,2.5vw,16px);text-align:center}
-  .about-hero-left .hero-bio{font-size:clamp(12px,2.2vw,15px);text-align:center}
-  .hero-btn{display:flex;justify-content:center;margin:0 auto}
-  .site-links{gap:4px}
-  .site-link{font-size:clamp(9px,1.8vw,11px);padding:3px 8px}
-  .about-hero-right .deco-cross{font-size:clamp(120px,30vw,200px);right:-10%}
-  .about-hero-right .deco-light{width:clamp(60px,15vw,100px);height:clamp(60px,15vw,100px)}
-  #about::after{width:80%;height:100%}
-}
-
-@media(max-width:768px){
-  .nav-dots{display:none}
-  .glass-nav{padding:4px;top:clamp(10px,2vh,16px)}
-  .glass-nav a{padding:5px 12px;font-size:clamp(11px,2.5vw,13px);letter-spacing:0.5px}
-  .glass-nav-inner{gap:0}
-
-  .about-lower{gap:6px;padding:6px 0 20px}
-  .meme-border{margin:0 clamp(8px,2vw,16px);padding:6px 0}
-  .meme-row{height:clamp(40px,7vh,65px)}
-  .meme-row-inner img{height:clamp(35px,6vh,55px)}
-  .meme-header{padding:0 clamp(12px,2vw,20px)}
-  .meme-refresh-btn{width:26px;height:26px}
-  .meme-refresh-btn svg{width:11px;height:11px}
-
-  /* Photo section - mobile */
-  #photos{flex-direction:column;justify-content:center;min-height:100vh;overflow:visible!important;padding:0}
-  .photo-scroll-wrap{position:relative;inset:auto;padding:0;flex:0 0 45vh;width:100%;min-height:0;overflow:hidden;background:#0a0a0a}
-  .photo-scroll{width:100%;height:45vh;border-radius:0;box-shadow:none;overflow:hidden}
-  .photo-track{position:relative;width:100%;height:100%}
-  .photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 0.5s ease}
-  .photo-img.active{opacity:1}
-  .photo-nav{width:32px;height:32px;font-size:14px}
-  .photo-nav-prev{left:6px}
-  .photo-nav-next{right:6px}
-  .photo-info-wrap{position:relative;right:auto;top:auto;transform:none;width:100%;flex:0 0 auto;min-height:140px;border-radius:0;border:none;background:transparent;padding:16px 0 0}
-  .photo-info-inner{position:relative;padding:0 clamp(20px,4vw,32px);min-height:140px}
-  .photo-info-item{position:absolute;inset:0 clamp(20px,4vw,32px);display:flex;flex-direction:column;justify-content:center;text-align:center;opacity:0;transform:translateY(10px);transition:all 0.5s ease}
-  .photo-info-item.show{opacity:1;transform:translateY(0)}
-  .photo-info-item .badge{font-size:10px;padding:4px 12px;border-radius:100px;margin:0 auto 8px;width:fit-content}
-  .photo-info-item h2{font-size:clamp(24px,6vw,32px);margin-bottom:4px}
-  .photo-info-item p{font-size:clamp(13px,3.2vw,16px);line-height:1.6;color:rgba(255,255,255,0.5)}
-  .photo-dots{position:relative;right:auto;top:auto;transform:none;flex-direction:row;justify-content:center;gap:8px;padding:12px 0 0;margin-top:auto}
-  .photo-dots span{width:6px;height:6px}
-  .photo-dots span.active{width:20px;height:6px;border-radius:3px}
-
-  /* Movie section - mobile */
-  #movies{overflow:visible!important}
-  .movie-carousel-wrap{align-items:flex-start;padding-top:2vh;overflow:visible!important}
-  .movie-track{height:auto;min-height:50vh;padding-top:30px;padding-bottom:30px}
-  .movie-card{width:110px;height:165px}
-  .movie-card.focus{width:190px;height:285px;margin-bottom:260px!important}
-  .movie-card.focus .poster-overlay{opacity:0.5}
-  .movie-item .movie-info{padding:4px 2px;min-height:0}
-  .movie-item .movie-info h3{font-size:clamp(12px,3vw,15px);color:rgba(255,255,255,0.5)!important}
-  .movie-item .movie-info .meta{color:rgba(255,255,255,0.35)!important;display:block!important}
-  .movie-item .movie-info .actors{color:rgba(255,255,255,0.25)!important;display:block!important}
-  .movie-item .movie-info .rating{color:rgba(255,255,255,0.25)!important;display:block!important}
-  .movie-item .movie-info .desc{color:rgba(255,255,255,0.2)!important;display:block!important;font-size:clamp(10px,2.2vw,12px)!important}
-  .movie-item.focus .movie-info h3{color:#E85050!important;font-size:clamp(14px,3.5vw,18px)!important}
-  .movie-item.focus .movie-info .meta{color:rgba(255,255,255,0.55)!important}
-  .movie-item.focus .movie-info .actors{color:rgba(255,255,255,0.45)!important}
-  .movie-item.focus .movie-info .rating{color:#FFD700!important}
-  .movie-item.focus .movie-info .desc{color:rgba(255,255,255,0.5)!important}
-}
-
-@media(max-width:480px){
-  .about-hero{padding:8vh 4vw 0;gap:12px}
-  .about-hero-right{width:clamp(130px,35vw,180px)}
-  .about-hero-left .hero-title{font-size:clamp(28px,8vw,40px)}
-  .hero-btn{padding:8px 20px;font-size:clamp(11px,3vw,13px)}
-  .site-link{padding:2px 6px;font-size:clamp(8px,2vw,10px)}
-  .about-hero-left .hero-bio{font-size:clamp(11px,3vw,13px);margin-bottom:16px}
-  .about-hero-left .hero-tagline{font-size:clamp(11px,2.8vw,14px);margin-bottom:8px}
-
-  .photo-scroll-wrap{flex:0 0 40vh;height:40vh;background:#0a0a0a}
-  .photo-scroll{height:40vh}
-  .photo-info-wrap{min-height:120px;padding:12px 0 0}
-  .photo-info-inner{min-height:120px;padding:0 clamp(16px,3vw,24px)}
-  .photo-info-item{inset:0 clamp(16px,3vw,24px)}
-  .photo-info-item h2{font-size:clamp(20px,5vw,26px)}
-  .photo-info-item p{font-size:clamp(12px,3vw,14px)}
-  .photo-dots{padding:8px 0 0;gap:6px}
-  .photo-dots span{width:5px;height:5px}
-  .photo-dots span.active{width:16px;height:5px;border-radius:3px}
-  .photo-info-item h2{font-size:clamp(17px,5vw,22px)}
-  .photo-info-item p{font-size:clamp(11px,3vw,13px)}
-  .photo-info-item .badge{font-size:8px;padding:3px 8px;margin-bottom:8px}
-  .photo-dots{right:8px;gap:4px}
-  .photo-dots span{width:4px;height:4px}
-  .photo-dots span.active{width:5px;height:10px}
-
-  .movie-track{height:auto;min-height:45vh;padding-bottom:30px}
-  .movie-card{width:90px;height:135px}
-  .movie-card.focus{width:160px;height:240px;margin-bottom:210px!important}
-  .movie-item .movie-info h3{font-size:clamp(11px,3.5vw,13px)!important;color:rgba(255,255,255,0.5)!important}
-  .movie-item .movie-info .meta,.movie-item .movie-info .actors,.movie-item .movie-info .rating,.movie-item .movie-info .desc{font-size:clamp(9px,2.5vw,11px)!important;display:block!important;color:rgba(255,255,255,0.3)!important}
-  .movie-item.focus .movie-info h3{color:#E85050!important}
-  .movie-item.focus .movie-info .rating{color:#FFD700!important}
-}
-
-@media(hover:none) and (pointer:coarse){
-  #cursor,#cursor-dot{display:none!important}
-  body{cursor:auto}
-}
-
-@media(max-width:900px){
-  #cursor,#cursor-dot{display:none!important}
-  body{cursor:auto}
-}
-
-/* ===== WATERFALL FLOW EFFECT ===== */
-.waterfall-indicator{position:absolute;right:clamp(30px,6vw,100px);bottom:clamp(40px,8vh,100px);z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.3}
-.waterfall-indicator .wf-line{width:1px;height:40px;background:linear-gradient(to bottom,#fff,transparent)}
-.waterfall-indicator .wf-text{font-size:10px;letter-spacing:2px;writing-mode:vertical-rl}
-
-/* ===== ZOOM OVERLAY ===== */
-#zoomLightbox{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.4s ease;cursor:zoom-out}
-#zoomLightbox.open{background:rgba(0,0,0,0.7);pointer-events:all}
-#zoomLightbox img{max-height:0;max-width:0;border-radius:12px;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);opacity:0}
+#zoomLightbox{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);pointer-events:none;transition:background .4s ease;cursor:zoom-out}
+#zoomLightbox.open{background:rgba(0,0,0,0.8);pointer-events:all}
+#zoomLightbox img{max-height:0;max-width:0;border-radius:var(--radius-md);transition:all .5s var(--ease-spring);opacity:0}
 #zoomLightbox.open img{max-height:80vh;max-width:80vw;opacity:1}
-
-/* ===== MEME CAROUSEL ===== */
-.about-lower{width:100%;overflow:hidden;position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;padding:6px 0 30px;margin-top:auto}
-.meme-header{display:flex;align-items:center;justify-content:flex-start;padding:0 clamp(24px,4vw,50px)}
-.meme-refresh-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,140,0,0.15);background:rgba(255,140,0,0.05);color:rgba(255,180,100,0.4);cursor:pointer;transition:all 0.3s ease;padding:0;flex-shrink:0}
-.meme-refresh-btn:hover{border-color:rgba(255,140,0,0.35);background:rgba(255,140,0,0.1);color:rgba(255,180,100,0.7)}
-.meme-refresh-btn svg{width:14px;height:14px;display:block}
-.meme-refresh-btn.spinning svg{animation:spin 0.6s linear infinite}
+.about-lower{width:100%;overflow:hidden;position:relative;z-index:2;display:flex;flex-direction:column;gap:8px;padding:4px 0 24px;margin-top:auto}
+.meme-header{display:flex;align-items:center;padding:0 30px}
+.meme-refresh-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border-subtle);background:rgba(20,16,12,0.5);color:var(--text-muted);cursor:pointer;padding:0;flex-shrink:0}
+.meme-refresh-btn.spinning svg{animation:spin .6s linear infinite}
 @keyframes spin{100%{transform:rotate(360deg)}}
-.meme-border{margin:0 clamp(20px,3vw,50px);border:1.5px solid rgba(255,140,0,0.2);border-radius:12px;overflow:hidden;padding:8px 0;background:rgba(255,140,0,0.02)}
-.meme-row{overflow:hidden;position:relative;display:flex;align-items:center;height:clamp(65px,11vh,120px)}
-.meme-row-inner{display:flex;gap:10px;white-space:nowrap;padding:0}
-.meme-row-inner img{height:clamp(55px,9vh,100px);width:auto;border-radius:6px;cursor:pointer;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s ease;flex-shrink:0}
-.meme-row-inner img:hover{transform:scale(1.05) !important;box-shadow:0 6px 20px rgba(255,140,0,0.25)}
+.meme-border{margin:0 30px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);overflow:hidden;padding:8px 0;background:rgba(20,16,12,0.3)}
+.meme-row{overflow:hidden;display:flex;align-items:center;height:clamp(60px,10vh,110px)}
+.meme-row-inner{display:flex;gap:10px;white-space:nowrap}
+.meme-row-inner img{height:clamp(50px,8vh,90px);width:auto;border-radius:var(--radius-sm);cursor:pointer;flex-shrink:0;opacity:0.85}
+.meme-row-inner img:hover{transform:scale(1.05)!important;box-shadow:0 6px 20px rgba(255,107,53,0.2);opacity:1}
 .meme-row-inner.r1{animation:memeScroll 45s linear infinite}
 .meme-row-inner.r2{animation:memeScroll 60s linear infinite;animation-delay:-20s}
 .meme-row-inner.r3{animation:memeScroll 75s linear infinite;animation-delay:-40s}
 .meme-row-inner.paused{animation-play-state:paused!important}
 @keyframes memeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-</style>
-</head>
-<body>
-<!-- ===== SPLASH / ENTRANCE ===== -->
-<div id="splash">
-  <h1 class="splash-title"><span class="title-base">你好，我是彭艺柯</span><span class="title-sweep">你好，我是彭艺柯</span></h1>
-</div>
-
-<!-- ===== ZOOM LIGHTBOX ===== -->
+@media(max-width:900px){#cursor,#cursor-dot{display:none!important}body{cursor:auto}.about-hero{flex-direction:column-reverse;gap:14px;padding:10vh 5vw 0}.about-hero-right{width:clamp(160px,40vw,240px)}.about-hero-right .name-img{max-height:38vh}.about-hero-left .hero-title,.about-hero-left .greeting,.about-hero-left .hero-tagline,.about-hero-left .hero-bio{text-align:center}.about-hero-left .hero-title{font-size:clamp(36px,10vw,56px)}.hero-btn{margin:0 auto}.site-link{font-size:clamp(9px,1.8vw,11px);padding:3px 8px}.about-hero-left::before{display:none}}
+@media(max-width:768px){.nav-dots{display:none}.glass-nav{padding:4px}.glass-nav a{padding:5px 12px;font-size:clamp(10px,2.5vw,12px);letter-spacing:0.5px}.about-lower{gap:4px;padding:2px 0 16px}.meme-border{margin:0 12px;padding:4px 0}.meme-row{height:clamp(40px,7vh,60px)}.meme-row-inner img{height:clamp(30px,5vh,50px)}.meme-header{padding:0 16px}.meme-refresh-btn{width:24px;height:24px}.meme-refresh-btn svg{width:11px;height:11px}.site-links{gap:2px}.photo-car-item{inset:5%!important}.photo-counter{font-size:clamp(14px,3vw,18px)!important;bottom:clamp(12px,2vh,20px)!important}.photo-nav-btn{font-size:clamp(18px,5vw,24px)!important}.photo-pages{bottom:clamp(12px,2vh,20px)!important;gap:5px!important}.photo-page-dot{width:5px!important;height:5px!important}.photo-page-dot.active{width:8px!important;height:8px!important}.game-grid{gap:8px;padding:2px}.game-grid-item{gap:12px;padding:10px 12px}.game-grid-poster{width:60px;height:90px}.game-grid-info h3{font-size:13px}.game-grid-info .hours{font-size:11px}.game-desc{font-size:12px;max-width:90%}.music-artists-wrap{flex-direction:column;gap:10px;padding:0 12px 16px}.music-artist-img{width:clamp(50px,10vw,70px)!important;height:clamp(50px,10vw,70px)!important}.music-artist-header h3{font-size:clamp(15px,3.5vw,18px)}.music-album-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}.music-album-name{font-size:10px}.movie-carousel-wrap{align-items:flex-start!important;padding-top:2vh}.movie-track{height:auto!important;min-height:45vh;padding-top:20px;padding-bottom:20px}.movie-card{width:110px;height:165px}.movie-card.focus{width:170px;height:255px;margin-bottom:200px!important}.movie-info h3{font-size:clamp(14px,3vw,17px)!important}.movie-info .meta,.movie-info .actors,.movie-info .rating,.movie-info .desc{font-size:clamp(11px,2.2vw,13px)!important}}
+@media(max-width:480px){.about-hero{padding:8vh 4vw 0;gap:10px}.about-hero-right{width:clamp(130px,35vw,170px)}.about-hero-left .hero-title{font-size:clamp(28px,8vw,40px)}.hero-btn{padding:8px 18px;font-size:12px}.about-hero-left .hero-bio{font-size:12px;margin-bottom:14px}.about-hero-left .hero-tagline{font-size:11px;margin-bottom:6px}.site-link{font-size:8px;padding:2px 5px}.glass-nav a{padding:3px 8px;font-size:clamp(9px,2.8vw,10px);letter-spacing:0}.photo-car-item{inset:3%!important}.photo-counter{font-size:clamp(12px,4vw,16px)!important}.game-grid{gap:6px}.game-grid-item{gap:8px;padding:8px 10px}.game-grid-poster{width:50px;height:75px}.game-grid-info h3{font-size:12px}.movie-card{width:90px;height:135px}.movie-card.focus{width:140px;height:210px;margin-bottom:150px!important}}
+</style></head><body>
+<div id="splash"><h1 class="splash-title"><span class="title-base">你好，我是彭艺柯</span><span class="title-sweep">你好，我是彭艺柯</span></h1></div>
 <div id="zoomLightbox"><img alt=""></div>
-
-<!-- ===== CUSTOM CURSOR ===== -->
-<div id="cursor-dot"></div>
-<div id="cursor"></div>
-
-<!-- ===== SECTION BACKGROUND CROSSFADE ===== -->
-<div id="sectionFade"></div>
-
-<!-- ===== GLASS NAV ===== -->
-<nav class="glass-nav" id="glassNav">
-  <div class="glass-nav-inner">
-    <div class="glass-nav-indicator" id="navIndicator"></div>
-    <a href="#about" data-index="0" class="active">关于我</a>
-    <a href="#photos" data-index="1">摄影</a>
-    <a href="#movies" data-index="2">电影</a>
-  </div>
-</nav>
-
-<!-- ===== NAV DOTS ===== -->
-<nav class="nav-dots" id="navDots">
-  <a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a>
-  <a class="nav-dot" href="#photos" data-index="1"><span class="dot-label">摄影</span></a>
-  <a class="nav-dot" href="#movies" data-index="2"><span class="dot-label">电影</span></a>
-</nav>
-
-
-<!-- ===== MAIN CONTENT ===== -->
+<div id="cursor-dot"></div><div id="cursor"></div>
+<nav class="glass-nav" id="glassNav"><div class="glass-nav-inner"><div class="glass-nav-indicator" id="navIndicator"></div><a href="#about" data-index="0" class="active">关于我</a><a href="#games" data-index="1">游戏</a><a href="#photos" data-index="2">摄影</a><a href="#movies" data-index="3">电影</a><a href="#music" data-index="4">音乐</a></div></nav>
+<nav class="nav-dots" id="navDots"><a class="nav-dot active" href="#about" data-index="0"><span class="dot-label">关于我</span></a><a class="nav-dot" href="#games" data-index="1"><span class="dot-label">游戏</span></a><a class="nav-dot" href="#photos" data-index="2"><span class="dot-label">摄影</span></a><a class="nav-dot" href="#movies" data-index="3"><span class="dot-label">电影</span></a><a class="nav-dot" href="#music" data-index="4"><span class="dot-label">音乐</span></a></nav>
 <div class="main" id="main">
-
-  <!-- ============ ABOUT ============ -->
-  <section id="about" class="section">
-    <div class="about-hero">
-      <div class="about-hero-left">
-        <p class="greeting hover-text">Hi, I'm</p>
-        <h1 class="hero-title hover-text">彭艺柯</h1>
-        <p class="hero-tagline hover-text">高司令指定扮演者</p>
-        <p class="hero-bio hover-text">一个热爱生活、沉迷创意的人。<br>用 <strong>镜头</strong> 记录世界，用 <strong>代码</strong> 构建想象，用 <strong>故事</strong> 连接你我。</p>
-        <a class="hero-btn" href="#photos">探索作品 <span>→</span></a>
-      </div>
-      <div class="about-hero-right">
-        <span class="deco-cross">+</span>
-        <span class="deco-light" style="top:5%;left:-15%"></span>
-        <span class="deco-light" style="bottom:10%;right:-10%"></span>
-        <img class="name-img" src="pic/头像.jpg" alt="彭艺柯">
-        <div class="site-links">
-          <a class="site-link hover-text" href="https://www.bilibili.com" target="_blank"><span class="link-icon">▸</span>B站</a>
-          <a class="site-link hover-text" href="https://www.zhihu.com" target="_blank"><span class="link-icon">▸</span>知乎</a>
-          <a class="site-link hover-text" href="https://www.youtube.com" target="_blank"><span class="link-icon">▸</span>YouTube</a>
-          <a class="site-link hover-text" href="https://t.me" target="_blank"><span class="link-icon">▸</span>Telegram</a>
-          <a class="site-link hover-text" href="https://x.com" target="_blank"><span class="link-icon">▸</span>X</a>
-          <a class="site-link hover-text" href="https://rousi.pro/" target="_blank"><span class="link-icon">▸</span>rousi.pro</a>
-          <a class="site-link hover-text" href="https://carpt.net/index.php" target="_blank"><span class="link-icon">▸</span>carpt.net</a>
-        </div>
-      </div>
-    </div>
-    <div class="about-lower">
-      <div class="meme-header">
-        <button class="meme-refresh-btn" id="memeRefreshBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        </button>
-      </div>
-      <div class="meme-border" id="memeBorder">
-      <div class="meme-row"><div class="meme-row-inner r1" id="memeRow1"></div></div>
-      <div class="meme-row"><div class="meme-row-inner r2" id="memeRow2"></div></div>
-      <div class="meme-row"><div class="meme-row-inner r3" id="memeRow3"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PHOTOS ============ -->
-  <section id="photos" class="section">
-    <div class="photo-scroll-wrap">
-      <div class="photo-scroll">
-        <div class="photo-track" id="photoTrack">
-          <img src="pic/照片展示/DSC01708-1.JPG" alt="桥" class="photo-img">
-          <img src="pic/照片展示/DSC09198-1.JPG" alt="山间晨雾" class="photo-img active">
-          <img src="pic/照片展示/1780071501759.jpg" alt="窗" class="photo-img">
-          <img src="pic/照片展示/mmexport1768918568845.jpg" alt="秋" class="photo-img">
-          <img src="pic/照片展示/流星1.jpg" alt="流星" class="photo-img">
-          <img src="pic/照片展示/流星2.jpg" alt="星河" class="photo-img">
-        </div>
-        <button class="photo-nav photo-nav-prev" id="photoPrev">‹</button>
-        <button class="photo-nav photo-nav-next" id="photoNext">›</button>
-      </div>
-    </div>
-    <div class="photo-info-wrap">
-      <div class="photo-info-inner" id="photoInfoInner">
-        <div class="photo-info-item pi-0 show"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">山间晨雾</h2><p class="hover-text">云雾缠绕着山脊，光从缝隙中漏下来。</p></div>
-        <div class="photo-info-item pi-1"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">桥</h2><p class="hover-text">钢筋与水面之间，藏着城市的另一面。</p></div>
-        <div class="photo-info-item pi-2"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">窗</h2><p class="hover-text">窗里窗外，是不同的时间流速。</p></div>
-        <div class="photo-info-item pi-3"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">秋</h2><p class="hover-text">落叶铺满来时的路。</p></div>
-        <div class="photo-info-item pi-4"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">流星</h2><p class="hover-text">一瞬的光，也值得被记住。</p></div>
-        <div class="photo-info-item pi-5"><span class="badge hover-text">摄影作品</span><h2 class="hover-text">星河</h2><p class="hover-text">抬头看的时候，宇宙也在看你。</p></div>
-      </div>
-      <div class="photo-dots" id="photoDots">
-        <span class="active" data-i="0"></span><span data-i="1"></span><span data-i="2"></span>
-        <span data-i="3"></span><span data-i="4"></span><span data-i="5"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MOVIES ============ -->
-  <section id="movies" class="section">
-    <div class="section-content">
-      <h2 class="section-title animate hover-text">光影 · 电影</h2>
-      <p class="section-subtitle animate hover-text">那些在银幕上闪烁的，是另一个世界的梦</p>
-    </div>
-    <div class="movie-carousel-wrap">
-      <div class="movie-track" id="movieTrack">
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BODYwNDYxNDk1Nl5BMl5BanBnXkFtZTgwOTAwMTk2MDE@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">白日梦想家</h3><div class="meta hover-text">🎬 本·斯蒂勒 · 2013</div><div class="actors hover-text">⭐ 本·斯蒂勒 / 克里斯汀·韦格</div><div class="rating hover-text">🏆 IMDb 7.3</div><div class="desc hover-text">开拓视野，冲破艰险。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">楚门的世界</h3><div class="meta hover-text">🎬 彼得·威尔 · 1998</div><div class="actors hover-text">⭐ 金·凯瑞 / 劳拉·琳尼</div><div class="rating hover-text">🏆 IMDb 8.2</div><div class="desc hover-text">如果不能再见，祝你早安午安晚安。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">爱乐之城</h3><div class="meta hover-text">🎬 达米恩·查泽雷 · 2016</div><div class="actors hover-text">⭐ 瑞恩·高斯林 / 艾玛·斯通</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">敬那些做梦的人。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzVkMTgzODQtMWIwZC00NzE4LTgzZjYtMzAwM2I5OGZhNjE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">头号玩家</h3><div class="meta hover-text">🎬 史蒂文·斯皮尔伯格 · 2018</div><div class="actors hover-text">⭐ 泰伊·谢里丹 / 奥利维亚·库克</div><div class="rating hover-text">🏆 IMDb 7.4</div><div class="desc hover-text">谢谢你玩我的游戏。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">波西米亚狂想曲</h3><div class="meta hover-text">🎬 布莱恩·辛格 · 2018</div><div class="actors hover-text">⭐ 拉米·马雷克 / 露西·宝通</div><div class="rating hover-text">🏆 IMDb 7.9</div><div class="desc hover-text">我们注定与众不同。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">搏击俱乐部</h3><div class="meta hover-text">🎬 大卫·芬奇 · 1999</div><div class="actors hover-text">⭐ 布拉德·皮特 / 爱德华·诺顿</div><div class="rating hover-text">🏆 IMDb 8.8</div><div class="desc hover-text">丢掉一切，才能自由。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">星际穿越</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2014</div><div class="actors hover-text">⭐ 马修·麦康纳 / 安妮·海瑟薇</div><div class="rating hover-text">🏆 IMDb 8.7</div><div class="desc hover-text">爱是我们能穿越时空的唯一力量。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">银翼杀手</h3><div class="meta hover-text">🎬 雷德利·斯科特 · 1982</div><div class="actors hover-text">⭐ 哈里森·福特 / 肖恩·杨</div><div class="rating hover-text">🏆 IMDb 8.1</div><div class="desc hover-text">我见过你们无法想象的美。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDU5YTNmMmItN2QxNy00OGQ0LTg5MTctNzFmYjEzZjcwN2UwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">绿皮书</h3><div class="meta hover-text">🎬 彼得·法雷利 · 2018</div><div class="actors hover-text">⭐ 维果·莫滕森 / 马赫沙拉·阿里</div><div class="rating hover-text">🏆 IMDb 8.2</div><div class="desc hover-text">勇气改变人心。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">信条</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2020</div><div class="actors hover-text">⭐ 约翰·大卫·华盛顿 / 罗伯特·帕丁森</div><div class="rating hover-text">🏆 IMDb 7.3</div><div class="desc hover-text">不要试图理解它，去感受它。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">当幸福来敲门</h3><div class="meta hover-text">🎬 加布里尔·穆奇诺 · 2006</div><div class="actors hover-text">⭐ 威尔·史密斯 / 贾登·史密斯</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">如果你有梦想，就要守护它。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">盗梦空间</h3><div class="meta hover-text">🎬 克里斯托弗·诺兰 · 2010</div><div class="actors hover-text">⭐ 莱昂纳多·迪卡普里奥 / 约瑟夫·高登-莱维特</div><div class="rating hover-text">🏆 IMDb 8.8</div><div class="desc hover-text">一个念头就能改变一切。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">黑客帝国</h3><div class="meta hover-text">🎬 沃卓斯基姐妹 · 1999</div><div class="actors hover-text">⭐ 基努·里维斯 / 劳伦斯·菲什伯恩</div><div class="rating hover-text">🏆 IMDb 8.7</div><div class="desc hover-text">欢迎来到现实荒漠。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGRkYTNhOWQtYmI0Ni00MjZhLWJmMzAtMTA2Mjg4NGNiNDU0XkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">这个杀手不太冷</h3><div class="meta hover-text">🎬 吕克·贝松 · 1994</div><div class="actors hover-text">⭐ 让·雷诺 / 娜塔莉·波特曼</div><div class="rating hover-text">🏆 IMDb 8.5</div><div class="desc hover-text">人生总是如此痛苦吗？</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDg0ZTU4YTItZTI3My00ODNjLTllMTYtMzI3ZWNjYjU1NGM1XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">海上钢琴师</h3><div class="meta hover-text">🎬 朱塞佩·托纳多雷 · 1998</div><div class="actors hover-text">⭐ 蒂姆·罗斯 / 普路特·泰勒·文斯</div><div class="rating hover-text">🏆 IMDb 8.0</div><div class="desc hover-text">琴键有限，音乐无限。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDdjZGQ5YzEtNTc2My00Mjc0LWFlMTctYzkwMzZlNzdiZWYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,9,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">心灵捕手</h3><div class="meta hover-text">🎬 格斯·范·桑特 · 1997</div><div class="actors hover-text">⭐ 罗宾·威廉姆斯 / 马特·达蒙</div><div class="rating hover-text">🏆 IMDb 8.4</div><div class="desc hover-text">不是你的错。</div></div></div>
-        <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3 class="hover-text">教父</h3><div class="meta hover-text">🎬 弗朗西斯·科波拉 · 1972</div><div class="actors hover-text">⭐ 马龙·白兰度 / 阿尔·帕西诺</div><div class="rating hover-text">🏆 IMDb 9.2</div><div class="desc hover-text">我会给他一个无法拒绝的提议。</div></div></div>
-      </div>
-    </div>
-  </section>
-
+<section id="about" class="section"><div class="about-hero"><div class="about-hero-left"><p class="greeting hover-text">Hi, I'm</p><h1 class="hero-title hover-text">彭艺柯</h1><p class="hero-tagline hover-text">高司令指定扮演者</p><p class="hero-bio hover-text">一个热爱生活、沉迷创意的人。<br>用 <strong>镜头</strong> 记录世界，用 <strong>代码</strong> 构建想象，用 <strong>故事</strong> 连接你我。</p><a class="hero-btn" href="#photos">探索作品 <span>→</span></a></div>
+<div class="about-hero-right"><span class="deco-cross">+</span><span class="deco-light" style="top:5%;left:-15%"></span><span class="deco-light" style="bottom:10%;right:-10%"></span><img class="name-img" src="pic/头像.jpg" alt="彭艺柯">
+<div class="site-links"><a class="site-link hover-text" href="https://www.bilibili.com" target="_blank"><span class="link-icon">▸</span>B站</a><a class="site-link hover-text" href="https://www.zhihu.com" target="_blank"><span class="link-icon">▸</span>知乎</a><a class="site-link hover-text" href="https://www.youtube.com" target="_blank"><span class="link-icon">▸</span>YouTube</a><a class="site-link hover-text" href="https://t.me" target="_blank"><span class="link-icon">▸</span>Telegram</a><a class="site-link hover-text" href="https://x.com" target="_blank"><span class="link-icon">▸</span>X</a><a class="site-link hover-text" href="https://rousi.pro/" target="_blank"><span class="link-icon">▸</span>rousi.pro</a><a class="site-link hover-text" href="https://carpt.net/index.php" target="_blank"><span class="link-icon">▸</span>carpt.net</a></div></div></div>
+<div class="about-lower"><div class="meme-header"><button class="meme-refresh-btn" id="memeRefreshBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button></div>
+<div class="meme-border"><div class="meme-row"><div class="meme-row-inner r1" id="memeRow1"></div></div><div class="meme-row"><div class="meme-row-inner r2" id="memeRow2"></div></div><div class="meme-row"><div class="meme-row-inner r3" id="memeRow3"></div></div></div></div></section>
+<section id="games" class="section"><div class="section-content"><h2 class="section-title animate hover-text">游戏 · 存档</h2><p class="section-subtitle animate hover-text">那些消耗了无数夜晚的虚拟世界</p><p class="game-desc animate hover-text">从 CS:GO 的竞技场到战地的硝烟战场，从无主之地的废土到艾尔登法环的狭间之地——<strong style="color:var(--text-secondary)">FPS</strong> 是刻在骨子里的本能，<strong style="color:var(--text-secondary)">RPG</strong> 是沉浸另一个自我的方式，<strong style="color:var(--text-secondary)">Roguelike</strong> 则是永不言弃的执念。427 小时的 CS2 见证了无数次残局，231 小时的战地记录了每一场拉栓。射击、探索、建造、生存——屏幕亮起，便是另一个世界。</p></div><div class="game-grid-wrap"><div class="game-grid" id="gameGrid"></div><div class="game-grid-nav"><button class="game-nav-btn" id="gamePrev">‹</button><span class="game-page-info" id="gamePageInfo">1/4</span><button class="game-nav-btn" id="gameNext">›</button></div></div></section>
+<section id="photos" class="section"><div class="section-content"><h2 class="section-title animate hover-text">摄影 · 光影</h2><p class="section-subtitle animate hover-text">用镜头记录的瞬间</p></div><div class="photo-view"><div class="photo-track" id="photoTrack"></div><button class="photo-nav-btn prev" id="photoPrev">‹</button><button class="photo-nav-btn next" id="photoNext">›</button><div class="photo-pages" id="photoPages"></div><div class="photo-counter" id="photoCounter"></div></div></section>
+<section id="movies" class="section"><div class="section-content"><h2 class="section-title animate hover-text">光影 · 电影</h2><p class="section-subtitle animate hover-text">那些在银幕上闪烁的，是另一个世界的梦</p></div><div class="movie-carousel-wrap"><div class="movie-track" id="movieTrack">
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BODYwNDYxNDk1Nl5BMl5BanBnXkFtZTgwOTAwMTk2MDE@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>白日梦想家</h3><div class="meta">🎬 本·斯蒂勒 · 2013</div><div class="actors">⭐ 本·斯蒂勒 / 克里斯汀·韦格</div><div class="rating">🏆 IMDb 7.3</div><div class="desc">开拓视野，冲破艰险。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>楚门的世界</h3><div class="meta">🎬 彼得·威尔 · 1998</div><div class="actors">⭐ 金·凯瑞 / 劳拉·琳尼</div><div class="rating">🏆 IMDb 8.2</div><div class="desc">如果不能再见，祝你早安午安晚安。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>爱乐之城</h3><div class="meta">🎬 达米恩·查泽雷 · 2016</div><div class="actors">⭐ 瑞恩·高斯林 / 艾玛·斯通</div><div class="rating">🏆 IMDb 8.0</div><div class="desc">敬那些做梦的人。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNzVkMTgzODQtMWIwZC00NzE4LTgzZjYtMzAwM2I5OGZhNjE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>头号玩家</h3><div class="meta">🎬 史蒂文·斯皮尔伯格 · 2018</div><div class="actors">⭐ 泰伊·谢里丹 / 奥利维亚·库克</div><div class="rating">🏆 IMDb 7.4</div><div class="desc">谢谢你玩我的游戏。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>波西米亚狂想曲</h3><div class="meta">🎬 布莱恩·辛格 · 2018</div><div class="actors">⭐ 拉米·马雷克 / 露西·宝通</div><div class="rating">🏆 IMDb 7.9</div><div class="desc">我们注定与众不同。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>搏击俱乐部</h3><div class="meta">🎬 大卫·芬奇 · 1999</div><div class="actors">⭐ 布拉德·皮特 / 爱德华·诺顿</div><div class="rating">🏆 IMDb 8.8</div><div class="desc">丢掉一切，才能自由。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>星际穿越</h3><div class="meta">🎬 克里斯托弗·诺兰 · 2014</div><div class="actors">⭐ 马修·麦康纳 / 安妮·海瑟薇</div><div class="rating">🏆 IMDb 8.7</div><div class="desc">爱是我们能穿越时空的唯一力量。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>银翼杀手</h3><div class="meta">🎬 雷德利·斯科特 · 1982</div><div class="actors">⭐ 哈里森·福特 / 肖恩·杨</div><div class="rating">🏆 IMDb 8.1</div><div class="desc">我见过你们无法想象的美。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDU5YTNmMmItN2QxNy00OGQ0LTg5MTctNzFmYjEzZjcwN2UwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>绿皮书</h3><div class="meta">🎬 彼得·法雷利 · 2018</div><div class="actors">⭐ 维果·莫滕森 / 马赫沙拉·阿里</div><div class="rating">🏆 IMDb 8.2</div><div class="desc">勇气改变人心。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>信条</h3><div class="meta">🎬 克里斯托弗·诺兰 · 2020</div><div class="actors">⭐ 约翰·大卫·华盛顿 / 罗伯特·帕丁森</div><div class="rating">🏆 IMDb 7.3</div><div class="desc">不要试图理解它，去感受它。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>当幸福来敲门</h3><div class="meta">🎬 加布里尔·穆奇诺 · 2006</div><div class="actors">⭐ 威尔·史密斯 / 贾登·史密斯</div><div class="rating">🏆 IMDb 8.0</div><div class="desc">如果你有梦想，就要守护它。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>盗梦空间</h3><div class="meta">🎬 克里斯托弗·诺兰 · 2010</div><div class="actors">⭐ 莱昂纳多·迪卡普里奥 / 约瑟夫·高登-莱维特</div><div class="rating">🏆 IMDb 8.8</div><div class="desc">一个念头就能改变一切。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>黑客帝国</h3><div class="meta">🎬 沃卓斯基姐妹 · 1999</div><div class="actors">⭐ 基努·里维斯 / 劳伦斯·菲什伯恩</div><div class="rating">🏆 IMDb 8.7</div><div class="desc">欢迎来到现实荒漠。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGRkYTNhOWQtYmI0Ni00MjZhLWJmMzAtMTA2Mjg4NGNiNDU0XkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>这个杀手不太冷</h3><div class="meta">🎬 吕克·贝松 · 1994</div><div class="actors">⭐ 让·雷诺 / 娜塔莉·波特曼</div><div class="rating">🏆 IMDb 8.5</div><div class="desc">人生总是如此痛苦吗？</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDg0ZTU4YTItZTI3My00ODNjLTllMTYtMzI3ZWNjYjU1NGM1XkEyXkFqcGc@._V1_SX300.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>海上钢琴师</h3><div class="meta">🎬 朱塞佩·托纳多雷 · 1998</div><div class="actors">⭐ 蒂姆·罗斯 / 普路特·泰勒·文斯</div><div class="rating">🏆 IMDb 8.0</div><div class="desc">琴键有限，音乐无限。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNDdjZGQ5YzEtNTc2My00Mjc0LWFlMTctYzkwMzZlNzdiZWYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,9,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>心灵捕手</h3><div class="meta">🎬 格斯·范·桑特 · 1997</div><div class="actors">⭐ 罗宾·威廉姆斯 / 马特·达蒙</div><div class="rating">🏆 IMDb 8.4</div><div class="desc">不是你的错。</div></div></div>
+            <div class="movie-item"><div class="movie-card"><div class="poster"><div style="background-image:url('https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg')"></div></div><div class="poster-overlay"></div></div><div class="movie-info"><h3>教父</h3><div class="meta">🎬 弗朗西斯·科波拉 · 1972</div><div class="actors">⭐ 马龙·白兰度 / 阿尔·帕西诺</div><div class="rating">🏆 IMDb 9.2</div><div class="desc">我会给他一个无法拒绝的提议。</div></div></div>
+</div></div></section><section id="music" class="section"><div class="section-content"><h2 class="section-title animate hover-text">音乐 · 收藏</h2><p class="section-subtitle animate hover-text">反复听过无数遍的专辑，都在这里了。</p></div>
+<div class="music-artists-wrap"><div class="music-artist-panel" data-artist="马思唯"><div class="music-artist-header"><img class="music-artist-img" src="https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg" alt="马思唯"><h3>马思唯</h3><div class="music-artist-count" data-count="马思唯"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsMs"></div></div></div>
+<div class="music-artist-panel" data-artist="陶喆"><div class="music-artist-header"><img class="music-artist-img" src="https://p2.music.126.net/7FWLQ9Vm_po0VS7ptLTFiQ==/109951170606711717.jpg" alt="陶喆"><h3>陶喆</h3><div class="music-artist-count" data-count="陶喆"></div></div><div class="music-album-scroll"><div class="music-album-grid" id="musicAlbumsDt"></div></div></div></div></section>
 </div>
-
+<script src="music_data.js"></script>
 <script>
-// ===== SPLASH ENTRANCE =====
-const splash = document.getElementById('splash');
-
-function dismissSplash() {
-  if (splash.classList.contains('dismissing')) return;
-  splash.classList.add('dismissing');
-  setTimeout(() => {
-    splash.classList.add('hidden');
-    document.body.style.overflow = '';
-    document.getElementById('main').style.overflowY = 'scroll';
-    // Trigger about section entrance
-    const about = document.getElementById('about');
-    about.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 120);
-    });
-    // Init nav indicator
-    updateUI('about');
-  }, 800);
-}
-
-// Click anywhere to dismiss
-splash.addEventListener('click', dismissSplash);
-
-// Auto-dismiss after sweep completes: 0.5s delay + 3.5s sweep + buffer
-setTimeout(() => {
-  if (!splash.classList.contains('hidden')) dismissSplash();
-}, 5000);
-
-// Prevent body scroll while splash is active
-document.body.style.overflow = 'hidden';
-document.getElementById('main').style.overflowY = 'hidden';
-
-// ===== AVATAR ZOOM =====
-const avatar = document.querySelector('.name-img');
-const zoomLightbox = document.getElementById('zoomLightbox');
-const zoomImg = zoomLightbox.querySelector('img');
-
-avatar.addEventListener('click', () => {
-  zoomImg.src = avatar.src;
-  zoomLightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('main').style.overflowY = 'hidden';
-});
-
-zoomLightbox.addEventListener('click', () => {
-  zoomLightbox.classList.remove('open');
-  document.body.style.overflow = '';
-  document.getElementById('main').style.overflowY = 'scroll';
-});
-
-// ===== SMOOTH SECTION ENTRANCE =====
-const sections = document.querySelectorAll('.section');
-const navDots = document.querySelectorAll('.nav-dot');
-const main = document.getElementById('main');
-const glassLinks = document.querySelectorAll('#glassNav a');
-const indicator = document.getElementById('navIndicator');
-const fadeOverlay = document.getElementById('sectionFade');
-
-const bgColors = {
-  about: '#0a0604',
-  photos: '#0a0e2a',
-  movies: '#0d0000'
-};
-
-let lastSection = 'about';
-let navLock = 0;
-
-function slideIndicator(id) {
-  const link = document.querySelector(`#glassNav a[href="#${id}"]`);
-  if (!link) return;
-  const navInner = link.closest('.glass-nav-inner');
-  if (!navInner) return;
-  // Calculate offset within the inner wrapper
-  let left = 0;
-  let found = false;
-  navInner.querySelectorAll('a').forEach(a => {
-    if (a === link) found = true;
-    if (!found) left += a.offsetWidth;
-  });
-  indicator.style.left = left + 'px';
-  indicator.style.width = link.offsetWidth + 'px';
-}
-
-function updateUI(id) {
-  lastSection = id;
-  slideIndicator(id);
-  glassLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-  navDots.forEach(d => d.classList.toggle('active', d.getAttribute('href') === '#' + id));
-}
-
-function doFade(id) {
-  if (id === lastSection) return;
-  fadeOverlay.style.background = bgColors[lastSection] || '#000';
-  fadeOverlay.style.opacity = '1';
-  requestAnimationFrame(() => {
-    fadeOverlay.style.opacity = '0';
-    updateUI(id);
-  });
-}
-
-function updateSectionProgress() {
-  if (Date.now() < navLock) return;
-  const viewH = main.clientHeight;
-  let best = null;
-  let maxV = 0;
-  sections.forEach(sec => {
-    const r = sec.getBoundingClientRect();
-    // Only consider sections with visible area on screen
-    if (r.bottom <= 0 || r.top >= viewH) return;
-    // How much of this section is visible (0-1)
-    const visibleArea = Math.min(r.bottom, viewH) - Math.max(r.top, 0);
-    const visibleRatio = visibleArea / r.height;
-    sec.querySelectorAll('.animate').forEach(el => {
-      if (visibleRatio > 0.1) el.classList.add('visible');
-    });
-    // Handle about hero section
-    if (sec.id === 'about') {
-      sec.querySelectorAll('.greeting, .hero-title, .hero-tagline, .hero-bio, .hero-btn, .site-links').forEach(el => {
-        if (visibleRatio > 0.15) el.classList.add('visible');
-      });
-    }
-    if (visibleRatio > maxV) {
-      maxV = visibleRatio;
-      best = sec.id;
-    }
-  });
-  if (best && best !== lastSection && bgColors[best]) {
-    doFade(best);
-  }
-}
-main.addEventListener('scroll', updateSectionProgress, { passive: true });
-
-function initSectionUI() {
-  if (!document.getElementById('glassNav').offsetWidth) { setTimeout(initSectionUI, 50); return; }
-  updateUI('about');
-}
-setTimeout(initSectionUI, 150);
-
-// ===== PHOTO CAROUSEL =====
-const photoImgs = document.querySelectorAll('.photo-img');
-const photoItems = document.querySelectorAll('.photo-info-item');
-const photoDots = document.querySelectorAll('#photoDots span');
-const photoPrev = document.getElementById('photoPrev');
-const photoNext = document.getElementById('photoNext');
-const PHOTO_COUNT = 6;
-let photoIdx = 0;
-let photoTimer = null;
-const PHOTO_INTERVAL = 5000;
-
-function showPhoto(index) {
-  photoImgs.forEach((img, i) => img.classList.toggle('active', i === index));
-  photoItems.forEach((item, i) => item.classList.toggle('show', i === index));
-  photoDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-  photoIdx = index;
-}
-
-function nextPhoto() {
-  showPhoto((photoIdx + 1) % PHOTO_COUNT);
-}
-
-function prevPhoto() {
-  showPhoto((photoIdx - 1 + PHOTO_COUNT) % PHOTO_COUNT);
-}
-
-function startCarousel() {
-  stopCarousel();
-  (function tick() {
-    photoTimer = setTimeout(() => { nextPhoto(); tick(); }, PHOTO_INTERVAL);
-  })();
-}
-
-function stopCarousel() {
-  if (photoTimer) { clearTimeout(photoTimer); photoTimer = null; }
-}
-
-// Buttons
-photoPrev.addEventListener('click', () => { stopCarousel(); prevPhoto(); startCarousel(); });
-photoNext.addEventListener('click', () => { stopCarousel(); nextPhoto(); startCarousel(); });
-
-// Dots
-photoDots.forEach((dot, i) => {
-  dot.addEventListener('click', () => { stopCarousel(); showPhoto(i); startCarousel(); });
-});
-
-// Hover pause
-document.querySelector('.photo-scroll').addEventListener('mouseenter', stopCarousel);
-document.querySelector('.photo-scroll').addEventListener('mouseleave', startCarousel);
-
-// Start on intersection
-const photoObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) startCarousel();
-    else stopCarousel();
-  });
-}, { threshold: 0.3 });
-photoObs.observe(document.getElementById('photos'));
-showPhoto(0);
-
-// ===== MOVIE CAROUSEL =====
-const movieTrack = document.getElementById('movieTrack');
-const movieItems = Array.from(movieTrack.querySelectorAll('.movie-item'));
-const MC = movieItems.length;
-let movieTimer = null;
-let movieIdx = 0;
-const NORMAL_INTERVAL = 3500;
-
-// Clone: prepend last 3 and append first 3 for seamless wrap
-movieItems.slice(-3).forEach(item => movieTrack.insertBefore(item.cloneNode(true), movieTrack.firstChild));
-movieItems.slice(0, 3).forEach(item => movieTrack.appendChild(item.cloneNode(true)));
-
-const allItems = movieTrack.querySelectorAll('.movie-item');
-const CS = 3;
-
-function centerMovie(anim) {
-  const vw = movieTrack.parentElement?.offsetWidth || window.innerWidth;
-  movieTrack.style.transition = anim ? 'transform 0.5s cubic-bezier(0.22,1,0.36,1)' : 'none';
-  movieTrack.style.transform = `translateX(${vw / 2 - movieIdx * 210 - 80}px)`;
-  allItems.forEach((item, i) => {
-    const f = i === movieIdx;
-    item.classList.toggle('focus', f);
-    item.querySelector('.movie-card').classList.toggle('focus', f);
-    item.querySelector('.movie-card').classList.toggle('side', Math.abs(i - movieIdx) === 1);
-  });
-}
-
-function advanceMovie() {
-  movieIdx++;
-  if (movieIdx >= MC + CS) {
-    movieTrack.style.transition = 'none';
-    movieIdx = CS;
-    centerMovie(false);
-  } else {
-    centerMovie(true);
-  }
-}
-
-function goToMovie(i) { movieStop(); movieIdx = i; centerMovie(true); movieStart(NORMAL_INTERVAL); }
-
-function movieStart(interval) {
-  movieStop();
-  movieTimer = setInterval(advanceMovie, interval || NORMAL_INTERVAL);
-}
-
-function movieStop() { if (movieTimer) { clearInterval(movieTimer); movieTimer = null; } }
-
-// Rapid intro: burst once, then steady
-function initMovies() {
-  if (!movieTrack.parentElement?.offsetWidth) { setTimeout(initMovies, 50); return; }
-  movieIdx = CS;
-  centerMovie(false);
-  // Rapid burst: advance 3 times at 120ms each
-  movieStart(120);
-  let burst = 0;
-  const stopBurst = setInterval(() => {
-    burst++;
-    advanceMovie();
-    if (burst >= 3) {
-      clearInterval(stopBurst);
-      movieStart(NORMAL_INTERVAL);
-    }
-  }, 120);
-}
-
-allItems.forEach((item, i) => item.addEventListener('click', () => goToMovie(i)));
-movieTrack.addEventListener('mouseenter', movieStop);
-movieTrack.addEventListener('mouseleave', () => movieStart(NORMAL_INTERVAL));
-
-// Observer pauses/resumes on scroll
-const movieObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      // Only do rapid intro if section was fully out of view
-      initMovies();
-    } else movieStop();
-  });
-}, { threshold: 0.1 });
-movieObs.observe(document.getElementById('movies'));
-window.addEventListener('resize', () => centerMovie(false));
-
-// ===== SMOOTH NAV DOT CLICK =====
-navDots.forEach(dot => {
-  dot.addEventListener('click', (e) => {
-    e.preventDefault();
-    const id = dot.getAttribute('href').replace('#', '');
-    const target = document.querySelector(dot.getAttribute('href'));
-    if (target) {
-      navLock = Date.now() + 900;
-      updateUI(id);
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-// ===== GLASS NAV CLICK =====
-glassLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const id = link.getAttribute('href').replace('#', '');
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      navLock = Date.now() + 900;
-      updateUI(id);
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-
-// ===== MEME CAROUSEL =====
+var S=document.getElementById('splash'),Z=document.getElementById('zoomLightbox'),ZI=Z.querySelector('img'),AV=document.querySelector('.name-img'),CU=document.getElementById('cursor'),CD=document.getElementById('cursor-dot'),SE=document.querySelectorAll('.section'),ND=document.querySelectorAll('.nav-dot'),MN=document.getElementById('main'),GL=document.querySelectorAll('#glassNav a'),ID=document.getElementById('navIndicator'),LS='about';
+function SI(i){var l=document.querySelector('#glassNav a[href="#'+i+'"]');if(!l)return;var n=l.closest('.glass-nav-inner');var le=0,fo=false;n.querySelectorAll('a').forEach(function(a){if(a===l)fo=true;if(!fo)le+=a.offsetWidth});ID.style.left=le+'px';ID.style.width=l.offsetWidth+'px'}
+function U(i){LS=i;SI(i);GL.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+i)});ND.forEach(function(d){d.classList.toggle('active',d.getAttribute('href')==='#'+i)})}
+function dS(){if(S.classList.contains('dismissing'))return;S.classList.add('dismissing');setTimeout(function(){S.classList.add('hidden');document.body.style.overflow='';MN.style.overflowY='scroll';document.getElementById('about').querySelectorAll('.greeting,.hero-title,.hero-tagline,.hero-bio,.hero-btn').forEach(function(e,i){setTimeout(function(){e.classList.add('visible')},i*120)});U('about')},800)}
+S.addEventListener('click',dS);setTimeout(function(){if(!S.classList.contains('hidden'))dS()},5000);
+document.body.style.overflow='hidden';MN.style.overflowY='hidden';
+AV.addEventListener('click',function(){ZI.src=AV.src;Z.classList.add('open');document.body.style.overflow='hidden';MN.style.overflowY='hidden'});
+Z.addEventListener('click',function(){Z.classList.remove('open');document.body.style.overflow='';MN.style.overflowY='scroll'});
+function US(){var v=MN.clientHeight,best=null,bv=0;SE.forEach(function(s){var r=s.getBoundingClientRect();if(r.bottom<=0||r.top>=v)return;var vi=(Math.min(r.bottom,v)-Math.max(r.top,0))/r.height;if(vi>bv){bv=vi;best=s.id}if(s.id==='about')s.querySelectorAll('.greeting,.hero-title,.hero-tagline,.hero-bio,.hero-btn').forEach(function(e){if(vi>0.15)e.classList.add('visible')});s.querySelectorAll('.animate').forEach(function(e){if(vi>0.1)e.classList.add('visible')})});if(best&&best!==LS&&SE.length)U(best)}
+MN.addEventListener('scroll',US,{passive:true});setTimeout(function(){U('about');US()},150);
+ND.forEach(function(d){d.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(d.getAttribute('href'));if(t){U(t.id);t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+GL.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(l.getAttribute('href'));if(t){U(t.id);t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+// photos
+(function(){var pf=["DSC09198-1.JPG","DSC01708-1.JPG","1780071501759.jpg","mmexport1768918568845.jpg","流星1.jpg","流星2.jpg","20240407-DSC00401.jpg","20240407-DSC00459.jpg","20240409-DSC00535.jpg","20240409-DSC00606.jpg","20240409-DSC00631.jpg","20240905-2024-08-20 101206.jpg","DSC01622.jpg","DSC01648-1.jpg","DSC01649.jpg","DSC01900-1.jpg","微信图片_20240727174633-1.jpg","微信图片_20240727174638-1.jpg","未命名 (1 - 16).jpg","未命名 (2 - 16).jpg"];var pt=document.getElementById('photoTrack'),pp=document.getElementById('photoPages'),pc=document.getElementById('photoCounter'),pb=document.getElementById('photoPrev'),pn=document.getElementById('photoNext');var cp=0;
+pf.forEach(function(f,i){var el=document.createElement('div');el.className='photo-car-item'+(i===0?' active':'');var im=document.createElement('img');im.src='pic/照片展示/'+encodeURI(f);im.alt='';im.loading='lazy';el.appendChild(im);el.addEventListener('click',function(){ZI.src=im.src;Z.classList.add('open');document.body.style.overflow='hidden';MN.style.overflowY='hidden'});pt.appendChild(el)});
+function ud(){var it=pt.children;for(var i=0;i<it.length;i++){it[i].classList.toggle('active',i===cp);it[i].classList.toggle('prev',i===cp-1||(cp===0&&i===it.length-1));it[i].classList.toggle('next',i===cp+1||(cp===it.length-1&&i===0))}var d=pp.querySelectorAll('.photo-page-dot');d.forEach(function(e,i){e.classList.toggle('active',i===cp)});if(pc)pc.textContent=String(cp+1).padStart(2,'0')+' / '+String(it.length).padStart(2,'0')}
+function go(i){cp=((i%pf.length)+pf.length)%pf.length;ud()}
+pb.addEventListener('click',function(){go(cp-1);rt()});pn.addEventListener('click',function(){go(cp+1);rt()});
+pp.innerHTML='';for(var i=0;i<pf.length;i++){(function(idx){var d=document.createElement('button');d.className='photo-page-dot'+(idx===0?' active':'');d.addEventListener('click',function(){go(idx);rt()});pp.appendChild(d)})(i)}ud();
+var pa;function rt(){if(pa)clearInterval(pa);pa=setInterval(function(){go(cp+1)},4000)}
+pt.addEventListener('mouseenter',function(){if(pa)clearInterval(pa)});pt.addEventListener('mouseleave',function(){rt()});
+var po=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)rt();else if(pa)clearInterval(pa)})},{threshold:0.1});po.observe(document.getElementById('photos'));
+window.addEventListener('resize',function(){ud()});rt()})();
+// games
+(function(){var gg=document.getElementById('gameGrid');var gpd=document.getElementById('gamePrev');var gnd=document.getElementById('gameNext');var gi=document.getElementById('gamePageInfo');var gd=[{"n":"CS:GO / CS2","h":"427.9h","id":730},{"n":"战地1","h":"231h","id":1238840},{"n":"无主之地3","h":"178.1h","id":397540},{"n":"死亡细胞","h":"177.3h","id":588650},{"n":"艾尔登法环","h":"114h","id":1245620},{"n":"赛博朋克2077","h":"90.6h","id":1091500},{"n":"艾尔登法环：黑夜君临","h":"85.9h","id":2622380},{"n":"以撒的结合","h":"72.8h","id":250900},{"n":"无主之地2","h":"69.9h","id":49520},{"n":"刺客信条：起源","h":"65h","id":582160},{"n":"消逝的光芒","h":"61.9h","id":239140},{"n":"戴森球计划","h":"50.2h","id":1366540},{"n":"消逝的光芒2","h":"48.2h","id":534380},{"n":"命运2","h":"48.2h","id":1085660},{"n":"天际 特别版","h":"48.1h","id":489830},{"n":"辐射4","h":"36.9h","id":377160},{"n":"战地2042","h":"36.1h","id":1517290},{"n":"绿色地狱","h":"32.5h","id":815370},{"n":"巫师3","h":"31.8h","id":292030},{"n":"雨中冒险2","h":"29.5h","id":632360},{"n":"刺客信条：奥德赛","h":"28.7h","id":812140},{"n":"黑神话：悟空","h":"28.4h","id":2358720},{"n":"博德之门3","h":"26.2h","id":1086940},{"n":"人类一败涂地","h":"25h","id":477160},{"n":"幻兽帕鲁","h":"24.1h","id":1623730},{"n":"求生之路2","h":"23.6h","id":550},{"n":"Pavlov","h":"22.4h","id":555160},{"n":"火影忍者疾风4","h":"20.2h","id":349040},{"n":"耻辱","h":"18.4h","id":205100},{"n":"森林之子","h":"16.1h","id":1326470}];var gpp=10,cp=0,tp=Math.ceil(gd.length/gpp);
+function mk(g){var e=document.createElement('div');e.className='game-grid-item';var p=g.id?'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/'+g.id+'/library_600x900_2x.jpg':'';e.innerHTML='<div class="game-grid-poster"><div style="'+(p?'background-image:url('+p+');background-size:cover;background-position:center;background-color:#1a1a2e':'background:linear-gradient(135deg,#2a2a4e,#1a1a2e)')+'"></div></div><div class="game-grid-info"><h3>'+g.n+'</h3><div class="hours">🎮 '+g.h+'</div></div>';if(g.id)e.addEventListener('click',function(){window.open('https://store.steampowered.com/app/'+g.id,'_blank')});return e}
+function rd(){gg.innerHTML='';var s=cp*gpp;var e=Math.min(s+gpp,gd.length);for(var i=s;i<e;i++){gg.appendChild(mk(gd[i]))}gi.textContent=(cp+1)+'/'+tp;gpd.disabled=cp===0;gnd.disabled=cp>=tp-1}
+gpd.addEventListener('click',function(){if(cp>0){cp--;rd()}});gnd.addEventListener('click',function(){if(cp<tp-1){cp++;rd()}});
+rd()})();
+// movies
+(function(){var mt=document.getElementById('movieTrack');var mi=Array.from(mt.querySelectorAll('.movie-item'));mi.slice(-3).forEach(function(i){mt.insertBefore(i.cloneNode(true),mt.firstChild)});mi.slice(0,3).forEach(function(i){mt.appendChild(i.cloneNode(true))});var ami=mt.querySelectorAll('.movie-item');var mi2=3,mt2=null;
+function cm(a){var vw=mt.parentElement?.offsetWidth||window.innerWidth;mt.style.transition=a?'transform .5s cubic-bezier(0.22,1,0.36,1)':'none';mt.style.transform='translateX('+(vw/2-mi2*210-80)+'px)';ami.forEach(function(e,i){e.classList.toggle('focus',i===mi2);e.querySelector('.movie-card').classList.toggle('focus',i===mi2);e.querySelector('.movie-card').classList.toggle('side',Math.abs(i-mi2)===1)})}
+function am(){mi2++;if(mi2>=mi.length+3){mt.style.transition='none';mi2=3;cm(false)}else cm(true)}
+function ms(i){if(mt2)clearInterval(mt2);mt2=setInterval(am,i||3500)}
+cm(false);ms(120);var b=0;var sb=setInterval(function(){b++;am();if(b>=3){clearInterval(sb);ms()}},120);
+ami.forEach(function(e,i){e.addEventListener('click',function(){if(mt2)clearInterval(mt2);mi2=i;cm(true);ms()})});
+mt.addEventListener('mouseenter',function(){if(mt2)clearInterval(mt2)});mt.addEventListener('mouseleave',function(){ms()});
+new IntersectionObserver(function(e){e.forEach(function(en){if(!en.isIntersecting&&mt2)clearInterval(mt2)})},{threshold:0.1}).observe(document.getElementById('movies'));
+window.addEventListener('resize',function(){cm(false)})})();
+// memes
 const memeFiles = [
   '1748875607313.jpg','1753255081215.jpeg','1755950079507.jpeg',
   '1756979894541.jpg','1765352075279.jpeg','1765516039129.jpg','1765516075962.jpg',
@@ -899,93 +339,20 @@ const memeFiles = [
   'meme_36.png','meme_37.jpg','meme_38.jpg','meme_39.jpg','meme_4.jpg','meme_5.jpg',
   'meme_6.jpg','meme_7.png','meme_8.jpg','meme_9.jpg',
   'mmexport1779282871533.jpg','mmexport1779371520178.jpg'
-];
-const memeRows = [
-  document.getElementById('memeRow1'),
-  document.getElementById('memeRow2'),
-  document.getElementById('memeRow3')
-];
-
-function shuffleArray(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function renderMemes(fileNames) {
-  const srcs = fileNames.map(f => 'pic/梗图/' + f);
-  const groups = [[], [], []];
-  srcs.forEach((s, i) => groups[i % 3].push(s));
-  memeRows.forEach((row, ri) => {
-    row.innerHTML = '';
-    groups[ri].forEach(src => {
-      const img = document.createElement('img');
-      img.src = src; img.alt = 'meme';
-      row.appendChild(img);
-    });
-    groups[ri].forEach(src => {
-      const img = document.createElement('img');
-      img.src = src; img.alt = 'meme';
-      row.appendChild(img);
-    });
-  });
-  memeRows.forEach(row => {
-    row._pause = () => row.classList.add('paused');
-    row._resume = () => row.classList.remove('paused');
-    row.addEventListener('mouseenter', row._pause);
-    row.addEventListener('mouseleave', row._resume);
-  });
-  document.querySelectorAll('.meme-row-inner img').forEach(img => {
-    img.addEventListener('click', () => {
-      zoomImg.src = img.src;
-      zoomLightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      document.getElementById('main').style.overflowY = 'hidden';
-    });
-  });
-}
-
-renderMemes(memeFiles);
-
-// Refresh - shuffle local memes only
-const refreshBtn = document.getElementById('memeRefreshBtn');
-refreshBtn.addEventListener('click', () => {
-  refreshBtn.classList.add('spinning');
-  // Reduce to 45 images per load for file:// reliability
-  const shuffled = shuffleArray([...memeFiles]).slice(0, 45);
-  renderMemes(shuffled);
-  setTimeout(() => refreshBtn.classList.remove('spinning'), 400);
-});
-
-// ===== CUSTOM CURSOR =====
-const cursor = document.getElementById('cursor');
-const cursorDot = document.getElementById('cursor-dot');
-let curX = 0, curY = 0;
-
-document.addEventListener('mousemove', (e) => {
-  curX = e.clientX;
-  curY = e.clientY;
-  cursorDot.style.left = curX + 'px';
-  cursorDot.style.top = curY + 'px';
-  setTimeout(() => {
-    cursor.style.left = curX + 'px';
-    cursor.style.top = curY + 'px';
-  }, 40);
-});
-
-document.querySelectorAll('a, button, input, img, .card, .movie-card, .site-link, .photo-nav, .meme-row-inner img, .name-img, .hero-btn').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorDot.classList.add('hover'); });
-  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorDot.classList.remove('hover'); });
-});
-
-document.addEventListener('mousedown', () => cursor.classList.add('click'));
-document.addEventListener('mouseup', () => cursor.classList.remove('click'));
-document.addEventListener('mouseleave', () => { cursor.style.display = 'none'; cursorDot.style.display = 'none'; });
-document.addEventListener('mouseenter', () => { cursor.style.display = ''; cursorDot.style.display = ''; });
-
+];;
+var MR=[document.getElementById('memeRow1'),document.getElementById('memeRow2'),document.getElementById('memeRow3')];
+function SF(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function RM(f){var s=f.map(function(f){return 'pic/梗图/'+f});var g=[[],[],[]];s.forEach(function(s,i){g[i%3].push(s)});MR.forEach(function(r,ri){r.innerHTML='';g[ri].forEach(function(s){var im=document.createElement('img');im.src=s;im.alt='meme';r.appendChild(im)});g[ri].forEach(function(s){var im=document.createElement('img');im.src=s;im.alt='meme';r.appendChild(im)})});MR.forEach(function(r){r.addEventListener('mouseenter',function(){r.classList.add('paused')});r.addEventListener('mouseleave',function(){r.classList.remove('paused')})});document.querySelectorAll('.meme-row-inner img').forEach(function(im){im.addEventListener('click',function(){ZI.src=im.src;Z.classList.add('open');document.body.style.overflow='hidden';MN.style.overflowY='hidden'})})}
+RM(memeFiles);
+document.getElementById('memeRefreshBtn').addEventListener('click',function(){this.classList.add('spinning');RM(SF([].concat(memeFiles)).slice(0,45));var t=this;setTimeout(function(){t.classList.remove('spinning')},400)});
+// cursor
+document.addEventListener('mousemove',function(e){CD.style.left=e.clientX+'px';CD.style.top=e.clientY+'px';setTimeout(function(){CU.style.left=e.clientX+'px';CU.style.top=e.clientY+'px'},40)});
+document.querySelectorAll('a,button,input,img,.site-link,.meme-row-inner img,.name-img,.hero-btn,.photo-car-item,.game-grid-item,.movie-card').forEach(function(e){e.addEventListener('mouseenter',function(){CU.classList.add('hover');CD.classList.add('hover')});e.addEventListener('mouseleave',function(){CU.classList.remove('hover');CD.classList.remove('hover')})});
+document.addEventListener('mousedown',function(){CU.classList.add('click')});document.addEventListener('mouseup',function(){CU.classList.remove('click')});
+document.addEventListener('mouseleave',function(){CU.style.display='none';CD.style.display='none'});document.addEventListener('mouseenter',function(){CU.style.display='';CD.style.display=''});
+// music
+if(typeof MUSIC_DATA!=='undefined'){(function(){var AI={'马思唯':'https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg','陶喆':'https://p2.music.126.net/7FWLQ9Vm_po0VS7ptLTFiQ==/109951170606711717.jpg'};function RA(n,cid){var c=document.getElementById(cid);if(!c)return;var t=MUSIC_DATA.tracks.filter(function(t){return t.artists.some(function(a){return a===n})});var cnt=document.querySelector('[data-count="'+n+'"]');if(cnt)cnt.textContent=t.length+' 首';var se={};t.forEach(function(t){var k=t.album||'';if(se[k])return;se[k]=true;var cd=document.createElement('div');cd.className='music-album-card';cd.innerHTML='<img class="music-album-img" src="'+(t.albumPic||AI[n])+'" alt="" loading="lazy"><span class="music-album-name">'+(t.album||'未知')+'</span>';c.appendChild(cd)})}RA('马思唯','musicAlbumsMs');RA('陶喆','musicAlbumsDt')})()}
+new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting&&!document.querySelector('#music .section-title.visible'))document.querySelectorAll('#music .animate').forEach(function(el,i){setTimeout(function(){el.classList.add('visible')},i*150)})})},{threshold:0.15}).observe(document.getElementById('music'));
 </script>
-
 </body>
 </html>
