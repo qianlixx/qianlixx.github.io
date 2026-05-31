@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA$IWEI · 马思唯</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Righteous&family=Space+Mono:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color:#ece4dc;overflow-x:hidden;font-weight:400;line-height:1.9;font-size:20px;-webkit-font-smoothing:antialiased;letter-spacing:0.3px}
+:root{--bk:#000;--rd:#DC2626;--rd2:#991B1B;--gd:#F59E0B;--gd2:#D97706;--wh:#ece4dc;--gr:#9a9088;--gr2:#4a4440;--font-d:'Bebas Neue','Impact','Arial Black',sans-serif;--font-t:'Anton','Impact',sans-serif;--font-r:'Righteous',cursive;--font-b:'Source Sans 3','Noto Sans SC',sans-serif;--font-m:'Space Mono','Courier New',monospace;--spring:cubic-bezier(0.34,1.56,0.64,1);--ease-out:cubic-bezier(0.16,1,0.3,1)}
+::selection{background:var(--rd);color:#000}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.g-d{position:fixed;top:0;left:3%;width:80px;height:100vh;z-index:0;pointer-events:none;opacity:0.08}.g-d svg{width:100%;height:100%}
+.g-s{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.04}
+.g-t{position:fixed;bottom:4%;right:4%;width:clamp(120px,20vw,260px);z-index:0;pointer-events:none;opacity:0.025}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:16px 36px;background:#000;border-bottom:3px solid var(--rd);font-size:13px;letter-spacing:4px;text-transform:uppercase}
+.top-bar .l{color:var(--gr);display:flex;align-items:center;gap:16px}
+.top-bar .l .back{font-size:12px;letter-spacing:2px;color:var(--gr);border:1px solid var(--gr2);padding:6px 16px;transition:all .2s;font-family:var(--font-d)}
+.top-bar .l .back:hover{border-color:var(--rd);color:var(--rd);transform:scale(0.97)}
+.top-bar .l .back:active{transform:scale(0.92)}.top-bar .l span{font-family:var(--font-d);letter-spacing:4px;font-size:13px}
+.top-bar .r{font-family:var(--font-d);color:var(--gr);letter-spacing:6px;font-size:14px}
+.top-bar .r em{font-style:normal;color:var(--rd)}.top-bar .r .hl{color:var(--gd)}
+.side-nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;align-items:center;gap:10px}
+.side-nav .sn-dot{display:flex;align-items:center;gap:16px;flex-direction:row-reverse;cursor:pointer;transition:all .3s;opacity:0.5;position:relative}
+.side-nav .sn-dot:hover,.side-nav .sn-dot.active{opacity:1}
+.side-nav .sn-dot .sd-circle{width:34px;height:34px;border-radius:50%;border:4px solid rgba(220,38,38,0.5);transition:all .3s;flex-shrink:0;background:transparent}
+.side-nav .sn-dot.active .sd-circle{background:var(--rd);border-color:var(--rd);box-shadow:0 0 30px rgba(220,38,38,0.5),0 0 60px rgba(220,38,38,0.2);width:40px;height:40px}
+.side-nav .sn-dot:hover .sd-circle{border-color:var(--gd);background:rgba(245,158,11,0.15)}
+.side-nav .sn-dot .sd-label{font-family:var(--font-d);font-size:16px;letter-spacing:4px;color:var(--rd);white-space:nowrap;text-transform:uppercase;opacity:0.8}
+.side-nav .sn-line{width:2px;height:24px;background:var(--rd2);opacity:0.4}.side-nav .sn-line:last-child{display:none}
+@media(max-width:768px){.side-nav{display:none}}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000;z-index:1;border-bottom:4px solid var(--rd)}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--rd),var(--gd),var(--rd))}
+.hero-coverlines{position:absolute;top:clamp(70px,10vh,100px);left:clamp(20px,3vw,36px);z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:5px;opacity:0.6}
+.hero-coverlines .cl{font-family:var(--font-t);font-size:clamp(10px,0.8vw,13px);letter-spacing:5px;text-transform:uppercase;color:var(--gr);line-height:1.1}
+.hero-coverlines .cl em{font-style:normal;color:var(--rd)}.hero-coverlines .cl .g{color:var(--gd)}
+.hero-coverlines-r{position:absolute;top:clamp(70px,10vh,100px);right:clamp(20px,3vw,36px);z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:5px;opacity:0.5}
+.hero-coverlines-r .ln{font-family:var(--font-t);font-size:clamp(9px,0.7vw,12px);letter-spacing:4px;text-transform:uppercase;color:var(--gr2);border-right:2px solid var(--rd2);padding-right:10px}
+.hero-coverlines-r .ln em{font-style:normal;color:var(--rd)}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,3vh,36px);text-align:center;padding:100px 20px 60px}
+.hero-img-wrap{position:relative;width:clamp(200px,24vw,360px);height:clamp(200px,24vw,360px);border-radius:50%;overflow:hidden;border:3px solid var(--gd);box-shadow:0 0 60px var(--rdg),0 0 120px rgba(245,158,11,0.06),0 0 200px rgba(220,38,38,0.03);transition:transform .4s var(--spring),box-shadow .4s}
+.hero-img-wrap:hover{transform:scale(1.04);box-shadow:0 0 80px rgba(220,38,38,0.25),0 0 160px rgba(245,158,11,0.1),0 0 240px rgba(220,38,38,0.05)}
+.hero-img-wrap:active{transform:scale(0.97)}
+.hero-img-wrap::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:2px solid var(--rd);pointer-events:none;z-index:1;animation:bp 3s ease-in-out infinite}
+.hero-img-wrap::after{content:'';position:absolute;inset:-26px;border-radius:50%;border:1px solid rgba(220,38,38,0.06);pointer-events:none;z-index:1;animation:bp2 4s ease-in-out infinite 1s}
+@keyframes bp{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.6;transform:scale(1.02)}}
+@keyframes bp2{0%,100%{opacity:0.1;transform:scale(1)}50%{opacity:0.3;transform:scale(1.03)}}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+.hero h1{font-family:var(--font-d);font-size:clamp(80px,16vw,180px);line-height:0.75;letter-spacing:-0.04em;color:var(--wh);text-shadow:6px 6px 0 var(--rd),12px 12px 0 rgba(220,38,38,0.1);transition:text-shadow .4s}
+.hero h1:hover{text-shadow:6px 6px 0 var(--gd),12px 12px 0 rgba(245,158,11,0.08)}
+.hero h1 .sub{display:block;font-family:var(--font-d);font-size:clamp(16px,2vw,28px);letter-spacing:22px;color:var(--gr2);text-shadow:none;margin-top:-4px}
+.hero-meta{display:flex;gap:clamp(8px,1.2vw,20px);font-size:clamp(12px,0.9vw,15px);color:var(--gr2);letter-spacing:5px;text-transform:uppercase;flex-wrap:wrap;justify-content:center}
+.hero-meta em{font-style:normal;color:var(--gd)}.hero-meta .sp{color:var(--rd2)}
+.hero-stats{display:flex;gap:clamp(20px,3vw,48px);margin-top:8px}
+.hero-stats div{text-align:center;border-right:1px solid var(--gr2);padding-right:clamp(20px,3vw,48px)}
+.hero-stats div:last-child{border:none;padding-right:0}
+.hero-stats .num{font-family:var(--font-m);font-size:clamp(44px,4.5vw,68px);color:var(--wh);line-height:1;letter-spacing:-1px;opacity:0;transform:translateY(10px);animation:sf .6s ease forwards}
+.hero-stats div:nth-child(1) .num{animation-delay:.3s}.hero-stats div:nth-child(2) .num{animation-delay:.5s}.hero-stats div:nth-child(3) .num{animation-delay:.7s}
+@keyframes sf{to{opacity:1;transform:translateY(0)}}
+.hero-stats .lbl{font-size:12px;color:var(--gr2);letter-spacing:4px;text-transform:uppercase;font-family:var(--font-d)}
+.hero .sc{position:absolute;bottom:clamp(20px,3.5vh,36px);left:50%;transform:translateX(-50%);z-index:2;font-family:var(--font-d);font-size:clamp(11px,0.9vw,14px);letter-spacing:12px;text-transform:uppercase;color:var(--gr2);padding:8px 28px;border:1px solid var(--gr2);animation:pl 2.4s ease-in-out infinite;cursor:pointer;transition:all .3s}
+.hero .sc:hover{color:var(--rd);border-color:var(--rd);animation:none}@keyframes pl{0%,100%{opacity:0.25}50%{opacity:0.65}}
+.phases{position:relative;z-index:1;max-width:100%;margin:0 auto}
+.phase{position:relative;overflow:hidden;border-bottom:1px solid rgba(220,38,38,0.04)}
+.phase[data-bg="0"]{background:#1a0e08}.phase[data-bg="1"]{background:#0d0a04}.phase[data-bg="2"]{background:#120606}.phase[data-bg="3"]{background:#080c10}.phase[data-bg="4"]{background:#100e02}.phase[data-bg="5"]{background:#040e12}.phase[data-bg="6"]{background:#0e0412}
+.ph-body[data-bg="0"]{background:radial-gradient(ellipse at 30% 50%,rgba(139,111,71,0.12) 0%,transparent 70%),#1a0e08}.ph-body[data-bg="1"]{background:radial-gradient(ellipse at 70% 50%,rgba(217,119,6,0.1) 0%,transparent 70%),#0d0a04}.ph-body[data-bg="2"]{background:radial-gradient(ellipse at 50% 30%,rgba(185,28,28,0.15) 0%,transparent 70%),#120606}.ph-body[data-bg="3"]{background:radial-gradient(ellipse at 60% 40%,rgba(245,158,11,0.1) 0%,transparent 70%),#080c10}.ph-body[data-bg="4"]{background:radial-gradient(ellipse at 40% 50%,rgba(234,88,12,0.12) 0%,transparent 70%),#100e02}.ph-body[data-bg="5"]{background:radial-gradient(ellipse at 50% 60%,rgba(14,165,233,0.1) 0%,transparent 70%),#040e12}.ph-body[data-bg="6"]{background:radial-gradient(ellipse at 30% 70%,rgba(124,58,237,0.1) 0%,transparent 70%),#0e0412}
+.ph-hero{position:relative;width:100%;height:clamp(340px,55vh,620px);overflow:hidden}
+.ph-hero img{width:100%;height:100%;object-fit:cover}.ph-hero:hover img{transform:scale(1.04)}
+
+/* Base: animation targets hidden by default */
+.pq,.ph-text,.tags-anim,.side .sb,.ec,.phase-album-card,.tr .tag,.phase-header *,.ph-sub,.ph-ch,.s-hr,.phase-album-more,.al-h,.ph-hero .ph-n{opacity:0}
+.ph-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.93) 0%,rgba(0,0,0,0.1) 25%,rgba(0,0,0,0.3) 100%)}
+.ph-hero .ph-overlay-color{position:absolute;inset:0;z-index:1;mix-blend-mode:overlay;opacity:0.08}
+.ph-hero .ph-c{position:absolute;bottom:0;left:0;right:0;padding:clamp(24px,3vw,48px) clamp(28px,5vw,64px);z-index:2}
+.ph-hero .ph-ch{font-family:var(--font-t);font-size:clamp(13px,1vw,16px);letter-spacing:10px;text-transform:uppercase;color:var(--rd);margin-bottom:4px}
+.ph-hero .ph-t{font-family:var(--font-d);font-size:clamp(56px,7vw,90px);line-height:0.82;letter-spacing:2px;color:var(--wh);text-shadow:5px 5px 0 var(--rd)}
+.ph-hero .ph-s{font-size:clamp(16px,1.2vw,20px);color:var(--gr);letter-spacing:8px;text-transform:uppercase;font-family:var(--font-r);margin-top:4px}
+.ph-hero .ph-y{font-family:var(--font-d);font-size:clamp(16px,1.3vw,20px);letter-spacing:10px;color:var(--gd);margin-top:4px}
+.ph-hero .ph-n{position:absolute;top:clamp(14px,2vw,28px);right:clamp(18px,3vw,40px);font-family:var(--font-t);font-size:clamp(72px,9vw,120px);color:rgba(220,38,38,0.06);z-index:2;letter-spacing:-2px}
+.ph-body{padding:clamp(28px,3vw,48px) clamp(28px,5vw,64px);max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,48px);position:relative;min-height:clamp(200px,30vh,360px)}
+.ph-body .main{flex:2;min-width:320px}.ph-body .side{flex:1;min-width:200px}
+@media(max-width:768px){.ph-body{flex-direction:column}}
+.pq{font-family:var(--font-t);font-size:clamp(30px,3.2vw,48px);line-height:1;letter-spacing:2px;color:var(--rd);padding:clamp(10px,1.2vw,16px) 0;margin-bottom:18px;text-transform:uppercase;position:relative}.pq::before{content:'';display:block;width:clamp(40px,4.5vw,70px);height:3px;background:var(--rd);margin-bottom:12px}.pq:hover::before{width:clamp(70px,8vw,120px)}
+.ph-text{font-size:clamp(17px,1.2vw,20px);color:var(--gr);line-height:2;max-width:640px}.ph-text p{margin-bottom:14px}.ph-text strong{color:var(--wh);font-weight:600}
+.tr{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tag{display:inline-block;padding:5px 14px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;border:1px solid;transition:all .25s;font-family:var(--font-r)}.tag:hover{transform:translateY(-2px)}
+.t-rd{border-color:rgba(220,38,38,0.15);color:var(--rd);background:rgba(220,38,38,0.03)}.t-rd:hover{border-color:var(--rd);background:rgba(220,38,38,0.06)}
+.t-gd{border-color:rgba(245,158,11,0.15);color:var(--gd);background:rgba(245,158,11,0.03)}.t-gd:hover{border-color:var(--gd);background:rgba(245,158,11,0.06)}
+.sb{margin-bottom:20px}.sb:hover{transform:translateX(3px)}
+.sb .n{font-family:var(--font-m);font-size:clamp(38px,3.5vw,54px);color:var(--rd);line-height:0.85;letter-spacing:-1px}
+.sb .l{font-size:14px;color:var(--gr2);letter-spacing:3.5px;text-transform:uppercase;font-family:var(--font-d);margin-top:4px}
+.sb .lne{width:32px;height:2px;background:var(--gd);margin:6px 0;transition:width .35s}.sb:hover .lne{width:56px}
+.s-hr{height:1px;background:var(--gr2);margin:16px 0}
+.ec{border-left:3px solid;border-radius:0;padding:14px 18px;margin-bottom:12px;background:rgba(220,38,38,0.012);transition:all .25s;cursor:default}
+.ec:hover{background:rgba(220,38,38,0.04);transform:translateX(5px)}
+.ec .ec-t{font-size:10px;text-transform:uppercase;letter-spacing:2.5px;font-weight:500;font-family:var(--font-r)}
+.ec .ec-tl{font-weight:600;font-size:15px;margin-bottom:3px;color:var(--wh);font-family:var(--font-d);letter-spacing:2px}
+.ec .ec-d{font-size:14px;color:var(--gr);line-height:1.7}
+.al-sec{padding:clamp(12px,1.5vw,20px) clamp(28px,5vw,64px) clamp(24px,3vw,48px);max-width:1280px;margin:0 auto;position:relative}
+.al-sec .al-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;border-bottom:1px solid var(--gr2);padding-bottom:8px}
+.al-sec .al-h h3{font-family:var(--font-d);font-size:clamp(20px,1.8vw,28px);letter-spacing:4px;color:var(--wh)}
+.al-sec .al-h span{font-size:11px;color:var(--gr2);letter-spacing:3px;text-transform:uppercase;font-family:var(--font-r)}
+.phase-albums{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(90px,10vw,120px),1fr));gap:10px}
+.phase-album-card{cursor:pointer;transition:transform .25s var(--spring);position:relative}
+.phase-album-card:hover{transform:translateY(-6px)}.phase-album-card:active{transform:translateY(-2px) scale(0.96)}
+.phase-album-img{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--gr2);transition:all .25s;background:#1a1a1a}
+.phase-album-card:hover .phase-album-img{border-color:var(--rd);box-shadow:0 8px 28px rgba(220,38,38,0.12)}
+.phase-album-name{font-size:12px;color:var(--gr);margin-top:4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phase-album-card:hover .phase-album-name{color:var(--wh)}
+.phase-album-count{font-size:9px;color:var(--gr2);text-align:center;letter-spacing:1px;font-family:var(--font-m)}
+.track-list{display:none;grid-column:1/-1;padding:10px;background:rgba(0,0,0,0.35);margin-top:4px}
+.track-list.open{display:block;animation:ti .3s ease}
+@keyframes ti{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.track-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;gap:4px;font-size:15px;border-bottom:1px solid rgba(255,255,255,0.015)}.track-item:last-child{border:none}.track-item:hover{background:rgba(220,38,38,0.03)}
+.track-item .ti-l{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.track-item .ti-i{font-size:10px;color:var(--gr2);width:14px;text-align:right;flex-shrink:0;font-family:var(--font-m)}
+.track-item .ti-n{color:var(--wh);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.track-item .ti-f{font-size:12px;color:var(--gr2)}.track-item .ti-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.track-item .ti-d{font-size:11px;color:var(--gr2);font-family:var(--font-m)}
+.track-item .ti-p{width:24px;height:24px;border:1px solid var(--gr2);background:transparent;color:var(--gd);font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.track-item .ti-p:hover{background:var(--rd);color:#000;border-color:var(--rd);transform:scale(1.15)}.track-item .ti-p:active{transform:scale(0.85)}
+.track-item .ti-p.playing{background:var(--gd);color:#000;border-color:var(--gd);box-shadow:0 0 14px rgba(245,158,11,0.2)}
+.phase-album-more{grid-column:1/-1;text-align:center;padding:8px;color:var(--gr);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:1px dashed var(--gr2);transition:all .25s;font-family:var(--font-d)}
+.phase-album-more:hover{color:var(--rd);border-color:var(--rd);background:rgba(220,38,38,0.02)}
+.footer{padding:60px 24px 80px;text-align:center;background:#000;border-top:3px solid var(--rd);position:relative;z-index:1}
+.footer a{color:var(--gr);font-size:12px;letter-spacing:5px;text-transform:uppercase;transition:all .25s;border:1px solid var(--gr2);padding:6px 20px;display:inline-block;font-family:var(--font-d)}
+.footer a:hover{color:var(--rd);border-color:var(--rd);transform:scale(1.03)}.footer a:active{transform:scale(0.95)}
+.footer .ft{font-family:var(--font-d);font-size:56px;letter-spacing:14px;color:rgba(255,255,255,0.008);margin-top:24px}
+.audio-bar{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:#000;border-top:2px solid var(--rd);padding:10px 20px;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--gr);transform:translateY(100%);transition:transform .35s var(--ease-out);visibility:hidden}
+.audio-bar.show{transform:translateY(0);visibility:visible}
+.audio-bar .ab-i{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
+.audio-bar .ab-img{width:28px;height:28px;object-fit:cover;flex-shrink:0;border:1px solid var(--gr2)}
+.audio-bar .ab-n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--wh);font-size:14px}
+.audio-bar .ab-p{flex:0 1 140px;height:2px;background:var(--gr2);overflow:hidden}
+.audio-bar .ab-pi{height:100%;width:0%;background:var(--rd);transition:width .3s}
+.audio-bar .ab-x{width:22px;height:22px;border:1px solid var(--gr2);background:transparent;color:var(--gr);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s;flex-shrink:0}
+.audio-bar .ab-x:hover{color:var(--rd);border-color:var(--rd);transform:scale(1.1)}.audio-bar .ab-x:active{transform:scale(0.9)}
+@media(max-width:768px){.hero-coverlines,.hero-coverlines-r{display:none}.hero-img-wrap{width:clamp(160px,40vw,240px);height:clamp(160px,40vw,240px)}.ph-hero{height:clamp(240px,45vw,360px)}.ph-hero .ph-t{font-size:clamp(34px,8vw,48px);text-shadow:4px 4px 0 var(--rd)}.ph-hero .ph-n{font-size:clamp(40px,14vw,56px)}.ph-body{padding:16px 20px}.al-sec{padding:12px 20px 24px}.hero h1{font-size:clamp(52px,16vw,80px);text-shadow:4px 4px 0 var(--rd)}.hero h1 .sub{font-size:clamp(14px,3.5vw,20px);letter-spacing:14px}.hero-meta{flex-direction:column;align-items:center;gap:4px}.pq{font-size:clamp(20px,5vw,30px)}.top-bar{padding:10px 16px;font-size:11px}.g-d{left:1%;opacity:0.05;width:40px}}
+@media(max-width:480px){.phase-albums{grid-template-columns:repeat(2,1fr)}.ph-hero{height:200px}.ph-hero .ph-c{padding:14px}.audio-bar .ab-p{display:none}}
+@media(prefers-reduced-motion:reduce){.phase,.hero .sc,.phase-album-card,.tag,.ec,.sb,.pq,.ph-hero .ph-n,.ph-text,.tags-anim,.side .sb,.phase-header *,.ph-sub,.ph-ch,.al-h{opacity:1;transform:none!important;transition:none!important;animation:none!important}.hero-stats .num{opacity:1;transform:none;animation:none}.hero-img-wrap::before,.hero-img-wrap::after{animation:none!important}.audio-bar{transition:none}.phase{opacity:1}}
+</style>
+</head>
+<body>
+<div class="g-d"><svg viewBox="0 0 120 800"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.8"/><stop offset="50%" stop-color="#DC2626" stop-opacity="0.3"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0"/></linearGradient><filter id="dr"><feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+<path d="M30 -10 C28 60,34 80,30 140 C26 200,32 220,30 280 C28 340,34 360,30 420 C26 480,32 500,30 560" stroke="url(#dg)" stroke-width="5" fill="none" stroke-linecap="round" filter="url(#dr)"/><circle cx="30" cy="568" r="4" fill="#DC2626" opacity="0.4"/><path d="M70 -10 C68 40,74 50,70 90 C66 130,72 140,70 180 C68 220,74 230,70 270" stroke="url(#dg)" stroke-width="7" fill="none" stroke-linecap="round" filter="url(#dr)"/><circle cx="70" cy="278" r="6" fill="#DC2626" opacity="0.35"/><path d="M100 -10 C98 25,104 35,100 60 C96 85,102 95,100 120" stroke="url(#dg)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#dr)"/><circle cx="100" cy="126" r="3.5" fill="#DC2626" opacity="0.3"/></svg></div>
+<div class="g-s"><svg viewBox="0 0 400 400"><circle cx="45" cy="55" r="12" fill="#DC2626" opacity="0.3"/><circle cx="32" cy="42" r="5" fill="#DC2626" opacity="0.2"/><circle cx="320" cy="80" r="15" fill="#F59E0B" opacity="0.25"/><circle cx="308" cy="65" r="6" fill="#F59E0B" opacity="0.15"/><circle cx="80" cy="180" r="18" fill="#DC2626" opacity="0.2"/><circle cx="65" cy="170" r="7" fill="#DC2626" opacity="0.12"/><circle cx="280" cy="200" r="20" fill="#F59E0B" opacity="0.18"/><circle cx="265" cy="185" r="8" fill="#F59E0B" opacity="0.1"/><circle cx="200" cy="300" r="25" fill="#DC2626" opacity="0.12"/><circle cx="180" cy="290" r="10" fill="#DC2626" opacity="0.08"/><circle cx="350" cy="350" r="14" fill="#F59E0B" opacity="0.15"/><circle cx="120" cy="50" r="2.5" fill="#DC2626" opacity="0.2"/></svg></div>
+<div class="g-t"><svg viewBox="0 0 600 200"><g transform="rotate(-8,300,100)"><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#DC2626" stroke-width="3" letter-spacing="-1" opacity="0.6">MA$IWEI</text><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" fill="none" stroke="#F59E0B" stroke-width="1.5" letter-spacing="-1" opacity="0.2" transform="translate(2,2)">MA$IWEI</text><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" fill="#DC2626" letter-spacing="-1" opacity="0.08">MA$IWEI</text></g></svg></div>
+<div class="top-bar">
+  <div class="l"><a class="back" href="index.html#music">BACK</a><span>VOL. 1 · 2026</span></div>
+  <div class="r"><em>MA$IWEI</em> <span class="hl">*</span> CHRONICLE</div>
+</div>
+<nav class="side-nav" id="sideNav"></nav>
+<section class="hero">
+  <div class="hero-coverlines"><div class="cl"><em>HIGHER BROTHERS</em> KINGPIN</div><div class="cl">CDC · <em class="g">PI DU</em> ORIGINAL</div><div class="cl">65 首曲目 · <em>29 张专辑</em></div></div>
+  <div class="hero-coverlines-r"><div class="ln">CHENGDU · CHINA</div><div class="ln">EST. <em>1993</em></div></div>
+  <div class="hero-inner">
+    <div class="hero-img-wrap"><img src="https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg" alt="马思唯"></div>
+    <h1>MA$IWEI<span class="sub">MA SI WEI</span></h1>
+    <div class="hero-meta"><span>成都 · 郫都区</span><span class="sp">|</span><span>出生 <em>1993.01.27</em></span><span class="sp">|</span><span><em>HIGHER BROTHERS</em></span></div>
+    <div class="hero-stats" id="heroStats">
+      <div><div class="num" id="trackCount">0</div><div class="lbl">曲目</div></div>
+      <div><div class="num" id="albumCount">0</div><div class="lbl">专辑</div></div>
+      <div><div class="num" id="yearCount">0</div><div class="lbl">年</div></div>
+    </div>
+  </div>
+  <div class="sc">SCROLL</div>
+</section>
+<div class="phases" id="phases">
+
+<section class="phase" data-bg="0" id="ph-0">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(139,111,71,0.2),transparent 70%)"></div>
+    <img src="https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg" alt="郫县少年">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 01</div><div class="ph-t">郫县少年</div><div class="ph-s">Chengdu · Pidu District</div><div class="ph-y">1993 — 2013</div></div><div class="ph-n">01</div>
+  </div>
+  <div class="ph-body" data-bg="0">
+    <div class="main"><div class="pq">I AM A RAPPER.</div><div class="ph-text"><p>马思唯 1993 年出生于 <strong>四川成都郫都区</strong>。小学二年级被周杰伦震撼，埋下说唱种子。2009 年开始做歌。大学成都理工装潢设计，结识 Ty.，酒吧巡演。22 岁离家出走，正式做说唱。</p></div><div class="tr tags-anim"><span class="tag t-rd">PI DU</span><span class="tag t-gd">CHENGDU</span><span class="tag t-rd">JAY CHOU</span></div></div>
+    <div class="side"><div class="sb"><div class="n">1993</div><div class="lne"></div><div class="l">出生</div></div><div class="sb"><div class="n">2009</div><div class="lne"></div><div class="l">起步</div></div><div class="sb"><div class="n">22</div><div class="lne"></div><div class="l">离家出走</div></div></div>
+  </div>
+</section>
+
+<section class="phase" data-bg="1" id="ph-1">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(217,119,6,0.2),transparent 70%)"></div>
+    <img src="https://p1.music.126.net/mocgR7CtRM_5LDU9W-NnJQ==/3341415837064327.jpg" alt="PEI Vol.2">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 02</div><div class="ph-t">横空出世</div><div class="ph-s">PEI Mixtape · 崂山道士</div><div class="ph-y">2014 — 2015</div></div><div class="ph-n">02</div>
+  </div>
+  <div class="ph-body" data-bg="1">
+    <div class="main"><div class="pq">SNOOP DOGG PUT HIM ON.</div><div class="ph-text"><p>2014 年 mixtape 三部曲《PEI》。<strong>《崂山道士》</strong>一战成名。2015 年被 <strong>Snoop Dogg</strong> 收录进 Underground Heat 第 10 位。</p></div><div class="tr tags-anim"><span class="tag t-gd">PEI TRILOGY</span><span class="tag t-rd">SNOOP DOGG</span></div></div>
+    <div class="side"><div class="sb"><div class="n">3</div><div class="lne"></div><div class="l">三部曲</div></div><div class="sb"><div class="n">#10</div><div class="lne"></div><div class="l">地下榜单</div></div><div class="s-hr"></div><div class="ec" style="border-left-color:#D97706"><div class="ec-t" style="color:#D97706">DISS</div><div class="ec-tl">Diss 半个说唱圈</div><div class="ec-d">小老虎、Jony J、老道、C-Block</div></div></div>
+  </div>
+  <div class="al-sec"><div class="al-h"><h3>代表作</h3><span>专辑 · EP</span></div><div class="phase-albums" data-p="1"></div></div>
+</section>
+
+<section class="phase" data-bg="2" id="ph-2">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(185,28,28,0.25),transparent 70%)"></div>
+    <img src="https://p1.music.126.net/7VIVlaayIqrC01Cy5b5iHQ==/109951165139518148.jpg" alt="339 EP">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 03</div><div class="ph-t">Beef · 战火</div><div class="ph-s">CDC vs GAI</div><div class="ph-y">2015 — 2016</div></div><div class="ph-n">03</div>
+  </div>
+  <div class="ph-body" data-bg="2">
+    <div class="main"><div class="pq">CDC DESTROYED CHILLGUN.</div><div class="ph-text"><p>年轻气盛。最著名的两场战争改变了中文说唱格局。</p></div></div>
+    <div class="side"><div class="ec" style="border-left-color:#DC2626"><div class="ec-t" style="color:#DC2626">BEEF</div><div class="ec-tl">vs 徐真真</div><div class="ec-d">川粤大战。2023 年和解。</div></div><div class="ec" style="border-left-color:#DC2626"><div class="ec-t" style="color:#DC2626">BEEF</div><div class="ec-tl">vs GAI</div><div class="ec-d">世纪之战。连发七首 Diss。</div></div><div class="sb"><div class="n">7+</div><div class="lne"></div><div class="l">Diss 曲目</div></div></div>
+  </div>
+</section>
+
+<section class="phase" data-bg="3" id="ph-3">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(245,158,11,0.2),transparent 70%)"></div>
+    <img src="https://p2.music.126.net/pBPojtKHoRIyrrTx3-rfSg==/109951170289904057.jpg" alt="Black Cab">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 04</div><div class="ph-t">Higher Brothers</div><div class="ph-s">88rising · Rolling Loud</div><div class="ph-y">2016 — 2019</div></div><div class="ph-n">04</div>
+  </div>
+  <div class="ph-body" data-bg="3">
+    <div class="main"><div class="pq">MADE IN CHINA. 23M VIEWS.</div><div class="ph-text"><p>与 KnowKnow、PSY.P、Melo 组建 <strong>Higher Brothers</strong>。《Made in China》2300 万播放。签约美国厂牌，<strong>《Black Cab》</strong>，Rolling Loud。</p></div><div class="tr tags-anim"><span class="tag t-rd">88RISING</span><span class="tag t-gd">BLACK CAB</span></div></div>
+    <div class="side"><div class="sb"><div class="n">23M+</div><div class="lne"></div><div class="l">播放量</div></div><div class="sb"><div class="n">2017</div><div class="lne"></div><div class="l">美国签约</div></div></div>
+  </div>
+  <div class="al-sec"><div class="al-h"><h3>代表作</h3><span>专辑</span></div><div class="phase-albums" data-p="3"></div></div>
+</section>
+
+<section class="phase" data-bg="4" id="ph-4">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(234,88,12,0.2),transparent 70%)"></div>
+    <img src="https://p2.music.126.net/G3CaguyN68IKKDrFuNeCQA==/109951170289918247.jpg" alt="黑马王子">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 05</div><div class="ph-t">黑马王子</div><div class="ph-s">First Solo Album</div><div class="ph-y">2020</div></div><div class="ph-n">05</div>
+  </div>
+  <div class="ph-body" data-bg="4">
+    <div class="main"><div class="pq">FROM PI DU TO THE TOP.</div><div class="ph-text"><p>首张个人专辑 <strong>《黑马王子》</strong>。迷笛奖最佳说唱。《说唱新世代》导师。</p></div><div class="tr tags-anim"><span class="tag t-gd">SOLO DEBUT</span><span class="tag t-rd">RAP NEW GEN</span></div></div>
+    <div class="side"><div class="sb"><div class="n">18</div><div class="lne"></div><div class="l">曲目</div></div><div class="sb"><div class="n">迷笛</div><div class="lne"></div><div class="l">最佳说唱</div></div></div>
+  </div>
+  <div class="al-sec"><div class="al-h"><h3>代表作</h3><span>专辑</span></div><div class="phase-albums" data-p="4"></div></div>
+</section>
+
+<section class="phase" data-bg="5" id="ph-5">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(14,165,233,0.2),transparent 70%)"></div>
+    <img src="https://p1.music.126.net/xdD-UKop8gEN4_c2dfAUBA==/109951170289920716.jpg" alt="黑马">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 06</div><div class="ph-t">高产期</div><div class="ph-s">5 张专辑 · 世界巡演</div><div class="ph-y">2021 — 2023</div></div><div class="ph-n">06</div>
+  </div>
+  <div class="ph-body" data-bg="5">
+    <div class="main"><div class="pq">5 ALBUMS. 3 YEARS. 16 CITIES.</div><div class="ph-text"><p><strong>《黑马》《Humble Swag》《狗咬狗》</strong>。世界巡演 9 国 16 城。「黑马季节」体育馆巡演。</p></div></div>
+    <div class="side"><div class="sb"><div class="n">5</div><div class="lne"></div><div class="l">专辑</div></div><div class="sb"><div class="n">9</div><div class="lne"></div><div class="l">国家</div></div></div>
+  </div>
+  <div class="al-sec"><div class="al-h"><h3>代表作</h3><span>专辑 · EP</span></div><div class="phase-albums" data-p="5"></div></div>
+</section>
+
+<section class="phase" data-bg="6" id="ph-6">
+  <div class="ph-hero"><div class="ph-overlay-color" style="background:radial-gradient(ellipse at 50% 50%,rgba(124,58,237,0.2),transparent 70%)"></div>
+    <img src="https://p1.music.126.net/iN7OUPkcavI2MBSG8pf2jw==/109951170600632372.jpg" alt="乐透人生">
+    <div class="ph-c"><div class="ph-ch">CHAPTER 07</div><div class="ph-t">乐透人生</div><div class="ph-s">4th Album · Jay Park</div><div class="ph-y">2024 — Present</div></div><div class="ph-n">07</div>
+  </div>
+  <div class="ph-body" data-bg="6">
+    <div class="main"><div class="pq">STILL ON THE TOP.</div><div class="ph-text"><p>第四张专辑 <strong>《乐透人生》</strong>— 与 <strong>朴宰范</strong> 合作《Still On The Top》。HB 合体 <strong>《最高》</strong>。</p></div><div class="tr tags-anim"><span class="tag t-gd">4TH ALBUM</span><span class="tag t-rd">JAY PARK</span></div></div>
+    <div class="side"><div class="sb"><div class="n">LP</div><div class="lne"></div><div class="l">第四张专辑</div></div><div class="sb"><div class="n">JP</div><div class="lne"></div><div class="l">合作曲目</div></div></div>
+  </div>
+  <div class="al-sec"><div class="al-h"><h3>代表作</h3><span>专辑</span></div><div class="phase-albums" data-p="6"></div></div>
+</section>
+</div>
+<footer class="footer"><a href="index.html#music">BACK TO MAIN</a><div class="ft">MA$IWEI</div></footer>
+<div class="audio-bar" id="audioBar">
+  <div class="ab-i"><img class="ab-img" id="abImg" src="" alt=""><span class="ab-n" id="abName"></span></div>
+  <div class="ab-p"><div class="ab-pi" id="abProg"></div></div>
+  <button class="ab-x" id="abClose">X</button>
+</div>
+<script src="music_data.js"></script>
+<script>
+(function(){
+  if(typeof MUSIC_DATA==='undefined')return;
+  var t=MUSIC_DATA.tracks.filter(function(x){return x.artists.some(function(a){return a.indexOf('马思唯')!==-1})});
+  var am={};t.forEach(function(x){var k=x.album||'';if(!am[k])am[k]={name:k,pic:x.albumPic,tracks:[]};am[k].tracks.push(x)});
+  document.getElementById('trackCount').textContent=t.length;
+  document.getElementById('albumCount').textContent=Object.keys(am).length;
+  document.getElementById('yearCount').textContent='12';
+
+  // Side nav dots
+  var phLbl=['PI DU','横空出世','Beef','HB','黑马王子','高产期','乐透人生'];
+  var sn=document.getElementById('sideNav');
+  var phases=document.querySelectorAll('.phase');
+  phases.forEach(function(p,i){
+    var d=document.createElement('div');d.className='sn-dot';d.dataset.index=i;
+    d.innerHTML='<div class="sd-circle"></div><span class="sd-label">'+phLbl[i]+'</span>';
+    d.addEventListener('click',function(){
+      phases[i].scrollIntoView({behavior:'smooth',block:'start'});
+      setTimeout(function(){triggerAnim(phases[i])},300);
+    });
+    sn.appendChild(d);if(i<phases.length-1){var l=document.createElement('div');l.className='sn-line';sn.appendChild(l)}
+  });
+
+  // Album rendering + audio
+  var pm={1:['P.E.I Vol.2','339 EP','Overcook Freestyle'],3:['Black Cab','Five Stars','最高'],4:['黑马王子','黑马季节演唱会精选辑 (Live)','R&B All Night (Masiwei Remix)'],5:['黑马','Humble Swag','Humble Swag GT Mixtape','狗咬狗','特别怪人','冠军情歌','啥子范','Something New','为什么','I Need a Girl,Pt.3','P.Y.T','BLACK SERIES','LIFE IS A MOVIE人生如戏','Mr. Enjoy Da Money','On Both Side 3:Summer Tape','年度人物','Couple Hunnid All Star Mixtape Vol.1','LONG TIME KNOW SEE'],6:['乐透人生','乐透人生GT：即刻入戏']};
+  var ae=null,ci=null,ab=document.getElementById('audioBar'),ai=document.getElementById('abImg'),an=document.getElementById('abName'),ap=document.getElementById('abProg'),ac=document.getElementById('abClose');
+  function pt(id,pic,name){
+    if(ae){ae.pause();ae=null}
+    if(ci===id){ci=null;ab.classList.remove('show');ap.style.width='0%';clp();return}
+    var u='https://music.163.com/song/media/outer/url?id='+id+'.mp3';ae=new Audio(u);ae.volume=.5;
+    ae.play().then(function(){ci=id;ai.src=pic||'';an.textContent=name||'';ab.classList.add('show');clp();var b=document.querySelector('.ti-p[data-id="'+id+'"]');if(b)b.classList.add('playing')}).catch(function(){});
+    ae.addEventListener('timeupdate',function(){if(ae.duration)ap.style.width=(ae.currentTime/ae.duration*100)+'%'});
+    ae.addEventListener('ended',function(){ab.classList.remove('show');ap.style.width='0%';ci=null;clp()});
+  }
+  function clp(){document.querySelectorAll('.ti-p').forEach(function(b){b.classList.remove('playing')})}
+  ac.addEventListener('click',function(){if(ae){ae.pause();ae=null}ci=null;ab.classList.remove('show');ap.style.width='0%';clp()});
+  function rp(n,c){
+    var ns=pm[n]||[];if(!ns.length)return;
+    var mx=8,fd=ns.length>mx,sh=fd?ns.slice(0,mx):ns;
+    function mk(an){var a=am[an];if(!a||!a.tracks.length)return null;var cd=document.createElement('div');cd.className='phase-album-card';var h='<img class="phase-album-img" src="'+(a.pic||'')+'" alt="" loading="lazy"><div class="phase-album-name">'+a.name+'</div><div class="phase-album-count">'+a.tracks.length+' 首</div><div class="track-list">';a.tracks.forEach(function(t,i){var f=t.artists.filter(function(x){return x!=='马思唯'&&x!=='Higher Brothers'});
+    h+='<div class="track-item"><div class="ti-l"><span class="ti-i">'+(i+1)+'</span><span class="ti-n">'+t.name+(f.length?' <span class="ti-f">feat. '+f.join(', ')+'</span>':'')+'</span></div><div class="ti-r"><span class="ti-d">'+t.dt+'</span><button class="ti-p" data-id="'+t.id+'" data-pic="'+(a.pic||'')+'" data-name="'+t.name+'">></button></div></div>'});h+='</div>';cd.innerHTML=h;cd.addEventListener('click',function(e){if(e.target.closest('.ti-p'))return;var tl=cd.querySelector('.track-list');tl&&tl.classList.toggle('open')});return cd}
+    sh.forEach(function(n){var c2=mk(n);if(c2)c.appendChild(c2)});if(fd){var m=document.createElement('div');m.className='phase-album-more';m.textContent='+'+(ns.length-mx)+' MORE';m.addEventListener('click',function(){m.remove();ns.slice(mx).forEach(function(n){var c2=mk(n);if(c2)c.appendChild(c2)})});c.appendChild(m)}
+  }
+  document.querySelectorAll('.phase-albums[data-p]').forEach(function(el){rp(parseInt(el.dataset.p),el);el.querySelectorAll('.ti-p').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pt(parseInt(this.dataset.id),this.dataset.pic,this.dataset.name)})})});
+
+  // Pure setTimeout + CSS transition approach — no @keyframes, no animationName, no CSS selector issues
+  var animConfig=[
+    {sel:'.pq',delay:80,from:'translateX(-30px)'},
+    {sel:'.ph-text',delay:180,from:'translateY(18px)'},
+    {sel:'.tags-anim',delay:350,from:'translateY(20px)'},
+    {sel:'.side .sb',delay:200,from:'translateX(30px)'},
+    {sel:'.ec',delay:250,from:'translateY(15px)'},
+    {sel:'.phase-album-card',delay:150,from:'translateY(20px)'},
+    {sel:'.tr .tag',delay:400,from:'translateY(20px)'},
+    {sel:'.phase-header *',delay:60,from:'translateY(18px)'},
+    {sel:'.ph-sub,.ph-ch',delay:100,from:'translateY(15px)'},
+    {sel:'.ph-hero .ph-n',delay:60,from:'rotate(-15deg) scale(0.3)'},
+    {sel:'.s-hr,.phase-album-more',delay:450,from:''},
+    {sel:'.al-h',delay:60,from:'translateY(18px)'}
+  ];
+  var ease='cubic-bezier(0.34,1.56,0.64,1)';
+  function triggerAnim(p){
+    if(p.classList.contains('visible'))return;
+    p._animId=(p._animId||0)+1;var myId=p._animId;
+    // Step 1: instantly hide all, set to start transforms — no transition
+    animConfig.forEach(function(cfg){
+      p.querySelectorAll(cfg.sel).forEach(function(el){
+        el.style.transition='none';
+        el.style.opacity='0';
+        el.style.transform=cfg.from||'translateY(18px)';
+      });
+    });
+    void document.body.offsetHeight;void document.body.offsetWidth;
+    // Step 2: after a frame, apply transition + final state
+    setTimeout(function(){
+      if(p._animId!==myId)return;
+      animConfig.forEach(function(cfg){
+        p.querySelectorAll(cfg.sel).forEach(function(el,i){
+          var delay=cfg.delay+i*80;
+          setTimeout(function(){
+            if(p._animId===myId){
+              el.style.transition='opacity .45s '+ease+', transform .45s '+ease;
+              el.style.opacity='1';
+              el.style.transform='translateX(0) translateY(0) scale(1) rotate(0deg)';
+            }
+          },delay);
+        });
+      });
+    },50);
+    p.classList.add('visible');
+  }
+  function killAnim(p){
+    if(!p.classList.contains('visible'))return;
+    p.classList.remove('visible');
+    p._animId=(p._animId||0)+1;
+    animConfig.forEach(function(cfg){
+      p.querySelectorAll(cfg.sel).forEach(function(el){
+        el.style.transition='none';
+        el.style.opacity='';
+        el.style.transform='';
+      });
+    });
+  }
+
+  // Scroll detection — checks position, triggers animation for newly visible phases
+  function cv(){
+    var vh=window.innerHeight;
+    document.querySelectorAll('.phase').forEach(function(p){
+      var r=p.getBoundingClientRect();
+      var on=r.top<vh+120&&r.bottom>0;
+      if(on&&!p.classList.contains('visible')) triggerAnim(p);
+      else if(!on&&p.classList.contains('visible')) killAnim(p);
+    });
+    // Side nav dots
+    var cnv=document.getElementById('sideNav');if(!cnv)return;
+    var closest=0,closestDist=Infinity;
+    document.querySelectorAll('.phase').forEach(function(p,i){
+      var rr=p.getBoundingClientRect(),dist=Math.abs(rr.top+rr.bottom-vh);
+      if(dist<closestDist){closestDist=dist;closest=i}
+    });
+    cnv.querySelectorAll('.sn-dot').forEach(function(d,i){d.classList.toggle('active',i===closest)});
+  }
+  window.addEventListener('scroll',cv,{passive:true});window.addEventListener('resize',cv);
+  setInterval(cv,150);setTimeout(cv,50);
+})();
+</script>
+</body>
+</html>

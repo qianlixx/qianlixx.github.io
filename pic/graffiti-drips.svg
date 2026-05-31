@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="dripGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DC2626" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#DC2626" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#991B1B" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <rect width="400" height="600" fill="transparent"/>
+  <!-- Drip 1 - long -->
+  <path d="M80 -5 C78 40,82 80,80 120 C78 160,82 200,80 240 C78 280,82 320,80 360 C78 400,81 420,80 440" stroke="url(#dripGrad)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7" filter="url(#rough)"/>
+  <circle cx="80" cy="448" r="5" fill="#DC2626" opacity="0.5"/>
+  <circle cx="79" cy="456" r="3" fill="#DC2626" opacity="0.3"/>
+  <!-- Drip 2 - medium -->
+  <path d="M200 -5 C198 30,203 60,200 90 C197 120,202 150,200 180 C198 210,202 240,200 270" stroke="url(#dripGrad)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6" filter="url(#rough)"/>
+  <circle cx="200" cy="278" r="7" fill="#DC2626" opacity="0.45"/>
+  <circle cx="199" cy="290" r="4" fill="#DC2626" opacity="0.25"/>
+  <circle cx="201" cy="298" r="2" fill="#DC2626" opacity="0.15"/>
+  <!-- Drip 3 - short -->
+  <path d="M310 -5 C308 25,313 50,310 75 C307 100,312 125,310 150" stroke="url(#dripGrad)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.65" filter="url(#rough)"/>
+  <circle cx="310" cy="156" r="4.5" fill="#DC2626" opacity="0.4"/>
+  <circle cx="309" cy="164" r="2.5" fill="#DC2626" opacity="0.2"/>
+  <!-- Drip 4 - thin bleed -->
+  <path d="M130 -5 C129 15,132 30,130 45 C128 60,131 75,130 90" stroke="url(#dripGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5" filter="url(#rough)"/>
+  <circle cx="130" cy="94" r="3" fill="#DC2626" opacity="0.35"/>
+  <!-- Overspray dots -->
+  <circle cx="68" cy="230" r="2" fill="#DC2626" opacity="0.15"/>
+  <circle cx="92" cy="350" r="3" fill="#DC2626" opacity="0.1"/>
+  <circle cx="210" cy="150" r="2" fill="#DC2626" opacity="0.12"/>
+  <circle cx="194" cy="310" r="4" fill="#DC2626" opacity="0.08"/>
+  <circle cx="320" cy="80" r="2" fill="#DC2626" opacity="0.1"/>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <filter id="splatterFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <!-- Red splatters -->
+  <circle cx="45" cy="55" r="12" fill="#DC2626" opacity="0.3"/>
+  <circle cx="32" cy="42" r="5" fill="#DC2626" opacity="0.2"/>
+  <circle cx="58" cy="68" r="8" fill="#DC2626" opacity="0.15"/>
+  <circle cx="25" cy="60" r="3" fill="#DC2626" opacity="0.12"/>
+  <circle cx="50" cy="35" r="4" fill="#DC2626" opacity="0.1"/>
+
+  <circle cx="320" cy="80" r="15" fill="#F59E0B" opacity="0.25"/>
+  <circle cx="308" cy="65" r="6" fill="#F59E0B" opacity="0.15"/>
+  <circle cx="335" cy="95" r="10" fill="#F59E0B" opacity="0.12"/>
+  <circle cx="340" cy="60" r="4" fill="#F59E0B" opacity="0.1"/>
+  <circle cx="300" cy="88" r="3" fill="#F59E0B" opacity="0.08"/>
+
+  <circle cx="80" cy="180" r="18" fill="#DC2626" opacity="0.2"/>
+  <circle cx="65" cy="170" r="7" fill="#DC2626" opacity="0.12"/>
+  <circle cx="95" cy="195" r="11" fill="#DC2626" opacity="0.1"/>
+  <circle cx="55" cy="190" r="4" fill="#DC2626" opacity="0.08"/>
+
+  <circle cx="280" cy="200" r="20" fill="#F59E0B" opacity="0.18"/>
+  <circle cx="265" cy="185" r="8" fill="#F59E0B" opacity="0.1"/>
+  <circle cx="295" cy="218" r="12" fill="#F59E0B" opacity="0.08"/>
+  <circle cx="300" cy="185" r="5" fill="#F59E0B" opacity="0.06"/>
+
+  <circle cx="160" cy="140" r="10" fill="#DC2626" opacity="0.15"/>
+  <circle cx="150" cy="130" r="4" fill="#DC2626" opacity="0.1"/>
+  <circle cx="170" cy="150" r="6" fill="#DC2626" opacity="0.08"/>
+
+  <circle cx="200" cy="300" r="25" fill="#DC2626" opacity="0.12"/>
+  <circle cx="180" cy="290" r="10" fill="#DC2626" opacity="0.08"/>
+  <circle cx="220" cy="315" r="15" fill="#DC2626" opacity="0.06"/>
+  <circle cx="175" cy="310" r="5" fill="#DC2626" opacity="0.04"/>
+
+  <circle cx="350" cy="350" r="14" fill="#F59E0B" opacity="0.15"/>
+  <circle cx="340" cy="340" r="6" fill="#F59E0B" opacity="0.1"/>
+  <circle cx="360" cy="365" r="8" fill="#F59E0B" opacity="0.06"/>
+
+  <!-- Small scattered dots -->
+  <circle cx="120" cy="50" r="2.5" fill="#DC2626" opacity="0.2"/>
+  <circle cx="280" cy="40" r="2" fill="#F59E0B" opacity="0.15"/>
+  <circle cx="230" cy="280" r="3" fill="#DC2626" opacity="0.1"/>
+  <circle cx="100" cy="350" r="2" fill="#DC2626" opacity="0.12"/>
+  <circle cx="350" cy="150" r="2" fill="#F59E0B" opacity="0.1"/>
+  <circle cx="40" cy="300" r="3" fill="#DC2626" opacity="0.08"/>
+</svg>

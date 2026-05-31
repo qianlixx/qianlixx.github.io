@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
+  <rect width="600" height="200" fill="transparent"/>
+  <g transform="rotate(-8, 300, 100)">
+    <!-- MA$IWEI tag - thick spray can style -->
+    <text x="48" y="120" font-family="'Arial Black','Impact','Haettenschweiler',sans-serif" font-size="clamp(48px,10vw,88px)" font-weight="900" fill="none" stroke="#DC2626" stroke-width="3" letter-spacing="-1" opacity="0.8">MA$IWEI</text>
+    <text x="48" y="120" font-family="'Arial Black','Impact','Haettenschweiler',sans-serif" font-size="clamp(48px,10vw,88px)" font-weight="900" fill="none" stroke="#F59E0B" stroke-width="1.5" letter-spacing="-1" opacity="0.3" transform="translate(2,2)">MA$IWEI</text>
+    <text x="48" y="120" font-family="'Arial Black','Impact','Haettenschweiler',sans-serif" font-size="clamp(48px,10vw,88px)" font-weight="900" fill="#DC2626" letter-spacing="-1" opacity="0.15">MA$IWEI</text>
+    <!-- underline slash -->
+    <line x1="30" y1="135" x2="520" y2="125" stroke="#DC2626" stroke-width="5" opacity="0.4" stroke-linecap="round"/>
+    <line x1="35" y1="138" x2="510" y2="128" stroke="#F59E0B" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+    <!-- star burst accent -->
+    <line x1="540" y1="70" x2="565" y2="50" stroke="#DC2626" stroke-width="2" opacity="0.3"/>
+    <line x1="550" y1="75" x2="575" y2="65" stroke="#DC2626" stroke-width="1.5" opacity="0.2"/>
+    <line x1="545" y1="60" x2="560" y2="45" stroke="#F59E0B" stroke-width="1.5" opacity="0.2"/>
+  </g>
+</svg>

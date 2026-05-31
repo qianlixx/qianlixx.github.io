@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1700">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@300;400;500;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap');
+      .bg{fill:#0a0806}
+      .grid{stroke:rgba(180,200,210,0.025);stroke-width:0.5}
+      .line-t1{fill:none;stroke-width:5;stroke-linecap:round;opacity:0.35}
+      .line-t2{fill:none;stroke-width:2;stroke-linecap:round;opacity:0.15}
+      .line-t3{fill:none;stroke-width:1;stroke-linecap:round;opacity:0.08}
+      .node-dot{cursor:pointer;transition:all 0.3s}
+      .node-glow{opacity:0.15}
+      .phase-num{font-family:'Bebas Neue',sans-serif;font-size:48px;opacity:0.08;letter-spacing:-2px}
+      .phase-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1.5px}
+      .phase-year{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px}
+      .phase-desc{font-family:'Outfit','Noto Sans SC',sans-serif;font-size:12px;fill:#9a9496;line-height:1.6}
+      .phase-desc strong{font-weight:600}
+      .label-kw{font-family:'Outfit','Noto Sans SC',sans-serif;font-size:9px;fill:#6a6468;letter-spacing:2px}
+      .tag{font-family:'Outfit','Noto Sans SC',sans-serif;font-size:9px;letter-spacing:1px;font-weight:500}
+    </style>
+    <filter id="spray">
+      <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="splatter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" class="grid"/>
+    </pattern>
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B6F47"/>
+      <stop offset="14%" stop-color="#D97706"/>
+      <stop offset="28%" stop-color="#B91C1C"/>
+      <stop offset="42%" stop-color="#F59E0B"/>
+      <stop offset="57%" stop-color="#EA580C"/>
+      <stop offset="72%" stop-color="#0EA5E9"/>
+      <stop offset="85%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="1700" class="bg"/>
+  <rect width="900" height="1700" fill="url(#grid)"/>
+
+
+  <!-- Title -->
+
+  <!-- Title -->
+  <text x="60" y="60" font-family="'Bebas Neue',sans-serif" font-size="36" letter-spacing="4" fill="#ece4dc">MA$IWEI</text>
+  <text x="60" y="82" font-family="'Outfit','Noto Sans SC',sans-serif" font-size="11" fill="#6a6468" letter-spacing="4">Timeline · 1993 – Present</text>
+  <line x1="60" y1="94" x2="260" y2="94" stroke="rgba(249,115,22,0.15)" stroke-width="1"/>
+
+  <!-- ===== GRAFFITI CENTRAL LINE (3 layers for spray effect) ===== -->
+  <!-- Layer 1: thick spray -->
+  <path d="M445 140 C435 200,465 240,445 300 C425 360,455 400,445 460 C435 520,465 560,445 620 C425 680,455 720,445 780 C435 840,465 880,445 940 C425 1000,455 1040,445 1100 C435 1160,465 1200,445 1260 C425 1320,455 1360,445 1420 C435 1480,465 1520,445 1580"
+        stroke="url(#lineGrad)" stroke-width="6" fill="none" opacity="0.2" filter="url(#spray)" stroke-linecap="round"/>
+  <!-- Layer 2 -->
+  <path d="M448 140 C438 200,468 240,448 300 C428 360,458 400,448 460 C438 520,468 560,448 620 C428 680,458 720,448 780 C438 840,468 880,448 940 C428 1000,458 1040,448 1100 C438 1160,468 1200,448 1260 C428 1320,458 1360,448 1420 C438 1480,468 1520,448 1580"
+        stroke="url(#lineGrad)" stroke-width="2.5" fill="none" opacity="0.08" filter="url(#spray)" stroke-linecap="round"/>
+  <!-- Layer 3 -->
+  <path d="M442 140 C432 200,462 240,442 300 C422 360,452 400,442 460 C432 520,462 560,442 620 C422 680,452 720,442 780 C432 840,462 880,442 940 C422 1000,452 1040,442 1100 C432 1160,462 1200,442 1260 C422 1320,452 1360,442 1420 C432 1480,462 1520,442 1580"
+        stroke="url(#lineGrad)" stroke-width="1" fill="none" opacity="0.05" filter="url(#spray)" stroke-linecap="round"/>
+
+  <!-- ===== PHASE NODES & CONTENT ===== -->
+
+  <!-- PHASE 1: 郫县少年 -->
+  <g transform="translate(0,0)">
+    <!-- Node glow -->
+    <circle cx="445" cy="160" r="28" fill="#8B6F47" filter="url(#glow)" opacity="0.12"/>
+    <!-- Drip -->
+    <path d="M445 185 L444 210 L446 210 Z" fill="#8B6F47" opacity="0.15"/>
+    <path d="M444 210 C444 220,443 228,444 235" stroke="#8B6F47" stroke-width="1.5" fill="none" opacity="0.08" stroke-linecap="round"/>
+    <!-- Node -->
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#8B6F47" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#8B6F47"/>
+    <!-- Content (left) -->
+    <text x="180" y="148" class="phase-num" fill="#8B6F47">01</text>
+    <text x="180" y="175" class="phase-title" fill="#ece4dc">郫县少年</text>
+    <text x="180" y="195" class="phase-year" fill="#8B6F47">1993 — 2013</text>
+    <text x="180" y="218" class="phase-desc" font-weight="300">
+      <tspan x="180" dy="0">成都郫都区出生 · 周杰伦启蒙</tspan>
+      <tspan x="180" dy="18">成都理工装潢设计 · 结识 Ty.</tspan>
+      <tspan x="180" dy="18">22岁离家出走，决心做说唱</tspan>
+    </text>
+    <!-- Tags -->
+    <rect x="180" y="260" width="70" height="18" rx="9" fill="rgba(139,111,71,0.12)"/>
+    <text x="215" y="273" text-anchor="middle" class="tag" fill="#8B6F47">PiDu</text>
+    <rect x="258" y="260" width="70" height="18" rx="9" fill="rgba(139,111,71,0.12)"/>
+    <text x="293" y="273" text-anchor="middle" class="tag" fill="#8B6F47">Chengdu</text>
+  </g>
+
+  <!-- PHASE 2: 横空出世 -->
+  <g transform="translate(0,260)">
+    <circle cx="445" cy="160" r="28" fill="#D97706" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#D97706" opacity="0.12"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#D97706" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#D97706"/>
+    <!-- Content (right) -->
+    <text x="670" y="148" class="phase-num" fill="#D97706" text-anchor="end">02</text>
+    <text x="670" y="175" class="phase-title" fill="#ece4dc" text-anchor="end">横空出世</text>
+    <text x="670" y="195" class="phase-year" fill="#D97706" text-anchor="end">2014 — 2015</text>
+    <text x="670" y="218" class="phase-desc" text-anchor="end">
+      <tspan x="670" dy="0">PEI Mixtape 三部曲</tspan>
+      <tspan x="670" dy="18">《崂山道士》现象级爆红</tspan>
+      <tspan x="670" dy="18">Snoop Dogg 收录 Underground Heat</tspan>
+    </text>
+    <rect x="558" y="260" width="80" height="18" rx="9" fill="rgba(217,119,6,0.12)"/>
+    <text x="598" y="273" text-anchor="middle" class="tag" fill="#D97706">PEI Trilogy</text>
+    <rect x="646" y="260" width="70" height="18" rx="9" fill="rgba(217,119,6,0.12)"/>
+    <text x="681" y="273" text-anchor="middle" class="tag" fill="#D97706">Snoop Dogg</text>
+  </g>
+
+  <!-- PHASE 3: Beef -->
+  <g transform="translate(0,520)">
+    <circle cx="445" cy="160" r="28" fill="#B91C1C" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#B91C1C" opacity="0.10"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#B91C1C" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#B91C1C"/>
+    <!-- Content (left) -->
+    <text x="180" y="148" class="phase-num" fill="#B91C1C">03</text>
+    <text x="180" y="175" class="phase-title" fill="#ece4dc">Beef · 战火</text>
+    <text x="180" y="195" class="phase-year" fill="#B91C1C">2015 — 2016</text>
+    <text x="180" y="218" class="phase-desc">
+      <tspan x="180" dy="0">Diss 半个说唱圈</tspan>
+      <tspan x="180" dy="18">vs 徐真真 — 川粤大战</tspan>
+      <tspan x="180" dy="18">vs GAI — 世纪之战 · 连发七八首 Diss</tspan>
+    </text>
+    <rect x="180" y="260" width="75" height="18" rx="9" fill="rgba(185,28,28,0.12)"/>
+    <text x="217" y="273" text-anchor="middle" class="tag" fill="#B91C1C">CDC vs GAI</text>
+    <rect x="263" y="260" width="55" height="18" rx="9" fill="rgba(185,28,28,0.12)"/>
+    <text x="290" y="273" text-anchor="middle" class="tag" fill="#B91C1C">Diss</text>
+  </g>
+
+  <!-- PHASE 4: Higher Brothers -->
+  <g transform="translate(0,780)">
+    <circle cx="445" cy="160" r="28" fill="#F59E0B" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#F59E0B" opacity="0.10"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#F59E0B" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#F59E0B"/>
+    <!-- Content (right) -->
+    <text x="670" y="148" class="phase-num" fill="#F59E0B" text-anchor="end">04</text>
+    <text x="670" y="175" class="phase-title" fill="#ece4dc" text-anchor="end">Higher Brothers · 走向世界</text>
+    <text x="670" y="195" class="phase-year" fill="#F59E0B" text-anchor="end">2016 — 2019</text>
+    <text x="670" y="218" class="phase-desc" text-anchor="end">
+      <tspan x="670" dy="0">组建 Higher Brothers · 签约 88rising</tspan>
+      <tspan x="670" dy="18">《Made in China》2300万+播放</tspan>
+      <tspan x="670" dy="18">Black Cab · Rolling Loud · 全球巡演</tspan>
+      <tspan x="670" dy="18">与 Joji、Rich Brian 合作</tspan>
+    </text>
+    <rect x="534" y="268" width="75" height="18" rx="9" fill="rgba(245,158,11,0.12)"/>
+    <text x="571" y="281" text-anchor="middle" class="tag" fill="#F59E0B">88rising</text>
+    <rect x="617" y="268" width="65" height="18" rx="9" fill="rgba(245,158,11,0.12)"/>
+    <text x="649" y="281" text-anchor="middle" class="tag" fill="#F59E0B">Global</text>
+    <rect x="690" y="268" width="55" height="18" rx="9" fill="rgba(245,158,11,0.12)"/>
+    <text x="717" y="281" text-anchor="middle" class="tag" fill="#F59E0B">Trap</text>
+  </g>
+
+  <!-- PHASE 5: 黑马王子 -->
+  <g transform="translate(0,1040)">
+    <circle cx="445" cy="160" r="28" fill="#EA580C" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#EA580C" opacity="0.10"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#EA580C" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#EA580C"/>
+    <!-- Content (left) -->
+    <text x="180" y="148" class="phase-num" fill="#EA580C">05</text>
+    <text x="180" y="175" class="phase-title" fill="#ece4dc">黑马王子</text>
+    <text x="180" y="195" class="phase-year" fill="#EA580C">2020</text>
+    <text x="180" y="218" class="phase-desc">
+      <tspan x="180" dy="0">首张个人专辑《黑马王子》</tspan>
+      <tspan x="180" dy="18">迷笛奖「年度最佳说唱音乐」</tspan>
+      <tspan x="180" dy="18">《说唱新世代》导师</tspan>
+      <tspan x="180" dy="18">帮唱袁娅维《歌手》歌王之战</tspan>
+    </text>
+    <rect x="180" y="270" width="80" height="18" rx="9" fill="rgba(234,88,12,0.12)"/>
+    <text x="220" y="283" text-anchor="middle" class="tag" fill="#EA580C">Solo Album</text>
+    <rect x="268" y="270" width="70" height="18" rx="9" fill="rgba(234,88,12,0.12)"/>
+    <text x="303" y="283" text-anchor="middle" class="tag" fill="#EA580C">Midi Award</text>
+  </g>
+
+  <!-- PHASE 6: 高产期 -->
+  <g transform="translate(0,1300)">
+    <circle cx="445" cy="160" r="28" fill="#0EA5E9" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#0EA5E9" opacity="0.10"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#0EA5E9" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#0EA5E9"/>
+    <!-- Content (right) -->
+    <text x="670" y="148" class="phase-num" fill="#0EA5E9" text-anchor="end">06</text>
+    <text x="670" y="175" class="phase-title" fill="#ece4dc" text-anchor="end">高产期</text>
+    <text x="670" y="195" class="phase-year" fill="#0EA5E9" text-anchor="end">2021 — 2023</text>
+    <text x="670" y="218" class="phase-desc" text-anchor="end">
+      <tspan x="670" dy="0">《黑马》《Humble Swag》《特别怪人》</tspan>
+      <tspan x="670" dy="18">与艾志恒 Asen 合作《狗咬狗》</tspan>
+      <tspan x="670" dy="18">世界巡演 9 国 16 城</tspan>
+      <tspan x="670" dy="18">「黑马季节」体育馆巡演</tspan>
+    </text>
+    <rect x="542" y="270" width="70" height="18" rx="9" fill="rgba(14,165,233,0.12)"/>
+    <text x="577" y="283" text-anchor="middle" class="tag" fill="#0EA5E9">World Tour</text>
+    <rect x="620" y="270" width="75" height="18" rx="9" fill="rgba(14,165,233,0.12)"/>
+    <text x="657" y="283" text-anchor="middle" class="tag" fill="#0EA5E9">9 Countries</text>
+  </g>
+
+  <!-- PHASE 7: 乐透人生 -->
+  <g transform="translate(0,1560)">
+    <circle cx="445" cy="160" r="28" fill="#7C3AED" filter="url(#glow)" opacity="0.12"/>
+    <path d="M445 185 L444 210 L446 210 Z" fill="#7C3AED" opacity="0.10"/>
+    <circle cx="445" cy="160" r="12" fill="none" stroke="#7C3AED" stroke-width="3"/>
+    <circle cx="445" cy="160" r="6" fill="#7C3AED"/>
+    <!-- Content (left) -->
+    <text x="180" y="148" class="phase-num" fill="#7C3AED">07</text>
+    <text x="180" y="175" class="phase-title" fill="#ece4dc">乐透人生</text>
+    <text x="180" y="195" class="phase-year" fill="#7C3AED">2024 — 至今</text>
+    <text x="180" y="218" class="phase-desc">
+      <tspan x="180" dy="0">第四张专辑《乐透人生》</tspan>
+      <tspan x="180" dy="18">《乐透人生 GT：即刻入戏》</tspan>
+      <tspan x="180" dy="18">与朴宰范合作《Still On The Top》</tspan>
+      <tspan x="180" dy="18">Higher Brothers 合体《最高》</tspan>
+    </text>
+    <rect x="180" y="270" width="80" height="18" rx="9" fill="rgba(124,58,237,0.12)"/>
+    <text x="220" y="283" text-anchor="middle" class="tag" fill="#7C3AED">4th Album</text>
+    <rect x="268" y="270" width="70" height="18" rx="9" fill="rgba(124,58,237,0.12)"/>
+    <text x="303" y="283" text-anchor="middle" class="tag" fill="#7C3AED">Jay Park</text>
+  </g>
+</svg>
