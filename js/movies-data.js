@@ -1,0 +1,20 @@
+// 电影数据
+const MOVIE_DATA = [
+  {title:'白日梦想家', meta:'本·斯蒂勒 · 2013', actors:'本·斯蒂勒 / 克里斯汀·韦格', rating:'IMDb 7.3', desc:'开拓视野，冲破艰险。', poster:'https://m.media-amazon.com/images/M/MV5BODYwNDYxNDk1Nl5BMl5BanBnXkFtZTgwOTAwMTk2MDE@._V1_SX300.jpg'},
+  {title:'楚门的世界', meta:'彼得·威尔 · 1998', actors:'金·凯瑞 / 劳拉·琳尼', rating:'IMDb 8.2', desc:'如果不能再见，祝你早安午安晚安。', poster:'https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg'},
+  {title:'爱乐之城', meta:'达米恩·查泽雷 · 2016', actors:'瑞恩·高斯林 / 艾玛·斯通', rating:'IMDb 8.0', desc:'敬那些做梦的人。', poster:'https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg'},
+  {title:'头号玩家', meta:'史蒂文·斯皮尔伯格 · 2018', actors:'泰伊·谢里丹 / 奥利维亚·库克', rating:'IMDb 7.4', desc:'谢谢你玩我的游戏。', poster:'https://m.media-amazon.com/images/M/MV5BNzVkMTgzODQtMWIwZC00NzE4LTgzZjYtMzAwM2I5OGZhNjE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg'},
+  {title:'波西米亚狂想曲', meta:'布莱恩·辛格 · 2018', actors:'拉米·马雷克 / 露西·宝通', rating:'IMDb 7.9', desc:'我们注定与众不同。', poster:'https://m.media-amazon.com/images/M/MV5BMTA2NDc3Njg5NDVeQTJeQWpwZ15BbWU4MDc1NDcxNTUz._V1_SX300.jpg'},
+  {title:'搏击俱乐部', meta:'大卫·芬奇 · 1999', actors:'布拉德·皮特 / 爱德华·诺顿', rating:'IMDb 8.8', desc:'丢掉一切，才能自由。', poster:'https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg'},
+  {title:'星际穿越', meta:'克里斯托弗·诺兰 · 2014', actors:'马修·麦康纳 / 安妮·海瑟薇', rating:'IMDb 8.7', desc:'爱是我们能穿越时空的唯一力量。', poster:'https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg'},
+  {title:'银翼杀手', meta:'雷德利·斯科特 · 1982', actors:'哈里森·福特 / 肖恩·杨', rating:'IMDb 8.1', desc:'我见过你们无法想象的美。', poster:'https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg'},
+  {title:'绿皮书', meta:'彼得·法雷利 · 2018', actors:'维果·莫滕森 / 马赫沙拉·阿里', rating:'IMDb 8.2', desc:'勇气改变人心。', poster:'https://m.media-amazon.com/images/M/MV5BNDU5YTNmMmItN2QxNy00OGQ0LTg5MTctNzFmYjEzZjcwN2UwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg'},
+  {title:'信条', meta:'克里斯托弗·诺兰 · 2020', actors:'约翰·大卫·华盛顿 / 罗伯特·帕丁森', rating:'IMDb 7.3', desc:'不要试图理解它，去感受它。', poster:'https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg'},
+  {title:'当幸福来敲门', meta:'加布里尔·穆奇诺 · 2006', actors:'威尔·史密斯 / 贾登·史密斯', rating:'IMDb 8.0', desc:'如果你有梦想，就要守护它。', poster:'https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg'},
+  {title:'盗梦空间', meta:'克里斯托弗·诺兰 · 2010', actors:'莱昂纳多·迪卡普里奥 / 约瑟夫·高登-莱维特', rating:'IMDb 8.8', desc:'一个念头就能改变一切。', poster:'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg'},
+  {title:'黑客帝国', meta:'沃卓斯基姐妹 · 1999', actors:'基努·里维斯 / 劳伦斯·菲什伯恩', rating:'IMDb 8.7', desc:'欢迎来到现实荒漠。', poster:'https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg'},
+  {title:'这个杀手不太冷', meta:'吕克·贝松 · 1994', actors:'让·雷诺 / 娜塔莉·波特曼', rating:'IMDb 8.5', desc:'人生总是如此痛苦吗？', poster:'https://m.media-amazon.com/images/M/MV5BNGRkYTNhOWQtYmI0Ni00MjZhLWJmMzAtMTA2Mjg4NGNiNDU0XkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg'},
+  {title:'海上钢琴师', meta:'朱塞佩·托纳多雷 · 1998', actors:'蒂姆·罗斯 / 普路特·泰勒·文斯', rating:'IMDb 8.0', desc:'琴键有限，音乐无限。', poster:'https://m.media-amazon.com/images/M/MV5BNDg0ZTU4YTItZTI3My00ODNjLTllMTYtMzI3ZWNjYjU1NGM1XkEyXkFqcGc@._V1_SX300.jpg'},
+  {title:'心灵捕手', meta:'格斯·范·桑特 · 1997', actors:'罗宾·威廉姆斯 / 马特·达蒙', rating:'IMDb 8.4', desc:'不是你的错。', poster:'https://m.media-amazon.com/images/M/MV5BNDdjZGQ5YzEtNTc2My00Mjc0LWFlMTctYzkwMzZlNzdiZWYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,9,380,562_.jpg'},
+  {title:'教父', meta:'弗朗西斯·科波拉 · 1972', actors:'马龙·白兰度 / 阿尔·帕西诺', rating:'IMDb 9.2', desc:'我会给他一个无法拒绝的提议。', poster:'https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg'}
+];

@@ -42,8 +42,24 @@ The site is pure static HTML — no build step, no package.json, no framework.
 
 ## Project Structure
 
-- `index.html` — Entire website (~52KB, ~1050 lines): inline HTML, CSS (in `<style>`), and JS (in `<script>`). Single-page portfolio with 5 sections: about, games, photos, movies, music.
-- `music_data.js` — 731-track playlist from NetEase Cloud Music, exported as global `MUSIC_DATA`. Each track: `{id, name, artists[], album, albumPic, dt}`.
+```
+index.html              ← HTML skeleton (~43 lines, references external CSS/JS)
+css/styles.css          ← All styles extracted from inline <style> (~267 lines)
+js/
+  navigation.js         ← Splash, glass nav, scroll spy
+  photos.js             ← Photo gallery with 3D parallax
+  games.js              ← Game list with pagination
+  movies.js             ← Movie carousel (generated from data)
+  movies-data.js        ← 17 movies data
+  memes.js              ← Meme carousel (~135 memes)
+  easter-eggs.js        ← All easter eggs + cursor particles
+  music.js              ← Album renderer from MUSIC_DATA
+music_data.js           ← 731-track playlist from NetEase Cloud Music
+```
+
+- `index.html` — Single-page portfolio with 5 sections: about, games, photos, movies, music. All CSS and JS externalized.
+- `css/styles.css` — All styles (~267 lines) previously inline in `<style>`.
+- `music_data.js` — 731-track playlist from NetEase Cloud Music, exported as global `MUSIC_DATA`.
 
 ## Music Section Current State
 
