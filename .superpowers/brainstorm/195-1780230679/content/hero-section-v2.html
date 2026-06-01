@@ -1,0 +1,65 @@
+<h2>🎯 第二节 v2：Hero 区域 — 更张扬</h2>
+<p class="subtitle">字体粗犷、冲击力拉满</p>
+
+<div class="section">
+  <h3>调整后的 Hero 构成</h3>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px;color:#F97316">🔥 标题字 — 核心改动</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:8px">
+        <strong style="color:#fff;font-size:18px">MA$IWEI</strong><br>
+        • Bebas Neue → Impact / 更重的字重<br>
+        • 超大：<strong>clamp(72px, 14vw, 160px)</strong><br>
+        • 金色 + 橙色双重渐变 + 轻微 text-shadow glow<br>
+        • 字距压缩（-0.03em）而不是加宽<br>
+        • 副标题「马思唯」也用 Bebas Neue，小号但 bold
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px;color:#F97316">🎨 背景增强</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:8px">
+        • 径向光晕从中心扩大到从底向上扫<br>
+        • 背景隐约的超大「马思唯」水印字 + 斜切 + 低透明度<br>
+        • 底部边缘：涂鸦喷漆溅射效果过渡到时间线
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">📷 艺人图</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:8px">
+        • 保持圆形裁切，但加<b>破格效果</b>——边框用 SVG 手绘风格圆圈（带涂鸦感），不是完美圆形<br>
+        • 或者保持正圆 + 粗犷的金色/橙色双边框（4px + 2px）
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">📊 统计数字</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:8px">
+        • Bebas Neue 超大数字<br>
+        • 标签使用 Tracking 较宽的 uppercase<br>
+        • 数字 display 分列，用橙色 | 分隔
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>与当前版本的主要区别：</strong><br>
+  • 标题字更重、更大、更猛<br>
+  • 背景水印字「马思唯」斜切底纹<br>
+  • 涂鸦感从 hero 就开始了，不是页面中间才出现<br>
+  • 整体更像《The Source》杂志封面，而不是温和的人物介绍</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="hero-v2-ok" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>这个够张扬了，继续</h3></div>
+  </div>
+  <div class="option" data-choice="hero-v2-more" onclick="toggleSelect(this)">
+    <div class="letter">🔥</div>
+    <div class="content"><h3>还不够狠，再加猛点</h3></div>
+  </div>
+</div>

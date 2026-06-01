@@ -1,0 +1,66 @@
+<h2>📱 第五节：响应式 & 动画</h2>
+<p class="subtitle">在不同屏幕上都保持杂志 × 涂鸦的感觉</p>
+
+<div class="section">
+  <h3>断点策略</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">桌面 ≥ 769px</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 涂鸦线居中贯穿<br>
+        • 左右交替排版<br>
+        • 内容卡 max-width 560px<br>
+        • 专辑网格 4-5 列
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">移动端 ≤ 768px</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 涂鸦线移到左侧（24px）<br>
+        • 所有内容全部右对齐<br>
+        • 标题缩小，文字紧凑<br>
+        • 专辑网格 2 列
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <h3>动画触发</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px">
+      <div style="font-size:15px;font-weight:500">🖌️ 涂鸦线描画</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">页面加载时从顶描画到底（2s）。滚动时实时更新画到哪了</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px">
+      <div style="font-size:15px;font-weight:500">💫 阶段进入</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">IntersectionObserver 触发 fade-in-up + 节点弹入动画</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px">
+      <div style="font-size:15px;font-weight:500">🎵 音频播放</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">底部固定 bar，点击曲目旁的 ▶ 预览 30s</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px">
+      <div style="font-size:15px;font-weight:500">🔽 专辑展开</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">手风琴展开曲目列表，prefers-reduced-motion 无动画</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>关于 accessibility：</strong><br>
+  prefers-reduced-motion 时禁用所有动画（描画/弹入/fade-in），但保留交互功能。涂鸦线简化成静态。</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="responsive-ok" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>响应式方案 OK</h3></div>
+  </div>
+  <div class="option" data-choice="responsive-adjust" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>想调整</h3><p>终端说</p></div>
+  </div>
+</div>

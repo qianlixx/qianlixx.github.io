@@ -1,0 +1,62 @@
+<h2>🖌️ 第三节：涂鸦时间线 — 核心视觉</h2>
+<p class="subtitle">那条贯穿全页的 graffiti 线，是页面的脊椎</p>
+
+<div class="section">
+  <h3>技术实现方案</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">SVG 喷漆线（主）</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 用 SVG 绘制一条 <strong>S 形蜿蜒</strong> 路径（不是直线，不是直角）<br>
+        • 3 层叠加制造喷漆感：<br>
+        &nbsp;&nbsp;— 第 1 层：粗线 4px，opacity 0.25，带 feTurbulence filter 喷溅效果<br>
+        &nbsp;&nbsp;— 第 2 层：细线 1.5px，opacity 0.12，x 偏移 -3px<br>
+        &nbsp;&nbsp;— 第 3 层：最细 0.5px，opacity 0.06，x 偏移 +5px<br>
+        • 描边颜色 <strong>从棕渐变到红到金到橙到蓝到紫</strong>（匹配每个 phase 的主题色）
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">节点 + 滴落效果</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 每个 phase 在线上有一个 <strong>圆节点（dot）</strong>，直径 20px<br>
+        • 节点周围有 <strong>glow 光晕</strong>（大 3 倍，blur）<br>
+        • 节点下方有 <strong>油漆滴落（drip）</strong>——一条 2px 宽的竖线，底部渐隐<br>
+        • 滴落长度每个 phase 不同，像真实的喷漆流动
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <h3>重要细节</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#F97316">1.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)"><strong>描边动画</strong><br>进入视口时线从顶部逐渐画下来（stroke-dashoffset）</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#F97316">2.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)"><strong>节点弹入</strong><br>对应的 phase 可见时，node 缩放弹入 + glow fade in</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#F97316">3.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)"><strong>滚动联动</strong><br>滚动时 graffiti 线实时「描画」进度</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>颜色 vs 阶段对应：</strong><br>
+  棕 (郫县少年) → 橙 (横空出世) → 红 (Beef) → 金 (HB 走向世界) → 橙 (黑马王子) → 蓝 (高产期) → 紫 (乐透人生)</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="graffiti-ok" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>涂鸦线方案 OK</h3></div>
+  </div>
+  <div class="option" data-choice="graffiti-adjust" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>想调整</h3><p>我在终端说</p></div>
+  </div>
+</div>

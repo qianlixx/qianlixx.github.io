@@ -1,0 +1,52 @@
+<h2>🎯 第二节：Hero 区域 — 杂志封面感</h2>
+<p class="subtitle">第一印象，要像 XXL Freshman 封面那样有冲击力</p>
+
+<div class="section">
+  <h3>Hero 构成</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">背景</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">纯黑底 + 细微 noise texture + 暖橙色径向光晕（从中心偏上发出）</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">艺人大图</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">圆形裁切（现在的方式 OK），但加双层边框——外圈细金线 + 内圈 glow<br>hover 时 slow rotate + 光晕增强</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">标题字</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)"><strong>MA$IWEI</strong> — Bebas Neue，金色渐变，超大<br>「马思唯」在下方，小字，letter-spacing 宽</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">信息行</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">📍成都 · 郫都区 &nbsp;🎂 1993.01.27 &nbsp;🎤 Higher Brothers<br>小字，金色/灰色混合</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">统计数字</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">65 TRACKS · 29 ALBUMS · 12 YEARS<br>Bebas Neue 数字 + 小字标签</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:4px">涂鸦线起点</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">从 hero 底部中央「滴落」进入时间线——一个油漆滴落的 SVG 动画</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>杂志风格提示：</strong><br>
+  hero 不要塞太多东西。现在的版本基本合理，但要更「空」一点——让 MA$IWEI 大字呼吸。移动端标题不换行。</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="hero-ok" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>Hero 方案 OK</h3></div>
+  </div>
+  <div class="option" data-choice="hero-adjust" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>想调整</h3><p>我在终端说</p></div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<h2>📰 第四节：阶段内容卡 — 杂志式布局</h2>
+<p class="subtitle">每个阶段就是杂志的一个跨页</p>
+
+<div class="section">
+  <h3>内容卡结构</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">左/右侧排版</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 超大节编号 <strong>01–07</strong>（Bebas Neue，透明度 0.1-0.2，衬底）<br>
+        • 阶段标题（粗、大）<br>
+        • 英文副标题（小字、uppercase、色弱）<br>
+        • 正文段落（Outfit 300，max-width 560px）<br>
+        • 内联 strong 高亮关键词
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;color:#F97316">Beef 事件卡（特殊）</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        • 半透明深色背景卡片 + 左边框红色强调<br>
+        • <strong>⚔️ BEEF</strong> tag<br>
+        • 事件标题（加粗）+ 描述<br>
+        • 可选：背景有淡淡的火焰/战斗纹理
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <h3>专辑展示区域</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500">默认状态</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        2-4 个专辑封面并排显示<br>
+        封面 + 专辑名 + 曲目数<br>
+        hover 时轻微上浮 + 光晕
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500">展开状态</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px">
+        点击专辑展开曲目列表<br>
+        每曲：序号 · 歌名 · feat · 时长 · ▶播放按钮<br>
+        播放时按钮变蓝（#0EA5E9）
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <h3>专辑数量 vs 布局</h3>
+  <div style="display:flex;gap:16px;margin-top:12px">
+    <div style="flex:1;text-align:center;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+      <div style="font-size:24px;font-weight:900;color:#F97316">1-3</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">单行排列<br>一起展示</div>
+    </div>
+    <div style="flex:1;text-align:center;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+      <div style="font-size:24px;font-weight:900;color:#F97316">4-9</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">网格 2×N<br>紧凑展示</div>
+    </div>
+    <div style="flex:1;text-align:center;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+      <div style="font-size:24px;font-weight:900;color:#F97316">10+</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">折叠显示前 8 张<br>"+X more" 展开</div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:8px;text-align:center">参考：Phase 6（高产期）有 18 张专辑，需要折叠方案</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="card-ok" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>内容卡布局 OK</h3></div>
+  </div>
+  <div class="option" data-choice="card-adjust" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>想调整</h3><p>终端告诉我</p></div>
+  </div>
+</div>

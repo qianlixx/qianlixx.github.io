@@ -1,0 +1,46 @@
+<h2>🖌️ 涂鸦线设计确认</h2>
+<p class="subtitle">蜿蜒曲折的喷漆轨迹，不是直线</p>
+
+<div class="section">
+  <div style="display:flex;gap:24px;align-items:flex-start">
+    <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:12px;padding:20px">
+      <h3>❌ 之前：笔直/轻微 S 弯</h3>
+      <div style="margin:16px 0;text-align:center;font-size:48px;opacity:0.2">│</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">太平淡，不像涂鸦，像 UI 时间线</div>
+    </div>
+    <div style="flex:1;background:rgba(249,115,22,0.06);border-radius:12px;padding:20px;border:1px solid rgba(249,115,22,0.2)">
+      <h3>✅ 现在：蜿蜒 graffiti 路径</h3>
+      <div style="margin:12px 0;text-align:center;font-family:monospace;font-size:20px;line-height:1.8;color:#F97316">
+        ╭─╮<br>
+        │ │<br>
+        ╰─╮<br>
+        &nbsp;&nbsp;│ ╭─<br>
+        &nbsp;&nbsp;╰─╯<br>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7)">
+        • SVG 用 3-4 段交错贝塞尔曲线 (C/C/S 命令)<br>
+        • 左右摇摆，像 spray can 在墙上画出来的轨迹<br>
+        • 每经过一个节点就拐一个弯<br>
+        • 线框之外有 overspray（喷漆外溢）颗粒感
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>具体 SVG 路径形状示意：</strong><br>
+  想象一条线从 hero 底部中心开始，向右弯 → 经过 phase-1 节点 → 向左拐 → 经过 phase-2 节点 → 向右拐…<br>
+  像蜿蜒的山路，但更有涂鸦的随性——不是完美的波浪，是有张力的扭曲。</p>
+</div>
+
+<div style="margin-top:24px;text-align:center">
+  <p style="font-size:15px;color:rgba(255,255,255,0.5)">以上所有设计方向已确认完毕！</p>
+  <p style="font-size:18px;font-weight:500;color:#F97316;margin-top:8px">一共 6 节设计全部对齐 → 进入 spec 撰写阶段</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="all-done" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>所有设计已确认，写 spec 吧</h3></div>
+  </div>
+</div>

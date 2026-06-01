@@ -1,0 +1,55 @@
+<h2>🎨 颜色方案：从专辑封面取色</h2>
+<p class="subtitle">涂鸦线 + 节点 + 背景色调都来自对应阶段的专辑封面</p>
+
+<div class="section">
+  <h3>实现方式：手动匹配主色</h3>
+  <p class="subtitle">我观察每个阶段关键专辑的封面主色，手动定义</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #8B6F47">
+      <div style="font-weight:500">Phase 1 郫县少年</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">P.E.I Vol.2 封面 → <strong>#8B6F47</strong> 大地棕</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #D97706">
+      <div style="font-weight:500">Phase 2 横空出世</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">Overcook Freestyle → <strong>#D97706</strong> 橙</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #B91C1C">
+      <div style="font-weight:500">Phase 3 Beef时代</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">339 EP 暗红感 → <strong>#B91C1C</strong> 战红</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #F59E0B">
+      <div style="font-weight:500">Phase 4 HB走向世界</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">Black Cab 金色 → <strong>#F59E0B</strong> 金</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #EA580C">
+      <div style="font-weight:500">Phase 5 黑马王子</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">黑马王子 橙红 → <strong>#EA580C</strong></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #0EA5E9">
+      <div style="font-weight:500">Phase 6 高产期</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">Humble Swag 蓝色调 → <strong>#0EA5E9</strong></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;border-left:3px solid #7C3AED">
+      <div style="font-weight:500">Phase 7 乐透人生</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5)">乐透人生GT 紫色 → <strong>#7C3AED</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>我的建议：</strong><br>
+  手动指定是务实的方案。每个阶段的涂鸦线色 + 节点色 + 背景 subtle 色调都统一用这个色系。<br>
+  如果你觉得哪个封面的主色调我看错了，可以直接告诉我「Phase 3 应该用 xxx 色」。</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="color-manual" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>手动指定色 OK</h3></div>
+  </div>
+  <div class="option" data-choice="color-adjust" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>我要换某个阶段的颜色</h3><p>终端告诉我</p></div>
+  </div>
+</div>

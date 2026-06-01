@@ -1,0 +1,72 @@
+<h2>📐 第一节：整体布局架构</h2>
+<p class="subtitle">杂志 × 涂鸦 — 页面骨架</p>
+
+<div class="section">
+  <h3>页面结构（从上到下）</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:8px">① Fixed Top Bar</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">← Back · MA$IWEI · 极简、半透明、始终可见</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:8px">② Hero 满屏</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">大尺寸艺人照 · 名字大字 · 标语 · 统计数字 · scroll 提示</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:16px;margin-top:8px">
+    <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:8px">③ 时间线主体</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">
+        中央 graffiti 喷漆线贯穿<br>
+        7 个阶段 · 左右交替 · 杂志风内容卡<br>
+        每阶段：节编号 + 标题 + 正文 + 专辑网格
+      </div>
+    </div>
+    <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:8px;padding:16px">
+      <div style="font-weight:500;margin-bottom:8px">④ Footer</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5)">返回链接 · MA$IWEI 水印</div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:16px;margin-top:8px">
+    <div style="font-weight:500;margin-bottom:8px">⑤ 浮动播放栏</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.5)">底部固定 · 当前播放曲目信息 · 关闭按钮</div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px">
+  <h3>时间线布局机制</h3>
+  <div style="display:flex;align-items:flex-start;gap:16px;margin-top:12px">
+    <div style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+      <div style="font-weight:500;text-align:center">← 左对齐阶段</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);text-align:center">phase 0, 2, 4, 6<br>内容在右侧</div>
+    </div>
+    <div style="width:40px;display:flex;flex-direction:column;align-items:center">
+      <div style="width:3px;height:20px;background:linear-gradient(to bottom,#F97316,transparent);border-radius:2px"></div>
+      <div style="width:16px;height:16px;border-radius:50%;background:#F97316;border:3px solid rgba(249,115,22,0.3)"></div>
+      <div style="width:3px;height:20px;background:linear-gradient(to bottom,transparent,#F97316);border-radius:2px"></div>
+    </div>
+    <div style="flex:1;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+      <div style="font-weight:500;text-align:center">→ 右对齐阶段 →</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);text-align:center">phase 1, 3, 5<br>内容在左侧</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;padding:16px;background:rgba(249,115,22,0.06);border-radius:8px">
+  <p><strong>关键设计决策：</strong><br>
+  • 每个 phase 占约 60-80vh 高度，不是满屏——给滚动留呼吸<br>
+  • 涂鸦线不占满屏宽，固定在中央（桌面）/左侧（手机）<br>
+  • 节点（dot）是按阶段变色的，和背景微渐变呼应<br>
+  • 背景：纯黑底 → 每阶段极 subtle 的色调渐变（不抢内容）</p>
+</div>
+
+<div class="options" style="margin-top:20px">
+  <div class="option" data-choice="approve-structure" onclick="toggleSelect(this)">
+    <div class="letter">✅</div>
+    <div class="content"><h3>结构 OK，继续下一节</h3></div>
+  </div>
+  <div class="option" data-choice="adjust-structure" onclick="toggleSelect(this)">
+    <div class="letter">🔄</div>
+    <div class="content"><h3>需要调整结构</h3><p>我会在终端说怎么改</p></div>
+  </div>
+</div>
