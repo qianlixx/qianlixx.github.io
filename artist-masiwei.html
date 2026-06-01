@@ -104,6 +104,9 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
 .phase-albums{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(90px,10vw,120px),1fr));gap:10px}
 .phase-album-card{cursor:pointer;transition:transform .25s var(--spring);position:relative}
 .phase-album-card:hover{transform:translateY(-6px)}.phase-album-card:active{transform:translateY(-2px) scale(0.96)}
+.phase-album-card.expanded{grid-column:1/-1;display:block;padding:14px;background:rgba(220,38,38,0.03);border:1px solid rgba(220,38,38,0.08);border-radius:6px}
+.phase-album-card.expanded .phase-album-img{width:80px;height:80px;float:left;margin:0 14px 4px 0}
+.phase-album-card.expanded .phase-album-name{text-align:left;white-space:normal;overflow:visible;font-size:15px;color:var(--wh)}
 .phase-album-img{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--gr2);transition:all .25s;background:#1a1a1a}
 .phase-album-card:hover .phase-album-img{border-color:var(--rd);box-shadow:0 8px 28px rgba(220,38,38,0.12)}
 .phase-album-name{font-size:12px;color:var(--gr);margin-top:4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -116,6 +119,7 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
 .track-item .ti-l{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .track-item .ti-i{font-size:10px;color:var(--gr2);width:14px;text-align:right;flex-shrink:0;font-family:var(--font-m)}
 .track-item .ti-n{color:var(--wh);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.phase-album-card.expanded .track-list .ti-n{overflow:visible;text-overflow:clip;white-space:normal}
 .track-item .ti-f{font-size:12px;color:var(--gr2)}.track-item .ti-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .track-item .ti-d{font-size:11px;color:var(--gr2);font-family:var(--font-m)}
 .track-item .ti-p{width:24px;height:24px;border:1px solid var(--gr2);background:transparent;color:var(--gd);font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
@@ -127,18 +131,37 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
 .footer a{color:var(--gr);font-size:12px;letter-spacing:5px;text-transform:uppercase;transition:all .25s;border:1px solid var(--gr2);padding:6px 20px;display:inline-block;font-family:var(--font-d)}
 .footer a:hover{color:var(--rd);border-color:var(--rd);transform:scale(1.03)}.footer a:active{transform:scale(0.95)}
 .footer .ft{font-family:var(--font-d);font-size:56px;letter-spacing:14px;color:rgba(255,255,255,0.008);margin-top:24px}
-.audio-bar{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:#000;border-top:2px solid var(--rd);padding:10px 20px;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--gr);transform:translateY(100%);transition:transform .35s var(--ease-out);visibility:hidden}
-.audio-bar.show{transform:translateY(0);visibility:visible}
-.audio-bar .ab-i{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
-.audio-bar .ab-img{width:28px;height:28px;object-fit:cover;flex-shrink:0;border:1px solid var(--gr2)}
-.audio-bar .ab-n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--wh);font-size:14px}
-.audio-bar .ab-p{flex:0 1 140px;height:2px;background:var(--gr2);overflow:hidden}
-.audio-bar .ab-pi{height:100%;width:0%;background:var(--rd);transition:width .3s}
-.audio-bar .ab-x{width:22px;height:22px;border:1px solid var(--gr2);background:transparent;color:var(--gr);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s;flex-shrink:0}
-.audio-bar .ab-x:hover{color:var(--rd);border-color:var(--rd);transform:scale(1.1)}.audio-bar .ab-x:active{transform:scale(0.9)}
-@media(max-width:768px){.hero-coverlines,.hero-coverlines-r{display:none}.hero-img-wrap{width:clamp(160px,40vw,240px);height:clamp(160px,40vw,240px)}.ph-hero{height:clamp(240px,45vw,360px)}.ph-hero .ph-t{font-size:clamp(34px,8vw,48px);text-shadow:4px 4px 0 var(--rd)}.ph-hero .ph-n{font-size:clamp(40px,14vw,56px)}.ph-body{padding:16px 20px}.al-sec{padding:12px 20px 24px}.hero h1{font-size:clamp(52px,16vw,80px);text-shadow:4px 4px 0 var(--rd)}.hero h1 .sub{font-size:clamp(14px,3.5vw,20px);letter-spacing:14px}.hero-meta{flex-direction:column;align-items:center;gap:4px}.pq{font-size:clamp(20px,5vw,30px)}.top-bar{padding:10px 16px;font-size:11px}.g-d{left:1%;opacity:0.05;width:40px}}
-@media(max-width:480px){.phase-albums{grid-template-columns:repeat(2,1fr)}.ph-hero{height:200px}.ph-hero .ph-c{padding:14px}.audio-bar .ab-p{display:none}}
-@media(prefers-reduced-motion:reduce){.phase,.hero .sc,.phase-album-card,.tag,.ec,.sb,.pq,.ph-hero .ph-n,.ph-text,.tags-anim,.side .sb,.phase-header *,.ph-sub,.ph-ch,.al-h{opacity:1;transform:none!important;transition:none!important;animation:none!important}.hero-stats .num{opacity:1;transform:none;animation:none}.hero-img-wrap::before,.hero-img-wrap::after{animation:none!important}.audio-bar{transition:none}.phase{opacity:1}}
+/* ===== 播放器 ===== */
+.player-bar{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:#000;border-top:2px solid var(--rd);transform:translateY(100%);transition:transform .35s var(--ease-out);visibility:hidden}
+.player-bar.show{transform:translateY(0);visibility:visible}
+.pb-main{display:flex;align-items:center;gap:8px;padding:8px 16px;flex-wrap:nowrap}
+.pb-info{display:flex;align-items:center;gap:8px;flex:0 0 auto;min-width:0;max-width:200px}
+.pb-img{width:36px;height:36px;object-fit:cover;flex-shrink:0;border:1px solid var(--gr2);border-radius:2px}
+.pb-meta{display:flex;flex-direction:column;min-width:0}
+.pb-name{color:var(--wh);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pb-artist{color:var(--gr2);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pb-controls{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.pb-btn{background:transparent;border:1px solid var(--gr2);color:var(--gr);cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;flex-shrink:0;border-radius:3px;line-height:1}
+.pb-btn:hover{color:var(--rd);border-color:var(--rd)}.pb-btn:active{transform:scale(0.9)}
+.pb-play{width:32px;height:32px;font-size:14px;border-color:var(--rd);color:var(--rd)}
+.pb-play:hover{background:var(--rd);color:#000}
+.pb-prog-wrap{flex:1;display:flex;align-items:center;gap:8px;min-width:60px}
+.pb-prog-bar{flex:1;height:4px;background:var(--gr2);border-radius:2px;cursor:pointer;position:relative}
+.pb-prog-fill{height:100%;width:0%;background:var(--rd);border-radius:2px;transition:width .2s}
+.pb-time{color:var(--gr2);font-size:10px;white-space:nowrap;font-family:var(--font-m);flex-shrink:0;min-width:70px;text-align:center}
+.pb-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.pb-lyric-btn.active{color:var(--gd);border-color:var(--gd)}
+.pb-lyrics{display:none;max-height:0;overflow-y:auto;padding:0 16px;background:rgba(10,10,10,0.95);transition:all .3s;scrollbar-width:thin}
+.pb-lyrics.show{display:block;max-height:200px;padding:8px 16px;border-top:1px solid var(--gr2);overflow-y:auto;scroll-behavior:smooth}
+.pbl-line{padding:3px 0;font-size:13px;color:var(--gr2);text-align:center;line-height:1.6;transition:all .35s ease;min-height:22px}
+.pbl-line.active{color:var(--gd);font-size:15px;font-weight:600}
+@media(max-width:768px){
+.hero-coverlines,.hero-coverlines-r{display:none}.hero-img-wrap{width:clamp(160px,40vw,240px);height:clamp(160px,40vw,240px)}
+.ph-hero{height:clamp(240px,45vw,360px)}.ph-hero .ph-t{font-size:clamp(34px,8vw,48px);text-shadow:4px 4px 0 var(--rd)}.ph-hero .ph-n{font-size:clamp(40px,14vw,56px)}.ph-body{padding:16px 20px}.al-sec{padding:12px 20px 24px}
+.hero h1{font-size:clamp(52px,16vw,80px);text-shadow:4px 4px 0 var(--rd)}.hero h1 .sub{font-size:clamp(14px,3.5vw,20px);letter-spacing:14px}.hero-meta{flex-direction:column;align-items:center;gap:4px}.pq{font-size:clamp(20px,5vw,30px)}.top-bar{padding:10px 16px;font-size:11px}.g-d{left:1%;opacity:0.05;width:40px}
+.pb-main{flex-wrap:wrap;padding:6px 10px;gap:4px}.pb-info{max-width:120px}.pb-name{font-size:12px}.pb-controls{gap:2px}.pb-btn{width:24px;height:24px;font-size:10px}.pb-play{width:28px;height:28px}.pb-prog-wrap{order:10;width:100%}.pb-time{font-size:9px;min-width:60px}.pb-lyrics.show{max-height:120px;padding:4px 10px}.pbl-line{font-size:12px}}
+@media(max-width:480px){.phase-albums{grid-template-columns:repeat(2,1fr)}.ph-hero{height:200px}.ph-hero .ph-c{padding:14px}.pb-info{max-width:80px}.pb-btn{width:20px;height:20px}.pb-play{width:24px;height:24px}}
+@media(prefers-reduced-motion:reduce){.phase,.hero .sc,.phase-album-card,.tag,.ec,.sb,.pq,.ph-hero .ph-n,.ph-text,.tags-anim,.side .sb,.phase-header *,.ph-sub,.ph-ch,.al-h{opacity:1;transform:none!important;transition:none!important;animation:none!important}.hero-stats .num{opacity:1;transform:none;animation:none}.hero-img-wrap::before,.hero-img-wrap::after{animation:none!important}.player-bar{transition:none}.phase{opacity:1}}
 </style>
 </head>
 <body>
@@ -147,12 +170,12 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
 <div class="g-s"><svg viewBox="0 0 400 400"><circle cx="45" cy="55" r="12" fill="#DC2626" opacity="0.3"/><circle cx="32" cy="42" r="5" fill="#DC2626" opacity="0.2"/><circle cx="320" cy="80" r="15" fill="#F59E0B" opacity="0.25"/><circle cx="308" cy="65" r="6" fill="#F59E0B" opacity="0.15"/><circle cx="80" cy="180" r="18" fill="#DC2626" opacity="0.2"/><circle cx="65" cy="170" r="7" fill="#DC2626" opacity="0.12"/><circle cx="280" cy="200" r="20" fill="#F59E0B" opacity="0.18"/><circle cx="265" cy="185" r="8" fill="#F59E0B" opacity="0.1"/><circle cx="200" cy="300" r="25" fill="#DC2626" opacity="0.12"/><circle cx="180" cy="290" r="10" fill="#DC2626" opacity="0.08"/><circle cx="350" cy="350" r="14" fill="#F59E0B" opacity="0.15"/><circle cx="120" cy="50" r="2.5" fill="#DC2626" opacity="0.2"/></svg></div>
 <div class="g-t"><svg viewBox="0 0 600 200"><g transform="rotate(-8,300,100)"><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#DC2626" stroke-width="3" letter-spacing="-1" opacity="0.6">MA$IWEI</text><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" fill="none" stroke="#F59E0B" stroke-width="1.5" letter-spacing="-1" opacity="0.2" transform="translate(2,2)">MA$IWEI</text><text x="48" y="120" font-family="'Arial Black','Impact',sans-serif" font-size="88" fill="#DC2626" letter-spacing="-1" opacity="0.08">MA$IWEI</text></g></svg></div>
 <div class="top-bar">
-  <div class="l"><a class="back" href="index.html#music">BACK</a><span>VOL. 1 · 2026</span></div>
+  <div class="l"><a class="back" href="index.html#music">← BACK</a><span>VOL. 1 · 2026</span></div>
   <div class="r"><em>MA$IWEI</em> <span class="hl">*</span> CHRONICLE</div>
 </div>
 <nav class="side-nav" id="sideNav"></nav>
 <section class="hero">
-  <div class="hero-coverlines"><div class="cl"><em>HIGHER BROTHERS</em> KINGPIN</div><div class="cl">CDC · <em class="g">PI DU</em> ORIGINAL</div><div class="cl">65 首曲目 · <em>29 张专辑</em></div></div>
+  <div class="hero-coverlines"><div class="cl"><em>HIGHER BROTHERS</em> KINGPIN</div><div class="cl">CDC · <em class="g">PI DU</em> ORIGINAL</div><div class="cl">158 首曲目 · <em>50 张专辑</em></div></div>
   <div class="hero-coverlines-r"><div class="ln">CHENGDU · CHINA</div><div class="ln">EST. <em>1993</em></div></div>
   <div class="hero-inner">
     <div class="hero-img-wrap"><img src="https://p1.music.126.net/bRHsTqcAX6mpZCylq_GIzQ==/109951170646726907.jpg" alt="马思唯"></div>
@@ -251,23 +274,48 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
 </section>
 </div>
 <footer class="footer"><a href="index.html#music">BACK TO MAIN</a><div class="ft">MA$IWEI</div></footer>
-<div class="audio-bar" id="audioBar">
-  <div class="ab-i"><img class="ab-img" id="abImg" src="" alt=""><span class="ab-n" id="abName"></span></div>
-  <div class="ab-p"><div class="ab-pi" id="abProg"></div></div>
-  <button class="ab-x" id="abClose">X</button>
+<div class="player-bar" id="playerBar">
+  <div class="pb-main">
+    <div class="pb-info">
+      <img class="pb-img" id="pbImg" src="" alt="">
+      <div class="pb-meta">
+        <span class="pb-name" id="pbName"></span>
+        <span class="pb-artist" id="pbArtist"></span>
+      </div>
+    </div>
+    <div class="pb-controls">
+      <button class="pb-btn" id="pbPrev">⏮</button>
+      <button class="pb-btn pb-play" id="pbPlay">▶</button>
+      <button class="pb-btn" id="pbNext">⏭</button>
+    </div>
+    <div class="pb-prog-wrap">
+      <div class="pb-prog-bar" id="pbProgBar">
+        <div class="pb-prog-fill" id="pbProgFill"></div>
+      </div>
+      <span class="pb-time" id="pbTime">0:00 / 0:00</span>
+    </div>
+    <div class="pb-actions">
+      <button class="pb-btn pb-lyric-btn" id="pbLyricBtn">📄</button>
+      <button class="pb-btn pb-close" id="pbClose">✕</button>
+    </div>
+  </div>
+  <div class="pb-lyrics" id="pbLyrics"></div>
 </div>
-<script src="music_data.js"></script>
+<script src="js/masiwei-data.js"></script>
+<script src="js/audio-map.js"></script>
+<script src="js/player.js"></script>
 <script>
 (function(){
-  if(typeof MUSIC_DATA==='undefined')return;
-  var t=MUSIC_DATA.tracks.filter(function(x){return x.artists.some(function(a){return a.indexOf('马思唯')!==-1})});
-  var am={};t.forEach(function(x){var k=x.album||'';if(!am[k])am[k]={name:k,pic:x.albumPic,tracks:[]};am[k].tracks.push(x)});
-  document.getElementById('trackCount').textContent=t.length;
+  if(typeof MS_DATA==='undefined')return;
+  var allTracks=MS_DATA;
+  var ids={};allTracks=allTracks.filter(function(x){if(ids[x.id])return false;ids[x.id]=true;return true});
+  var am={};allTracks.forEach(function(x){var k=x.album||'';if(!am[k])am[k]={name:k,pic:x.albumPic,tracks:[]};am[k].tracks.push(x)});
+  document.getElementById('trackCount').textContent=allTracks.length;
   document.getElementById('albumCount').textContent=Object.keys(am).length;
   document.getElementById('yearCount').textContent='12';
 
   // Side nav dots
-  var phLbl=['PI DU','横空出世','Beef','HB','黑马王子','高产期','乐透人生'];
+  var phLbl=['起步','横空出世','Beef','HB','黑马王子','高产期','乐透人生'];
   var sn=document.getElementById('sideNav');
   var phases=document.querySelectorAll('.phase');
   phases.forEach(function(p,i){
@@ -281,26 +329,20 @@ body{font-family:'Source Sans 3','Noto Sans SC',sans-serif;background:#000;color
   });
 
   // Album rendering + audio
-  var pm={1:['P.E.I Vol.2','339 EP','Overcook Freestyle'],3:['Black Cab','Five Stars','最高'],4:['黑马王子','黑马季节演唱会精选辑 (Live)','R&B All Night (Masiwei Remix)'],5:['黑马','Humble Swag','Humble Swag GT Mixtape','狗咬狗','特别怪人','冠军情歌','啥子范','Something New','为什么','I Need a Girl,Pt.3','P.Y.T','BLACK SERIES','LIFE IS A MOVIE人生如戏','Mr. Enjoy Da Money','On Both Side 3:Summer Tape','年度人物','Couple Hunnid All Star Mixtape Vol.1','LONG TIME KNOW SEE'],6:['乐透人生','乐透人生GT：即刻入戏']};
-  var ae=null,ci=null,ab=document.getElementById('audioBar'),ai=document.getElementById('abImg'),an=document.getElementById('abName'),ap=document.getElementById('abProg'),ac=document.getElementById('abClose');
-  function pt(id,pic,name){
-    if(ae){ae.pause();ae=null}
-    if(ci===id){ci=null;ab.classList.remove('show');ap.style.width='0%';clp();return}
-    var u='https://music.163.com/song/media/outer/url?id='+id+'.mp3';ae=new Audio(u);ae.volume=.5;
-    ae.play().then(function(){ci=id;ai.src=pic||'';an.textContent=name||'';ab.classList.add('show');clp();var b=document.querySelector('.ti-p[data-id="'+id+'"]');if(b)b.classList.add('playing')}).catch(function(){});
-    ae.addEventListener('timeupdate',function(){if(ae.duration)ap.style.width=(ae.currentTime/ae.duration*100)+'%'});
-    ae.addEventListener('ended',function(){ab.classList.remove('show');ap.style.width='0%';ci=null;clp()});
-  }
+  var pm={0:['HongKong'],1:['P.E.I Vol.2','339 EP','P.E.I_Mixtape1','Overcook Freestyle'],2:['成都集团2020cypher','I Need a Girl,Pt.3','Champion (ft. Will EsCargo)','Old Friend (prod. by Eddie  Beatz)'],3:['Black Cab','Five Stars','Type-3','HIGHER BROTHERS','Born Like This','WeChat','Higher Brothers·专场'],4:['黑马王子','黑马季节演唱会精选辑 (Live)','R&B All Night (Masiwei Remix)','平行世界','不完美人生指南','Goodkidstape 1','A Few Good Kids'],5:['黑马','Humble Swag','Humble Swag GT Mixtape','狗咬狗','特别怪人','BEDROOM TAPE','黑马交响季','冠军情歌','PSYLIFE.25','啥子范','Something New','为什么','P.Y.T','BLACK SERIES','LIFE IS A MOVIE人生如戏','Mr. Enjoy Da Money','On Both Side 3:Summer Tape','年度人物','Pull Up','Couple Hunnid All Star Mixtape Vol.1','LONG TIME KNOW SEE','天注定','Promise','Dior (feat. Masiwei & KnowKnow)','Graduated (feat. Masiwei)','天性使燃','丛林之王 (feat. Melo)','代理 (feat. KnowKnow)','Lover Boy 88','嘻哈帝国 (Empire)'],6:['乐透人生','乐透人生GT：即刻入戏','最高']};
+  // 播放器已分离到 js/player.js
   function clp(){document.querySelectorAll('.ti-p').forEach(function(b){b.classList.remove('playing')})}
-  ac.addEventListener('click',function(){if(ae){ae.pause();ae=null}ci=null;ab.classList.remove('show');ap.style.width='0%';clp()});
   function rp(n,c){
     var ns=pm[n]||[];if(!ns.length)return;
     var mx=8,fd=ns.length>mx,sh=fd?ns.slice(0,mx):ns;
     function mk(an){var a=am[an];if(!a||!a.tracks.length)return null;var cd=document.createElement('div');cd.className='phase-album-card';var h='<img class="phase-album-img" src="'+(a.pic||'')+'" alt="" loading="lazy"><div class="phase-album-name">'+a.name+'</div><div class="phase-album-count">'+a.tracks.length+' 首</div><div class="track-list">';a.tracks.forEach(function(t,i){var f=t.artists.filter(function(x){return x!=='马思唯'&&x!=='Higher Brothers'});
-    h+='<div class="track-item"><div class="ti-l"><span class="ti-i">'+(i+1)+'</span><span class="ti-n">'+t.name+(f.length?' <span class="ti-f">feat. '+f.join(', ')+'</span>':'')+'</span></div><div class="ti-r"><span class="ti-d">'+t.dt+'</span><button class="ti-p" data-id="'+t.id+'" data-pic="'+(a.pic||'')+'" data-name="'+t.name+'">></button></div></div>'});h+='</div>';cd.innerHTML=h;cd.addEventListener('click',function(e){if(e.target.closest('.ti-p'))return;var tl=cd.querySelector('.track-list');tl&&tl.classList.toggle('open')});return cd}
+    function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+    var hasFeat=/feat\.?/i.test(t.name);var fn=f.length&&!hasFeat?' <span class="ti-f">feat. '+esc(f.join(', '))+'</span>':'';
+    var firstArtist=t.artists[0]||'马思唯';
+    h+='<div class="track-item"><div class="ti-l"><span class="ti-i">'+(i+1)+'</span><span class="ti-n">'+esc(t.name)+fn+'</span></div><div class="ti-r"><span class="ti-d">'+esc(t.dt)+'</span><button class="ti-p" data-id="'+t.id+'" data-pic="'+esc(a.pic||'')+'" data-name="'+esc(t.name)+'" data-artist="'+esc(firstArtist)+'">▶</button></div></div>'});h+='</div>';cd.innerHTML=h;cd.addEventListener('click',function(e){if(e.target.closest('.ti-p'))return;var tl=cd.querySelector('.track-list');tl&&tl.classList.toggle('open');cd.classList.toggle('expanded')});return cd}
     sh.forEach(function(n){var c2=mk(n);if(c2)c.appendChild(c2)});if(fd){var m=document.createElement('div');m.className='phase-album-more';m.textContent='+'+(ns.length-mx)+' MORE';m.addEventListener('click',function(){m.remove();ns.slice(mx).forEach(function(n){var c2=mk(n);if(c2)c.appendChild(c2)})});c.appendChild(m)}
   }
-  document.querySelectorAll('.phase-albums[data-p]').forEach(function(el){rp(parseInt(el.dataset.p),el);el.querySelectorAll('.ti-p').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pt(parseInt(this.dataset.id),this.dataset.pic,this.dataset.name)})})});
+  document.querySelectorAll('.phase-albums[data-p]').forEach(function(el){rp(parseInt(el.dataset.p),el);el.querySelectorAll('.ti-p').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();playTrack(parseInt(this.dataset.id),this.dataset.pic,this.dataset.name,this.dataset.artist)})})});
 
   // Pure setTimeout + CSS transition approach — no @keyframes, no animationName, no CSS selector issues
   var animConfig=[
